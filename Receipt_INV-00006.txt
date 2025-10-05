@@ -1,0 +1,30 @@
+.............................................................
+                     SYNEX POS                       
+                SYOS Management System           
+                                                     
+Address: 123 Commerce Street, Business District      
+Contact: +94-11-234-5678 | SYOS@store.com           
+.............................................................
+
+Receipt #: INV-00006
+Transaction Date: 2025-10-05
+Customer: Walk-in Purchase
+Processed: 2025-10-05 10:04:10
+Operator: cashier1 (Terminal: CASH-001)
+
+------------------------------------------------------------------
+  #       Item Name         Price    Qty   Total Amount  
+------------------------------------------------------------------
+ 1        Free Range Eggs 12pc       320.00     4        1280.00 
+ 2        White Bread              125.00     2         250.00 
+------------------------------------------------------------------
+
+Subtotal:        Rs.   1530.00
+Discount:        Rs.     30.00
+Total Amount:    Rs.   1500.00
+Cash Paid:       Rs.   2000.00
+Change:          Rs.    500.00
+
+.............................................................
+Thank you for shopping at SYNEX! 
+.............................................................

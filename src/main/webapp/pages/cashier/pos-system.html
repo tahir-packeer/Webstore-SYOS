@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYOS Point of Sale System - Synex Outlet Store</title>
+    <link rel="stylesheet" href="../../css/pos-system.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="pos-system.html" class="navbar-brand">SYOS POS</a>
+                <ul class="navbar-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="pos-system.html" class="active">Point of Sale</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <span class="user-info" id="userInfo">Cashier</span>
+                    <button class="btn btn-outline" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main POS Interface -->
+        <main class="main-content">
+            <div class="pos-container">
+                <!-- Left Side - Item Entry and Cart -->
+                <div class="pos-left">
+                    <!-- Item Entry Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Item Entry</h3>
+                            <p>Enter item codes and quantities for customer purchase</p>
+                        </div>
+                        <div class="card-body">
+                            <form id="itemEntryForm">
+                                <div class="item-entry">
+                                    <div class="form-group">
+                                        <label class="form-label">Item Code *</label>
+                                        <input type="text" id="itemCode" class="form-control" 
+                                               placeholder="Enter item code (e.g., RICE001)" 
+                                               style="font-size: 18px; font-weight: bold;" 
+                                               autocomplete="off"
+                                               required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Quantity *</label>
+                                        <input type="number" id="itemQuantity" class="form-control" 
+                                               placeholder="Qty" min="1" value="1" 
+                                               style="font-size: 18px; text-align: center;" required>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary" style="padding: 12px 20px;">
+                                            <i class="fas fa-plus"></i> Add Item
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Shopping Cart -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h3>CUSTOMER'S Cart</h3>
+                            <div class="card-actions">
+                                <button class="btn btn-outline btn-sm" onclick="clearCart()">Clear Cart</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="cartItems">
+                                <p class="text-muted text-center">No items added yet. Enter item codes above to add to cart.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Bill Calculation and Payment -->
+                <div class="pos-right">
+                    <!-- Bill Summary Section -->
+                    <div class="cart-summary">
+                        <h3 style="color: white;"><i class="fas fa-receipt"></i> Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Items:</span>
+                            <span id="totalItems">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="billTotal">Rs 0.00</span>
+                        </div>
+                        <div class="summary-row" id="discountRow" style="display: none;">
+                            <span>Discount:</span>
+                            <span id="discountAmount" style="color: #ef4444;">-Rs 0.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="finalTotal">Rs 0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Discount Code Section -->
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h4 style="margin: 0;"><i class="fas fa-tags"></i> Discount Code</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Enter Discount Code:</label>
+                                <input type="text" id="discountCode" class="form-control" 
+                                       placeholder="Enter discount code">
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="applyDiscountCode()">
+                                Apply Discount
+                            </button>
+                            <button class="btn btn-outline btn-sm ml-2" onclick="removeDiscount()" 
+                                    id="removeDiscountBtn" style="display: none;">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Payment Section -->
+                    <div class="payment-section" id="paymentSection" style="display: none;">
+                        <h4><i class="fas fa-money-bill-wave"></i> Cash Payment</h4>                        
+                        <div class="form-group">
+                            <label class="form-label">Cash Tendered *</label>
+                            <input type="number" id="cashTendered" class="form-control" 
+                                   placeholder="0.00" step="0.01" min="0"
+                                   style="font-size: 24px; text-align: center; font-weight: bold;"
+                                   oninput="calculateChange()">
+                        </div>
+
+                        <!-- Change Calculation -->
+                        <div id="changeDisplay" class="change-display" style="display: none;">
+                            <div class="text-center">
+                                <h4><i class="fas fa-money-bill-wave"></i> Change to Return</h4>
+                                <div id="changeAmount" class="change-amount">Rs 0.00</div>
+                            </div>
+                        </div>
+
+                        <div id="paymentButtons" class="mt-3">
+                            <button class="complete-sale-btn mt-2" onclick="completeSale()" 
+                                    id="completeBtn" style="display: none;">
+                                <i class="fas fa-receipt"></i> Generate Bill
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-3" id="actionButtons">
+                        <button class="complete-sale-btn" onclick="proceedToPayment()" 
+                                id="proceedBtn" disabled>
+                            <i class="fas fa-credit-card"></i> Proceed to Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/pos-system.js"></script>
+</body>
+</html>
+</body>
+</html>

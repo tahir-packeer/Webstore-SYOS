@@ -1,0 +1,30 @@
+.............................................................
+                     SYNEX POS                       
+                SYOS Management System           
+                                                     
+Address: 123 Commerce Street, Business District      
+Contact: +94-11-234-5678 | SYOS@store.com           
+.............................................................
+
+Receipt #: INV-00007
+Transaction Date: 2025-10-05
+Customer: Tahir
+Mobile: 0725339382
+Processed: 2025-10-05 10:06:23
+Operator: cashier1 (Terminal: CASH-001)
+
+------------------------------------------------------------------
+  #       Item Name         Price    Qty   Total Amount  
+------------------------------------------------------------------
+ 1        Coconut Oil 500ml        625.00     5        3125.00 
+------------------------------------------------------------------
+
+Subtotal:        Rs.   3125.00
+Discount:        Rs.      5.00
+Total Amount:    Rs.   3120.00
+Cash Paid:       Rs.   4000.00
+Change:          Rs.    880.00
+
+.............................................................
+Thank you for shopping at SYNEX! 
+.............................................................

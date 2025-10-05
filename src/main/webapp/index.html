@@ -1,0 +1,542 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SYOS Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 2px solid black;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: black;
+            text-decoration: none;
+        }
+
+        .staff-btn {
+            background: black;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid black;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .staff-btn:hover {
+            background: white;
+            color: black;
+            border: 2px solid black;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-card {
+            background: white;
+            border: 2px solid black;
+            border-radius: 0;
+            padding: 3rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: black;
+            margin-bottom: 2rem;
+        }
+
+        .error-message {
+            background: white;
+            border: 2px solid black;
+            color: black;
+            padding: 0.75rem;
+            border-radius: 0;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .success-message {
+            background: white;
+            border: 2px solid black;
+            color: black;
+            padding: 0.75rem;
+            border-radius: 0;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: white;
+            border: 2px solid black;
+            border-radius: 0;
+            padding: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: black;
+        }
+
+        .tab-btn.active {
+            background: black;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            text-align: left;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: black;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid black;
+            border-radius: 0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            color: black;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: black;
+            background: white;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: black;
+            color: white;
+            border: 2px solid black;
+            padding: 1rem;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: white;
+            color: black;
+            border: 2px solid black;
+        }
+
+        .submit-btn:disabled {
+            background: #666;
+            border-color: #666;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .demo-note {
+            background: white;
+            border: 2px solid black;
+            border-radius: 0;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: black;
+            text-align: center;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border: 2px solid black;
+            border-radius: 0;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 400px;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: black;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: black;
+            font-size: 0.9rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: white;
+            border: 2px solid black;
+            border-radius: 0;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: black;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">SYOS Store</a>
+            <button class="staff-btn" onclick="showStaffModal()">
+                <span></span>
+                Staff Sign In
+            </button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="login-card">
+            <h1 class="welcome-title">Welcome to SYOS Store</h1>
+            
+            <div id="customerError" class="error-message"></div>
+            <div id="customerSuccess" class="success-message"></div>
+            
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" onclick="switchTab('register')">Register</button>
+            </div>
+            
+            <div id="loginTab" class="tab-content active">
+                <form id="customerLoginForm">
+                    <div class="form-group">
+                        <label class="form-label">Email or Name:</label>
+                        <input type="text" name="email" class="form-input" placeholder="Enter your email or name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Login & Continue Shopping</button>
+                </form>
+                
+                <div class="demo-note">
+                    Demo: Use your email as username and any password you set during registration
+                </div>
+            </div>
+            
+            <div id="registerTab" class="tab-content">
+                <form id="customerRegisterForm">
+                    <div class="form-group">
+                        <label class="form-label">Full Name:</label>
+                        <input type="text" name="name" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
+                        <input type="email" name="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Contact Number:</label>
+                        <input type="tel" name="contactNumber" class="form-input" placeholder="Enter your contact number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Address:</label>
+                        <textarea name="address" class="form-input form-textarea" placeholder="Enter your address" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-input" placeholder="Create a password" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Create Account & Start Shopping</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="staffModal" class="modal-overlay" onclick="closeStaffModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title">Staff Login</h3>
+                <p class="modal-subtitle">Access your dashboard and tools</p>
+                <button class="modal-close" onclick="closeStaffModal()">&times;</button>
+            </div>
+
+            <div id="staffError" class="error-message"></div>
+            <div id="staffSuccess" class="success-message"></div>
+
+            <form id="staffLoginForm">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-input" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Role</label>
+                    <select name="role" class="form-input" required>
+                        <option value="">Select your role</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="store manager">Store Manager</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
+
+    <script>
+        function switchTab(tabName) {
+            // Clear any customer messages when switching tabs
+            document.getElementById('customerError').style.display = 'none';
+            document.getElementById('customerSuccess').style.display = 'none';
+            
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function showStaffModal() {
+            document.getElementById('staffModal').classList.add('show');
+            clearMessages();
+        }
+
+        function closeStaffModal(event) {
+            if (!event || event.target === event.currentTarget || event.target.classList.contains('modal-close')) {
+                document.getElementById('staffModal').classList.remove('show');
+                clearMessages();
+                document.getElementById('staffLoginForm').reset();
+            }
+        }
+
+        function clearMessages() {
+            document.getElementById('staffError').style.display = 'none';
+            document.getElementById('staffSuccess').style.display = 'none';
+            document.getElementById('customerError').style.display = 'none';
+            document.getElementById('customerSuccess').style.display = 'none';
+        }
+
+        function showError(message, type = 'staff') {
+            const errorDiv = document.getElementById(type + 'Error');
+            const successDiv = document.getElementById(type + 'Success');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+
+        function showSuccess(message, type = 'staff') {
+            const successDiv = document.getElementById(type + 'Success');
+            const errorDiv = document.getElementById(type + 'Error');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+        }
+
+        document.getElementById('staffLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            clearMessages();
+
+            const formData = new FormData(this);
+            const username = formData.get('username');
+            const password = formData.get('password');
+            const role = formData.get('role');
+
+            if (!username || !password || !role) {
+                showError('Please fill in all fields');
+                return;
+            }
+
+            try {
+                const submitBtn = this.querySelector('.submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Signing In...';
+                submitBtn.disabled = true;
+
+                const response = await fetch('/syos/api/staff/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        username: username,
+                        password: password,
+                        role: role
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showSuccess('Login successful! Redirecting...');
+                    
+                    setTimeout(() => {
+                        switch(role.toLowerCase()) {
+                            case 'cashier':
+                                window.location.href = '/syos/pages/cashier/dashboard.html';
+                                break;
+                            case 'store manager':
+                                window.location.href = '/syos/pages/manager/dashboard.html';
+                                break;
+                            case 'admin':
+                                window.location.href = '/syos/pages/manager/dashboard.html';
+                                break;
+                            default:
+                                window.location.href = '/syos/pages/cashier/dashboard.html';
+                        }
+                    }, 1500);
+                } else {
+                    showError(data.message || 'Invalid credentials. Please check your username, password, and role.');
+                }
+            } catch (error) {
+                console.error('Staff login error:', error);
+                showError('Login failed. Please check your connection and try again.');
+            } finally {
+                const submitBtn = this.querySelector('.submit-btn');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeStaffModal();
+            }
+        });
+
+        window.switchTab = switchTab;
+        window.showStaffModal = showStaffModal;
+        window.closeStaffModal = closeStaffModal;
+        window.showError = showError;
+        window.showSuccess = showSuccess;
+        window.clearMessages = clearMessages;
+    </script>
+</body>
+</html>

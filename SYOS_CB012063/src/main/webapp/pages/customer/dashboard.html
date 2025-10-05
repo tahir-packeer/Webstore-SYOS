@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - SYOS Store</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="dashboard.html" class="navbar-brand">SYOS Store</a>
+                <ul class="navbar-nav">
+                    <li><a href="dashboard.html" class="active">Home</a></li>
+                    <li><a href="catalog.html">Shop</a></li>
+                    <li><a href="cart.html">Cart <span class="cart-count">0</span></a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <span class="user-info">Welcome, <span id="userName">Customer</span></span>
+                    <button class="btn btn-outline" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Welcome Section -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h1>Welcome to Your Dashboard</h1>
+                        <p>Discover our latest products and start shopping</p>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="cartItemsCount">0</div>
+                        <div class="stat-label">Items in Cart</div>
+                        <a href="cart.html" class="btn btn-sm btn-primary mt-2">View Cart</a>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="cartTotal">LKR 0.00</div>
+                        <div class="stat-label">Cart Total</div>
+                        <a href="cart.html" class="btn btn-sm btn-success mt-2">Go to Cart</a>
+                    </div>
+                </div>                
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/customer-dashboard.js"></script>
+</body>
+</html>

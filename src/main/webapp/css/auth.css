@@ -1,0 +1,146 @@
+/* ═══════════════════════════════════════════════════════════════════
+   AUTHENTICATION PAGES - ULTRA MINIMALIST STYLE
+   ═══════════════════════════════════════════════════════════════════ */
+
+@import url('main.css');
+
+/* Override main content for auth pages */
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-lg);
+}
+
+/* Ultra minimalist auth container */
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Simplified card styling */
+.card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    padding: 0;
+    box-shadow: none;
+}
+
+/* Clean header */
+.card-header {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: var(--space-xl) var(--space-lg) var(--space-lg);
+    text-align: center;
+}
+
+.card-header h2 {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--primary-color);
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+}
+
+.card-header p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+/* Clean form body */
+.card-body {
+    padding: 0 var(--space-lg) var(--space-lg);
+}
+
+/* Enhanced form controls for auth */
+.form-control-lg,
+.form-control {
+    padding: var(--space-md);
+    font-size: 16px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    background: var(--gray-50);
+    transition: var(--transition);
+}
+
+.form-control:focus,
+.form-control-lg:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Enhanced buttons */
+.btn-lg {
+    padding: var(--space-md) var(--space-lg);
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: var(--border-radius);
+}
+
+/* Clean footer */
+.card-footer {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: var(--space-lg);
+    text-align: center;
+    border-top: 1px solid var(--gray-200);
+}
+
+.card-footer p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: var(--space-sm);
+}
+
+.card-footer p:last-child {
+    margin-bottom: 0;
+}
+
+.card-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.card-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Enhanced form groups */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: var(--space-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .card-header {
+        padding: var(--space-lg) var(--space-md) var(--space-md);
+    }
+    
+    .card-body {
+        padding: 0 var(--space-md) var(--space-md);
+    }
+    
+    .card-footer {
+        padding: var(--space-md);
+    }
+    
+    .card-header h2 {
+        font-size: 24px;
+    }
+}

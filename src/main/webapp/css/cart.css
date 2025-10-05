@@ -1,0 +1,29 @@
+/* Shopping Cart Specific Styles */
+@import url('main.css');
+
+#emptyCartState .card {
+    border: 2px dashed var(--border-color);
+    background: var(--neutral-color);
+}
+
+#emptyCartState svg {
+    opacity: 0.6;
+}
+
+.cart-item {
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.cart-count {
+    background: var(--error-color);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}

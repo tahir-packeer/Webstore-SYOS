@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYOS Store Management System</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="navbar-brand">SYOS Store Management</a>
+                <div class="navbar-actions">
+                    <button class="btn btn-outline" onclick="showCustomerLogin()">Customer Login</button>
+                    <button class="btn btn-secondary" onclick="showStaffLogin()">Staff Login</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Welcome Section -->
+                <div class="text-center mb-5">
+                    <h1 style="margin-bottom: 1rem; color: var(--primary-color);">Welcome to SYOS Store Management System</h1>
+                    <p class="mb-4" style="font-size: 1.1rem; color: var(--text-light); max-width: 600px; margin: 0 auto 3rem;">Your complete solution for store operations, inventory management, and customer service.</p>
+                    
+                    <div class="row" style="justify-content: center;">
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-value">SHOP</div>
+                                <div class="stat-label" style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--primary-color);">Customer Shopping</div>
+                                <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Browse products and place orders online</p>
+                                <button class="btn btn-primary" onclick="showCustomerOptions()">Shop Now</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-value">STAFF</div>
+                                <div class="stat-label" style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--primary-color);">Staff Portal</div>
+                                <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Access cashier, management, and reporting tools</p>
+                                <button class="btn btn-secondary" onclick="showStaffLogin()">Staff Login</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-value">REPORTS</div>
+                                <div class="stat-label" style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--primary-color);">Management Console</div>
+                                <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Comprehensive reporting and analytics</p>
+                                <button class="btn btn-primary" onclick="showStaffLogin()">Manager Access</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Customer Options Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Customer Access</h3>
+                <button class="modal-close" onclick="closeModal('customerModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <p style="color: var(--text-light); font-size: 1.05rem;">Choose how you'd like to access our store:</p>
+                </div>
+                
+                <div class="row" style="gap: 1.5rem; justify-content: center;">
+                    <div class="col-6">
+                        <div class="card" style="height: 100%; border: 2px solid var(--border-color);">
+                            <div class="card-body text-center" style="display: flex; flex-direction: column; justify-content: center; padding: 2rem;">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">Existing Customer</h4>
+                                <p style="margin-bottom: 2rem; color: var(--text-light);">Sign in to your account to view order history and faster checkout</p>
+                                <button class="btn btn-primary w-100" onclick="redirectToCustomerLogin()">
+                                    Sign In
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card" style="height: 100%; border: 2px solid var(--border-color);">
+                            <div class="card-body text-center" style="display: flex; flex-direction: column; justify-content: center; padding: 2rem;">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">New Customer</h4>
+                                <p style="margin-bottom: 2rem; color: var(--text-light);">Create an account for personalized shopping experience</p>
+                                <button class="btn btn-secondary w-100" onclick="redirectToCustomerRegister()">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                    <p style="margin-bottom: 1rem; color: var(--text-light);">Or browse without an account</p>
+                    <button class="btn btn-outline" onclick="browseCatalog()">
+                        Browse Catalog
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+                        Browse Products (Guest)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Login Modal -->
+    <div id="staffLoginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Staff Login</h3>
+                <button class="modal-close" onclick="closeModal('staffLoginModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="staffLoginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="role">Role</label>
+                        <select id="role" name="role" class="form-control" required>
+                            <option value="">Select Role</option>
+                            <option value="cashier">Cashier</option>
+                            <option value="store manager">Store Manager</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        Sign In
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Login Modal -->
+    <div id="customerLoginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Customer Login</h3>
+                <button class="modal-close" onclick="closeModal('customerLoginModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="customerLoginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="customerEmail">Email</label>
+                        <input type="email" id="customerEmail" name="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="customerPassword">Password</label>
+                        <input type="password" id="customerPassword" name="password" class="form-control" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        Sign In
+                    </button>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p>Don't have an account? 
+                        <a href="#" onclick="redirectToCustomerRegister()">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

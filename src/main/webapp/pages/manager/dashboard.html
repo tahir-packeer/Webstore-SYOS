@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SYOS Store</title>
+    <link rel="stylesheet" href="../../css/manager-dashboard.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="dashboard.html" class="navbar-brand">SYOS Store - Admin</a>
+                <ul class="navbar-nav">
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="admin-reports.html">Admin Reports</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <span class="user-info" id="userInfo">Admin</span>
+                    <button class="btn btn-outline" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="row mb-4">
+                    <div>
+                        <h1>Admin Dashboard</h1>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Dashboard -->
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">SALES</div>
+                        <div class="stat-value" id="totalSales">LKR 0.00</div>
+                        <div class="stat-label">Total Sales Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">ORDERS</div>
+                        <div class="stat-value" id="totalOrders">0</div>
+                        <div class="stat-label">Orders Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">STOCK</div>
+                        <div class="stat-value" id="lowStockItems">0</div>
+                        <div class="stat-label">Low Stock Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">ALERT</div>
+                        <div class="stat-value" id="expiringItems">0</div>
+                        <div class="stat-label">Items Expiring Soon</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/manager-dashboard.js"></script>
+</body>
+</html>

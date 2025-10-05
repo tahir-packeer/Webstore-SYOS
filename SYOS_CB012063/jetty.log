@@ -1,0 +1,60 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< org.example:SYOS_CB012063 >----------------------
+[INFO] Building SYOS_CB012063 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] >>> jetty:11.0.17:run (default-cli) > test-compile @ SYOS_CB012063 >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ SYOS_CB012063 ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ SYOS_CB012063 ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ SYOS_CB012063 ---
+[INFO] Not copying test resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ SYOS_CB012063 ---
+[INFO] Not compiling test sources
+[INFO] 
+[INFO] <<< jetty:11.0.17:run (default-cli) < test-compile @ SYOS_CB012063 <<<
+[INFO] 
+[INFO] 
+[INFO] --- jetty:11.0.17:run (default-cli) @ SYOS_CB012063 ---
+[INFO] Configuring Jetty for project: SYOS_CB012063
+[INFO] Classes = /Users/thuannaheempakeer/Downloads/Projects/Freelancing/SYOS_CB012063_Final/SYOS_CB012063/target/classes
+[INFO] Context path = /syos
+[INFO] Tmp directory = /Users/thuannaheempakeer/Downloads/Projects/Freelancing/SYOS_CB012063_Final/SYOS_CB012063/target/tmp
+[INFO] web.xml file = file:///Users/thuannaheempakeer/Downloads/Projects/Freelancing/SYOS_CB012063_Final/SYOS_CB012063/src/main/webapp/WEB-INF/web.xml
+[INFO] Webapp directory = /Users/thuannaheempakeer/Downloads/Projects/Freelancing/SYOS_CB012063_Final/SYOS_CB012063/src/main/webapp
+[INFO] Web defaults = org/eclipse/jetty/webapp/webdefault.xml
+[INFO] Web overrides =  none
+[INFO] jetty-11.0.17; built: 2023-10-09T18:39:14.424Z; git: 48e7716b9462bebea6732b885dbebb4300787a5c; jvm 24.0.2
+[INFO] Session workerName=node0
+[INFO] Started o.e.j.m.p.MavenWebAppContext@9ab310b{SYOS Retail Management System,/syos,[file:///Users/thuannaheempakeer/Downloads/Projects/Freelancing/SYOS_CB012063_Final/SYOS_CB012063/src/main/webapp/],AVAILABLE}{file:///Users/thuannaheempakeer/Downloads/Projects/Freelancing/SYOS_CB012063_Final/SYOS_CB012063/src/main/webapp/}
+[INFO] Started ServerConnector@7abeabe9{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+[INFO] Started Server@68c9e023{STARTING}[11.0.17,sto=0] @1977ms
+[INFO] Automatic redeployment disabled, see 'mvn jetty:help' for more redeployment options
+SalesServlet.doPost() called!
+Bill added successfully with ID: 111
+OnlineSalesServlet.doPost() called!
+Received JSON: {"customerId":"0771234569","items":[{"code":"RICE001","quantity":1}],"cashTendered":0,"discount":0}
+Customer identifier extracted as string: 0771234569
+Looking up customer with identifier: 0771234569
+Online customer found: Alice Smith (ID: 1)
+Bill added successfully with ID: 112
+OnlineSalesServlet.doPost() called!
+Received JSON: {    "items": [      {        "code": "RICE001",        "quantity": 1      }    ],    "customer": {      "email": "test@example.com",      "firstName": "John",      "lastName": "Doe",      "phone": "555-1234"    },    "payment": {      "method": "card",      "amount": 950    }  }
+OnlineSalesServlet.doPost() called!
+Received JSON: {    "items": [      {        "code": "RICE001",        "quantity": 1      }    ],    "customerId": 1,    "payment": {      "method": "card",      "amount": 950    }  }
+Failed to get customerId as string, trying as object: JSONObject["customerId"] is not a string (class java.lang.Integer : 1).
+Customer identifier from object toString: 1
+Looking up customer with identifier: 1
+Customer with contact number 1 not found.
+Customer with contact number 1 not found.

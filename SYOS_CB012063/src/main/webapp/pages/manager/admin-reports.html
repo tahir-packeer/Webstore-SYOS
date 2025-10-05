@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Reports - SYOS Store</title>
+    <link rel="stylesheet" href="../../css/admin-reports.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="dashboard.html" class="navbar-brand">SYOS Store - Admin Reports</a>
+                <ul class="navbar-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="admin-reports.html" class="active">Admin Reports</a></li>
+                </ul>
+                <div class="navbar-actions">
+                    <span class="user-info" id="userInfo">Admin</span>
+                    <button class="btn btn-outline" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h1>Administrative Reports</h1>
+                    </div>
+                </div>
+
+                <!-- Report Type Tabs -->
+                <div class="report-tabs">
+                    <button class="report-tab active" onclick="switchReport('daily-sales')">Daily Sales</button>
+                    <button class="report-tab" onclick="switchReport('items-shelving')">Items Need Shelving</button>
+                    <button class="report-tab" onclick="switchReport('reorder-level')">Reorder Level</button>
+                    <button class="report-tab" onclick="switchReport('stock-report')">Stock Report</button>
+                    <button class="report-tab" onclick="switchReport('bill-transaction')">Bill Report</button>
+                </div>
+
+                <!-- Daily Sales Report -->
+                <div id="daily-sales" class="report-section active">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3>Daily Sales Report</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="date-controls">
+                                <div class="form-group-inline">
+                                    <label class="form-label">Date</label>
+                                    <input type="date" id="dailySalesDate" class="form-control" onchange="loadDailySalesReport()">
+                                </div>
+                                <div class="form-group-inline">
+                                    <label class="form-label">Transaction Type</label>
+                                    <select id="dailySalesTransactionType" class="form-control" onchange="loadDailySalesReport()">
+                                        <option value="">All Types</option>
+                                        <option value="CASH">Cash</option>
+                                        <option value="CARD">Card</option>
+                                        <option value="ONLINE">Online</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-inline">
+                                    <label class="form-label">Store Type</label>
+                                    <select id="dailySalesStoreType" class="form-control" onchange="loadDailySalesReport()">
+                                        <option value="">All Stores</option>
+                                        <option value="PHYSICAL">Physical</option>
+                                        <option value="ONLINE">Online</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="loadDailySalesReport()">Generate Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dailySalesSummary" class="summary-cards"></div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Daily Sales Transactions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="search-container">
+                                <input type="text" id="dailySalesSearch" class="search-input" 
+                                       placeholder="Search by invoice number, amount, payment method, or type..." 
+                                       onkeyup="searchTable('dailySalesData', this.value)">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead id="dailySalesHeader">
+                                        <tr>
+                                            <th>Invoice #</th>
+                                            <th>Time</th>
+                                            <th>Total Amount</th>
+                                            <th>Discount</th>
+                                            <th>Payment</th>
+                                            <th>Change</th>
+                                            <th>Items</th>
+                                            <th>Type</th>
+                                            <th>Store</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dailySalesData">
+                                        <tr><td colspan="9" class="text-center">Select a date to view sales data</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Items Need Shelving Report -->
+                <div id="items-shelving" class="report-section">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3>Items Needing Shelving</h3>
+                            <button class="btn btn-primary" onclick="loadItemsNeedShelvingReport()">Refresh Report</button>
+                        </div>
+                    </div>
+
+                    <div id="itemsShelvingSummary" class="summary-cards"></div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Items with Low Shelf Stock</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="search-container">
+                                <input type="text" id="itemsShelvingSearch" class="search-input" 
+                                       placeholder="Search by item code, name, or shelf type..." 
+                                       onkeyup="searchTable('itemsShelvingData', this.value)">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Code</th>
+                                            <th>Item Name</th>
+                                            <th>Shelf Qty</th>
+                                            <th>Stock Available</th>
+                                            <th>Shelf Type</th>
+                                            <th>Priority</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="itemsShelvingData">
+                                        <tr><td colspan="6" class="text-center">Loading...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reorder Level Report -->
+                <div id="reorder-level" class="report-section">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3>Reorder Level Report (Items below 50)</h3>
+                            <button class="btn btn-primary" onclick="loadReorderLevelReport()">Refresh Report</button>
+                        </div>
+                    </div>
+
+                    <div id="reorderLevelSummary" class="summary-cards"></div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Items Below Reorder Level (< 50 units)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="search-container">
+                                <input type="text" id="reorderLevelSearch" class="search-input" 
+                                       placeholder="Search by item code, name, or stock level..." 
+                                       onkeyup="searchTable('reorderLevelData', this.value)">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Code</th>
+                                            <th>Item Name</th>
+                                            <th>Current Stock</th>
+                                            <th>Reorder Level</th>
+                                            <th>Shortfall</th>
+                                            <th>Action Required</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reorderLevelData">
+                                        <tr><td colspan="6" class="text-center">Loading...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Report -->
+                <div id="stock-report" class="report-section">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3>Complete Stock Report</h3>
+                            <button class="btn btn-primary" onclick="loadStockReport()">Refresh Report</button>
+                        </div>
+                    </div>
+
+                    <div id="stockReportSummary" class="summary-cards"></div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>All Items Stock Status</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="search-container">
+                                <input type="text" id="stockReportSearch" class="search-input" 
+                                       placeholder="Search by item code, name, quantity, or expiry date..." 
+                                       onkeyup="searchTable('stockReportData', this.value)">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Code</th>
+                                            <th>Item Name</th>
+                                            <th>Total Quantity</th>
+                                            <th>Batches</th>
+                                            <th>Earliest Expiry</th>
+                                            <th>Latest Purchase</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="stockReportData">
+                                        <tr><td colspan="6" class="text-center">Loading...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bill Transaction Report -->
+                <div id="bill-transaction" class="report-section">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3>Bill Transaction Report</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="date-controls">
+                                <div class="form-group-inline">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" id="billTransactionStartDate" class="form-control" onchange="loadBillTransactionReport()">
+                                </div>
+                                <div class="form-group-inline">
+                                    <label class="form-label">End Date</label>
+                                    <input type="date" id="billTransactionEndDate" class="form-control" onchange="loadBillTransactionReport()">
+                                </div>
+                                <div class="form-group-inline">
+                                    <label class="form-label">Transaction Type</label>
+                                    <select id="billTransactionType" class="form-control" onchange="loadBillTransactionReport()">
+                                        <option value="">All Types</option>
+                                        <option value="CASH">Cash</option>
+                                        <option value="CARD">Card</option>
+                                        <option value="ONLINE">Online</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-inline">
+                                    <label class="form-label">Store Type</label>
+                                    <select id="billStoreType" class="form-control" onchange="loadBillTransactionReport()">
+                                        <option value="">All Stores</option>
+                                        <option value="PHYSICAL">Physical</option>
+                                        <option value="ONLINE">Online</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="loadBillTransactionReport()">Generate Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="billTransactionSummary" class="summary-cards"></div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Transaction Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="search-container">
+                                <input type="text" id="billTransactionSearch" class="search-input" 
+                                       placeholder="Search by invoice, date, amount, payment method, or store..." 
+                                       onkeyup="searchTable('billTransactionData', this.value)">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice #</th>
+                                            <th>Date/Time</th>
+                                            <th>Total Amount</th>
+                                            <th>Discount</th>
+                                            <th>Payment</th>
+                                            <th>Change</th>
+                                            <th>Items</th>
+                                            <th>Qty</th>
+                                            <th>Type</th>
+                                            <th>Store</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="billTransactionData">
+                                        <tr><td colspan="10" class="text-center">Select date range to view transactions</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/admin-reports.js"></script>
+</body>
+</html>

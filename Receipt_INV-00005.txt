@@ -1,0 +1,29 @@
+.............................................................
+                     SYNEX POS                       
+                SYOS Management System           
+                                                     
+Address: 123 Commerce Street, Business District      
+Contact: +94-11-234-5678 | SYOS@store.com           
+.............................................................
+
+Receipt #: INV-00005
+Transaction Date: 2025-10-05
+Customer: Walk-in Purchase
+Processed: 2025-10-05 10:02:26
+Operator: cashier1 (Terminal: CASH-001)
+
+------------------------------------------------------------------
+  #       Item Name         Price    Qty   Total Amount  
+------------------------------------------------------------------
+ 1        Basmati Rice 1kg         450.00    10        4500.00 
+------------------------------------------------------------------
+
+Subtotal:        Rs.   4500.00
+Discount:        Rs.      0.00
+Total Amount:    Rs.   4500.00
+Cash Paid:       Rs.   5000.00
+Change:          Rs.    500.00
+
+.............................................................
+Thank you for shopping at SYNEX! 
+.............................................................

@@ -1,0 +1,17 @@
+/* Manager Dashboard Styles */
+@import url('main.css');
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+/* Force horizontal 2x2 grid layout */
+.dashboard-stats {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 2rem !important;
+    max-width: 900px !important;
+    margin: 0 auto 3rem auto !important;
+    width: 100% !important;
+}
