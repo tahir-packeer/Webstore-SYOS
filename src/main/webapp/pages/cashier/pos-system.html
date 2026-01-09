@@ -1,168 +1,1175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYOS Point of Sale System - Synex Outlet Store</title>
-    <link rel="stylesheet" href="../../css/pos-system.css">
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="container">
-                <a href="pos-system.html" class="navbar-brand">SYOS POS</a>
-                <ul class="navbar-nav">
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="pos-system.html" class="active">Point of Sale</a></li>
-                </ul>
-                <div class="navbar-actions">
-                    <span class="user-info" id="userInfo">Cashier</span>
-                    <button class="btn btn-outline" onclick="logout()">Logout</button>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>SYOS Point of Sale System</title>
+    <link rel="icon" href="data:," />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: white;
+        color: black;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* Top Header Bar - Horizontal Navigation */
+      .top-bar {
+        background: black;
+        color: white;
+        padding: 0.8rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 3px solid black;
+      }
+
+      .brand {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-item {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        border: 2px solid white;
+        background: white;
+        color: black;
+      }
+
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .logout-btn {
+        background: white;
+        color: black;
+        border: 2px solid white;
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .logout-btn:hover {
+        background: black;
+        color: white;
+      }
+
+      /* Main Container - Horizontal 3-Panel Layout */
+      .main-container {
+        margin-top: 60px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 400px;
+        height: calc(100vh - 60px);
+        gap: 0;
+      }
+
+      /* Left Panel - Order Summary */
+      .summary-panel {
+        background: black;
+        color: white;
+        padding: 2rem;
+        border-right: 3px solid black;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .summary-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 2px solid white;
+        padding-bottom: 1rem;
+      }
+
+      .summary-stats {
+        background: white;
+        color: black;
+        padding: 1.5rem;
+        border: 2px solid white;
+        margin-bottom: 1rem;
+      }
+
+      .stat-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.7rem 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .stat-row:last-child {
+        border-bottom: none;
+        font-weight: bold;
+        font-size: 1.2rem;
+        background: black;
+        color: white;
+        margin: 1rem -1.5rem -1.5rem -1.5rem;
+        padding: 1rem 1.5rem;
+      }
+
+      .discount-section {
+        background: white;
+        color: black;
+        padding: 1.5rem;
+        border: 2px solid white;
+      }
+
+      .discount-title {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .discount-input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid black;
+        margin-bottom: 1rem;
+        background: white;
+        color: black;
+      }
+
+      .discount-input:focus {
+        outline: none;
+        background: #f5f5f5;
+      }
+
+      .discount-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .discount-btn {
+        flex: 1;
+        background: black;
+        color: white;
+        border: 2px solid black;
+        padding: 0.8rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .discount-btn:hover {
+        background: white;
+        color: black;
+      }
+
+      .remove-btn {
+        background: white;
+        color: black;
+        border: 2px solid black;
+      }
+
+      .remove-btn:hover {
+        background: black;
+        color: white;
+      }
+
+      /* Customer Section Styles */
+      .customer-section {
+        background: white;
+        color: black;
+        padding: 1.5rem;
+        border: 2px solid white;
+        margin-top: 1rem;
+      }
+
+      .customer-title {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .customer-display {
+        background: #f5f5f5;
+        border: 2px solid #ddd;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        min-height: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .customer-placeholder {
+        color: #666;
+        font-style: italic;
+        text-align: center;
+      }
+
+      .customer-info {
+        color: black;
+      }
+
+      .customer-name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .customer-phone {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .customer-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .customer-btn {
+        flex: 1;
+        background: black;
+        color: white;
+        border: 2px solid black;
+        padding: 0.8rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .customer-btn:hover {
+        background: white;
+        color: black;
+      }
+
+      /* Customer Panel Styles */
+      .panel-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .panel-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .customer-panel {
+        position: fixed;
+        top: 0;
+        left: -500px;
+        width: 500px;
+        height: 100vh;
+        background: white;
+        border-right: 3px solid black;
+        z-index: 10000;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .customer-panel.show {
+        left: 0;
+        transform: translateX(0);
+      }
+
+      .panel-header {
+        padding: 2rem;
+        border-bottom: 3px solid black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: black;
+        color: white;
+      }
+
+      .panel-header h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        margin: 0;
+      }
+
+      .panel-close {
+        background: white;
+        color: black;
+        border: 2px solid white;
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      .panel-close:hover {
+        background: black;
+        color: white;
+        border-color: black;
+      }
+
+      .panel-content {
+        padding: 2rem;
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .panel-subtitle {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .customer-search-section,
+      .customer-register-section {
+        border: 2px solid black;
+        padding: 1.5rem;
+        background: #f9f9f9;
+      }
+
+      .search-title,
+      .register-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: black;
+      }
+
+      .search-input,
+      .register-input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid black;
+        background: white;
+        color: black;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .search-input:focus,
+      .register-input:focus {
+        outline: none;
+        background: #f5f5f5;
+      }
+
+      .search-results {
+        max-height: 200px;
+        overflow-y: auto;
+        border: 2px solid #ddd;
+        background: white;
+        margin-top: 0.5rem;
+      }
+
+      .search-result-item {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .search-result-item:hover {
+        background: #f5f5f5;
+      }
+
+      .search-result-item:last-child {
+        border-bottom: none;
+      }
+
+      .result-name {
+        font-weight: bold;
+        color: black;
+        margin-bottom: 0.3rem;
+      }
+
+      .result-phone {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .register-btn,
+      .confirm-customer-btn {
+        background: black;
+        color: white;
+        border: 2px solid black;
+        padding: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .register-btn:hover,
+      .confirm-customer-btn:hover {
+        background: white;
+        color: black;
+      }
+
+      .selected-customer-info {
+        border: 2px solid #28a745;
+        padding: 1.5rem;
+        background: #f8fff9;
+      }
+
+      .selected-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #28a745;
+      }
+
+      .customer-details {
+        margin-bottom: 1rem;
+      }
+
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .detail-row:last-child {
+        border-bottom: none;
+      }
+
+      .detail-label {
+        font-weight: bold;
+        color: #666;
+      }
+
+      .detail-value {
+        color: black;
+      }
+
+      .no-results {
+        padding: 1rem;
+        text-align: center;
+        color: #666;
+        font-style: italic;
+      }
+
+      /* Responsive Design for Customer Panel */
+      @media (max-width: 600px) {
+        .customer-panel {
+          left: -100vw;
+          width: 100vw;
+        }
+
+        .customer-panel.show {
+          left: 0;
+        }
+
+        .panel-content {
+          padding: 1rem;
+        }
+
+        .customer-search-section,
+        .customer-register-section {
+          padding: 1rem;
+        }
+      }
+
+      /* Center Panel - Shopping Cart */
+      .cart-panel {
+        background: white;
+        border-right: 3px solid black;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .cart-header {
+        background: black;
+        color: white;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid black;
+      }
+
+      .cart-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      .clear-cart-btn {
+        background: white;
+        color: black;
+        border: 2px solid white;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .clear-cart-btn:hover {
+        background: black;
+        color: white;
+      }
+
+      .cart-content {
+        flex: 1;
+        padding: 1.5rem;
+        overflow-y: auto;
+        background: white;
+      }
+
+      .cart-item {
+        background: white;
+        border: 3px solid black;
+        padding: 0;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+        border-radius: 0;
+      }
+
+      .cart-item:hover {
+        box-shadow: 5px 5px 0px black;
+        transform: translate(-2px, -2px);
+      }
+
+      .item-header {
+        background: black;
+        color: white;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: none;
+      }
+
+      .item-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .item-name {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: white;
+        margin: 0;
+      }
+
+      .item-code {
+        font-size: 0.8rem;
+        color: #ccc;
+        font-family: "Courier New", monospace;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.3rem 0.6rem;
+        border: 1px solid #555;
+        display: inline-block;
+        width: fit-content;
+      }
+
+      .item-price-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.3rem;
+      }
+
+      .item-unit-price {
+        font-size: 0.85rem;
+        color: #ccc;
+        font-weight: normal;
+      }
+
+      .item-total-price {
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: white;
+        border: 2px solid white;
+        padding: 0.3rem 0.8rem;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .item-controls {
+        padding: 1.5rem;
+        background: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .qty-controls {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        background: white;
+        border: 3px solid black;
+      }
+
+      .qty-btn {
+        background: black;
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.4rem;
+        transition: all 0.3s ease;
+        border-radius: 0;
+      }
+
+      .qty-btn:hover {
+        background: #333;
+        transform: scale(1.1);
+      }
+
+      .qty-btn:active {
+        transform: scale(0.95);
+      }
+
+      .qty-display {
+        min-width: 60px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.3rem;
+        background: white;
+        color: black;
+        border: none;
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+      }
+
+      .remove-item-btn {
+        background: white;
+        color: #dc3545;
+        border: 3px solid #dc3545;
+        padding: 0.8rem 1.5rem;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+      }
+
+      .remove-item-btn:hover {
+        background: #dc3545;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+      }
+
+      .empty-cart {
+        text-align: center;
+        color: #666;
+        padding: 3rem 1rem;
+        border: 2px dashed #ccc;
+        font-style: italic;
+      }
+
+      /* Right Panel - Item Entry & Payment */
+      .control-panel {
+        background: #f8f8f8;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        overflow-y: auto;
+      }
+
+      .entry-section {
+        background: white;
+        border: 3px solid black;
+        padding: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      .section-subtitle {
+        color: #666;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .entry-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-label {
+        font-weight: bold;
+        color: black;
+      }
+
+      .form-input {
+        padding: 1rem;
+        border: 2px solid black;
+        background: white;
+        color: black;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .form-input:focus {
+        outline: none;
+        background: #f9f9f9;
+      }
+
+      .add-item-btn {
+        background: black;
+        color: white;
+        border: 2px solid black;
+        padding: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+      }
+
+      .add-item-btn:hover {
+        background: white;
+        color: black;
+      }
+
+      /* Payment Section */
+      .payment-section {
+        background: white;
+        border: 3px solid black;
+        padding: 2rem;
+      }
+
+      .payment-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .cash-input {
+        width: 100%;
+        padding: 1.2rem;
+        border: 3px solid black;
+        background: white;
+        color: black;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .cash-input:focus {
+        outline: none;
+        background: #f9f9f9;
+      }
+
+      .change-display {
+        background: black;
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        border: 3px solid black;
+      }
+
+      .change-label {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .change-amount {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      .action-btn {
+        width: 100%;
+        background: black;
+        color: white;
+        border: 3px solid black;
+        padding: 1.2rem;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .action-btn:hover:not(:disabled) {
+        background: white;
+        color: black;
+      }
+
+      .action-btn:disabled {
+        background: #ccc;
+        border-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .complete-btn {
+        background: #333;
+        border-color: #333;
+      }
+
+      .complete-btn:hover {
+        background: white;
+        color: #333;
+        border-color: #333;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .main-container {
+          grid-template-columns: 1fr;
+          height: auto;
+          min-height: calc(100vh - 60px);
+        }
+
+        .cart-content {
+          max-height: 400px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .top-bar {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        .main-container {
+          margin-top: 100px;
+        }
+
+        .nav-menu {
+          gap: 1rem;
+        }
+
+        .cart-item {
+          gap: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="brand">SYOS Webstore</div>
+      <nav class="nav-menu">
+        <a href="pos-system.html" class="nav-item active">Point of Sale</a>
+      </nav>
+      <div class="user-section">
+        <span id="userInfo">Cashier</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Main 3-Panel Layout -->
+    <main class="main-container">
+      <!-- LEFT PANEL: Order Summary -->
+      <section class="summary-panel">
+        <h2 class="summary-title">ORDER SUMMARY</h2>
+
+        <div class="summary-stats">
+          <div class="stat-row">
+            <span>Items:</span>
+            <span id="totalItems">0</span>
+          </div>
+          <div class="stat-row">
+            <span>Subtotal:</span>
+            <span id="billTotal">Rs 0.00</span>
+          </div>
+          <div class="stat-row" id="discountRow" style="display: none">
+            <span>Discount:</span>
+            <span id="discountAmount" style="color: #ff4444">-Rs 0.00</span>
+          </div>
+          <div class="stat-row">
+            <span>TOTAL:</span>
+            <span id="finalTotal">Rs 0.00</span>
+          </div>
+        </div>
+
+        <div class="discount-section">
+          <div class="discount-title">Discount Code</div>
+          <input
+            type="text"
+            id="discountCode"
+            class="discount-input"
+            placeholder="Enter discount code"
+          />
+          <div class="discount-actions">
+            <button class="discount-btn" onclick="applyDiscountCode()">
+              Apply
+            </button>
+            <button
+              class="discount-btn remove-btn"
+              onclick="removeDiscount()"
+              id="removeDiscountBtn"
+              style="display: none"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+
+        <div class="customer-section">
+          <div class="customer-title">Customer Info</div>
+          <div id="customerDisplay" class="customer-display">
+            <div class="customer-placeholder">No customer selected</div>
+          </div>
+          <div class="customer-actions">
+            <button class="customer-btn" onclick="openCustomerPanel()">
+              Select Customer
+            </button>
+            <button
+              class="customer-btn remove-btn"
+              onclick="removeCustomer()"
+              id="removeCustomerBtn"
+              style="display: none"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CENTER PANEL: Shopping Cart -->
+      <section class="cart-panel">
+        <div class="cart-header">
+          <h2 class="cart-title">CUSTOMER'S CART</h2>
+          <button class="clear-cart-btn" onclick="clearCart()">
+            Clear Cart
+          </button>
+        </div>
+        <div class="cart-content" id="cartItems">
+          <div class="empty-cart">
+            No items added yet. Enter item codes to add to cart.
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT PANEL: Item Entry & Payment -->
+      <section class="control-panel">
+        <!-- Item Entry Section -->
+        <div class="entry-section">
+          <h3 class="section-title">ITEM ENTRY</h3>
+          <p class="section-subtitle">Enter item codes and quantities</p>
+
+          <form id="itemEntryForm" class="entry-form">
+            <div class="form-row">
+              <label class="form-label">Item Code *</label>
+              <input
+                type="text"
+                id="itemCode"
+                class="form-input"
+                placeholder="Enter item code"
+                autocomplete="off"
+                required
+              />
             </div>
-        </nav>
-
-        <!-- Main POS Interface -->
-        <main class="main-content">
-            <div class="pos-container">
-                <!-- Left Side - Item Entry and Cart -->
-                <div class="pos-left">
-                    <!-- Item Entry Section -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Item Entry</h3>
-                            <p>Enter item codes and quantities for customer purchase</p>
-                        </div>
-                        <div class="card-body">
-                            <form id="itemEntryForm">
-                                <div class="item-entry">
-                                    <div class="form-group">
-                                        <label class="form-label">Item Code *</label>
-                                        <input type="text" id="itemCode" class="form-control" 
-                                               placeholder="Enter item code (e.g., RICE001)" 
-                                               style="font-size: 18px; font-weight: bold;" 
-                                               autocomplete="off"
-                                               required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Quantity *</label>
-                                        <input type="number" id="itemQuantity" class="form-control" 
-                                               placeholder="Qty" min="1" value="1" 
-                                               style="font-size: 18px; text-align: center;" required>
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="btn btn-primary" style="padding: 12px 20px;">
-                                            <i class="fas fa-plus"></i> Add Item
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Shopping Cart -->
-                    <div class="card mt-4">
-                        <div class="card-header">
-                            <h3>CUSTOMER'S Cart</h3>
-                            <div class="card-actions">
-                                <button class="btn btn-outline btn-sm" onclick="clearCart()">Clear Cart</button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div id="cartItems">
-                                <p class="text-muted text-center">No items added yet. Enter item codes above to add to cart.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Side - Bill Calculation and Payment -->
-                <div class="pos-right">
-                    <!-- Bill Summary Section -->
-                    <div class="cart-summary">
-                        <h3 style="color: white;"><i class="fas fa-receipt"></i> Order Summary</h3>
-                        <div class="summary-row">
-                            <span>Items:</span>
-                            <span id="totalItems">0</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Subtotal:</span>
-                            <span id="billTotal">Rs 0.00</span>
-                        </div>
-                        <div class="summary-row" id="discountRow" style="display: none;">
-                            <span>Discount:</span>
-                            <span id="discountAmount" style="color: #ef4444;">-Rs 0.00</span>
-                        </div>
-                        <div class="summary-total">
-                            <span>Total:</span>
-                            <span id="finalTotal">Rs 0.00</span>
-                        </div>
-                    </div>
-
-                    <!-- Discount Code Section -->
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            <h4 style="margin: 0;"><i class="fas fa-tags"></i> Discount Code</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Enter Discount Code:</label>
-                                <input type="text" id="discountCode" class="form-control" 
-                                       placeholder="Enter discount code">
-                            </div>
-                            <button class="btn btn-primary btn-sm" onclick="applyDiscountCode()">
-                                Apply Discount
-                            </button>
-                            <button class="btn btn-outline btn-sm ml-2" onclick="removeDiscount()" 
-                                    id="removeDiscountBtn" style="display: none;">
-                                Remove
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Payment Section -->
-                    <div class="payment-section" id="paymentSection" style="display: none;">
-                        <h4><i class="fas fa-money-bill-wave"></i> Cash Payment</h4>                        
-                        <div class="form-group">
-                            <label class="form-label">Cash Tendered *</label>
-                            <input type="number" id="cashTendered" class="form-control" 
-                                   placeholder="0.00" step="0.01" min="0"
-                                   style="font-size: 24px; text-align: center; font-weight: bold;"
-                                   oninput="calculateChange()">
-                        </div>
-
-                        <!-- Change Calculation -->
-                        <div id="changeDisplay" class="change-display" style="display: none;">
-                            <div class="text-center">
-                                <h4><i class="fas fa-money-bill-wave"></i> Change to Return</h4>
-                                <div id="changeAmount" class="change-amount">Rs 0.00</div>
-                            </div>
-                        </div>
-
-                        <div id="paymentButtons" class="mt-3">
-                            <button class="complete-sale-btn mt-2" onclick="completeSale()" 
-                                    id="completeBtn" style="display: none;">
-                                <i class="fas fa-receipt"></i> Generate Bill
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="mt-3" id="actionButtons">
-                        <button class="complete-sale-btn" onclick="proceedToPayment()" 
-                                id="proceedBtn" disabled>
-                            <i class="fas fa-credit-card"></i> Proceed to Payment
-                        </button>
-                    </div>
-                </div>
+            <div class="form-row">
+              <label class="form-label">Quantity *</label>
+              <input
+                type="number"
+                id="itemQuantity"
+                class="form-input"
+                placeholder="1"
+                min="1"
+                value="1"
+                required
+              />
             </div>
-        </main>
+            <button type="submit" class="add-item-btn">ADD TO CART</button>
+          </form>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section" id="paymentSection" style="display: none">
+          <h3 class="payment-title">CASH PAYMENT</h3>
+
+          <input
+            type="number"
+            id="cashTendered"
+            class="cash-input"
+            placeholder="0.00"
+            step="0.01"
+            min="0"
+            oninput="calculateChange()"
+          />
+
+          <div id="changeDisplay" class="change-display" style="display: none">
+            <div class="change-label">Change to Return</div>
+            <div id="changeAmount" class="change-amount">Rs 0.00</div>
+          </div>
+
+          <div id="paymentButtons">
+            <button
+              class="action-btn complete-btn"
+              onclick="completeSale()"
+              id="completeBtn"
+              style="display: none"
+            >
+              GENERATE BILL
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div id="actionButtons">
+          <button
+            class="action-btn"
+            onclick="proceedToPayment()"
+            id="proceedBtn"
+            disabled
+          >
+            PROCEED TO PAYMENT
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Customer Panel Overlay -->
+    <div
+      class="panel-overlay"
+      id="customerPanelOverlay"
+      onclick="closeCustomerPanel()"
+    ></div>
+
+    <!-- Customer Slide Panel -->
+    <div class="customer-panel" id="customerPanel">
+      <div class="panel-header">
+        <h3>Customer Management</h3>
+        <button class="panel-close" onclick="closeCustomerPanel()">×</button>
+      </div>
+      <div class="panel-content">
+        <p class="panel-subtitle">
+          Search for existing customer or register new customer
+        </p>
+
+        <!-- Customer Search Section -->
+        <div class="customer-search-section">
+          <h4 class="search-title">Search Customer</h4>
+          <div class="search-form">
+            <div class="form-row">
+              <label class="form-label">Search by Name or Phone</label>
+              <input
+                type="text"
+                id="customerSearch"
+                class="search-input"
+                placeholder="Enter name or phone number"
+                autocomplete="off"
+                oninput="searchCustomers()"
+              />
+            </div>
+            <div id="searchResults" class="search-results"></div>
+          </div>
+        </div>
+
+        <!-- Customer Registration Section -->
+        <div class="customer-register-section">
+          <h4 class="register-title">Register New Customer</h4>
+          <form id="customerRegistrationForm" class="register-form">
+            <div class="form-row">
+              <label class="form-label">Full Name *</label>
+              <input
+                type="text"
+                id="newCustomerName"
+                class="register-input"
+                placeholder="Enter customer name"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <label class="form-label">Phone Number *</label>
+              <input
+                type="tel"
+                id="newCustomerPhone"
+                class="register-input"
+                placeholder="Enter phone number"
+                required
+              />
+            </div>
+            <button type="submit" class="register-btn">
+              Register Customer
+            </button>
+          </form>
+        </div>
+
+        <!-- Selected Customer Info -->
+        <div
+          id="selectedCustomerInfo"
+          class="selected-customer-info"
+          style="display: none"
+        >
+          <h4 class="selected-title">Selected Customer</h4>
+          <div class="customer-details">
+            <div class="detail-row">
+              <span class="detail-label">Name:</span>
+              <span id="selectedCustomerName" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Phone:</span>
+              <span id="selectedCustomerPhone" class="detail-value"></span>
+            </div>
+          </div>
+          <button
+            class="confirm-customer-btn"
+            onclick="confirmCustomerSelection()"
+          >
+            Confirm Selection
+          </button>
+        </div>
+      </div>
     </div>
 
-    <script src="../../js/utils.js"></script>
-    <script src="../../js/pos-system.js"></script>
-</body>
-</html>
-</body>
+    <script src="../../js/utils.js?v=20251005"></script>
+    <script src="../../js/pos-system.js?v=20251005"></script>
+  </body>
 </html>

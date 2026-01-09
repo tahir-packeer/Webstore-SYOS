@@ -44,7 +44,6 @@ async function loadProducts() {
     productsContainer.style.display = 'none';
 
     try {
-        // Get website shelf items (not warehouse stock) from StockServlet
         const stockData = await APIClient.get(API_ENDPOINTS.STOCK, { type: 'website' });
         
         if (!stockData || stockData.length === 0) {
@@ -52,17 +51,12 @@ async function loadProducts() {
             return;
         }
 
-        // Transform website shelf data to product format for display
-        // These are already filtered for WEBSITE type and quantity > 0
         allProducts = stockData.map(item => ({
             id: item.id,
             code: item.code,
             name: item.name,
             price: parseFloat(item.price) || 0.00,
-            availableQty: item.quantity,
-            // Website shelf items don't have purchase/expiry dates
-            dateOfPurchase: item.date_of_purchase || null,
-            dateOfExpiry: item.date_of_expiry || null
+            availableQty: item.quantity
         }));
         
         if (allProducts.length === 0) {
@@ -72,23 +66,23 @@ async function loadProducts() {
 
         filteredProducts = [...allProducts];
         loadingState.style.display = 'none';
-        displayProducts(filteredProducts);
+        displayProducts();
         
     } catch (error) {
         console.error('Error loading products:', error);
         loadingState.style.display = 'none';
         productsContainer.style.display = 'block';
         productsContainer.innerHTML = `
-            <div class="col-12">
-                <div class="alert alert-danger">
-                    <h5>Unable to load products</h5>
-                    <p>${error.message}</p>
-                    <button class="btn btn-primary" onclick="loadProducts()">Try Again</button>
-                </div>
+            <div style="text-align: center; padding: 2rem; border: 3px solid black; background: white; margin: 2rem;">
+                <h3>Unable to load products</h3>
+                <p>${error.message}</p>
+                <button onclick="loadProducts()" style="background: black; color: white; border: 3px solid black; padding: 1rem 2rem; font-weight: 700; text-transform: uppercase;">Try Again</button>
             </div>
         `;
     }
 }
+
+
 
 function filterProducts() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
@@ -134,7 +128,7 @@ function displayProducts() {
     }
     
     noProductsState.style.display = 'none';
-    container.style.display = 'flex';
+    container.style.display = 'block';
     
     // Calculate pagination
     const startIndex = (currentPage - 1) * productsPerPage;
@@ -144,59 +138,77 @@ function displayProducts() {
     // Clear container
     container.innerHTML = '';
     
-    // Create product cards
-    pageProducts.forEach(product => {
-        const productCard = createProductCard(product);
-        container.appendChild(productCard);
+    // Create product items
+    pageProducts.forEach((product, index) => {
+        const productItem = createMagazineProductItem(product, index);
+        container.appendChild(productItem);
     });
     
     // Update pagination
     updatePagination();
 }
 
-function createProductCard(product) {
-    const col = document.createElement('div');
-    col.className = 'col-4 mb-4';
+function createMagazineProductItem(product, index) {
+    const container = document.createElement('div');
     
-    const stockBadge = product.availableQty > 10 ? 
-        '<span class="badge badge-success">In Stock</span>' :
-        product.availableQty > 0 ? 
-        '<span class="badge badge-warning">Low Stock</span>' :
-        '<span class="badge badge-danger">Out of Stock</span>';
+    // Alternate layout direction for visual interest
+    const isReverse = index % 2 === 1;
+    container.className = `product-magazine-item ${isReverse ? 'reverse' : ''}`;
     
-    const formattedPrice = `LKR ${product.price.toFixed(2)}`;
+    // Determine stock status
+    const stockStatus = product.availableQty > 10 ? 'in-stock' : 
+                       product.availableQty > 0 ? 'low-stock' : 'out-stock';
     
-    col.innerHTML = `
-        <div class="product-card h-100">
-            <div class="product-card-header">
-                <div class="product-badge-container">
-                    ${stockBadge}
-                </div>
-                <div class="product-info">
-                    <h5 class="product-title">${product.name}</h5>
-                    <div class="product-code">Code: ${product.code}</div>
+    const stockText = product.availableQty > 10 ? 'In Stock' :
+                     product.availableQty > 0 ? 'Low Stock' : 'Out of Stock';
+    
+    const stockClass = product.availableQty > 10 ? 'status-in-stock' :
+                      product.availableQty > 0 ? 'status-low-stock' : 'status-out-stock';
+    
+    // Generate product icon (first 2 letters of product name)
+    const productIcon = product.name.substring(0, 2).toUpperCase();
+    
+    container.innerHTML = `
+        <div class="product-visual-section">
+            <div class="status-badge ${stockClass}">${stockText}</div>
+            <div class="product-visual-content">
+                <div class="product-icon">${productIcon}</div>
+                <div class="product-stock-display">
+                    <div class="stock-label">Available</div>
+                    <div class="stock-number">${product.availableQty}</div>
                 </div>
             </div>
-            <div class="product-card-body">
-                <div class="product-stock-info">
-                    <span class="stock-text">${product.availableQty} units available</span>
+        </div>
+        
+        <div class="product-details-section">
+            <div class="product-header">
+                <h3 class="product-name">${product.name}</h3>
+                <div class="product-code-display">Code: ${product.code}</div>
+            </div>
+            
+            <div class="product-middle-section">
+                <div class="product-description">
+                    ${product.availableQty > 0 ? 
+                        `<p style="color: #666; font-style: italic;">Ready for immediate purchase and delivery.</p>` :
+                        `<p style="color: #dc3545; font-weight: 600;">Currently unavailable. Check back soon!</p>`
+                    }
                 </div>
-                <div class="product-pricing">
-                    <div class="price-container">
-                        <span class="currency">LKR</span>
-                        <span class="price">${product.price.toFixed(2)}</span>
-                    </div>
-                    <button class="add-to-cart-btn ${product.availableQty === 0 ? 'disabled' : ''}" 
-                            onclick="addToCart(${product.id})" 
-                            ${product.availableQty === 0 ? 'disabled' : ''}>
-                        <span class="btn-text">Add to Cart</span>
-                    </button>
+            </div>
+            
+            <div class="product-footer">
+                <div class="product-price-display">
+                    <span class="price-currency">LKR</span> ${product.price.toFixed(2)}
                 </div>
+                <button class="magazine-add-btn ${product.availableQty === 0 ? 'disabled' : ''}" 
+                        onclick="addToCart(${product.id})" 
+                        ${product.availableQty === 0 ? 'disabled' : ''}>
+                    ${product.availableQty === 0 ? 'Sold Out' : 'Add to Cart'}
+                </button>
             </div>
         </div>
     `;
     
-    return col;
+    return container;
 }
 
 function showNoProductsState() {
@@ -289,7 +301,7 @@ function addToCart(productId, quantity = 1) {
     };
     
     CartManager.addToCart(cartItem, quantity);
-    UIUtils.showAlert(`${product.name} (${quantity} units) added to cart!`, 'success', 2000);
+    UIUtils.showAlert(`${product.name} added to cart!`, 'success', 2000);
     CartManager.updateCartCount();
 }
 
@@ -303,198 +315,115 @@ function logout() {
     }
 }
 
-// Add CSS for badges and card styling
+// Add CSS for magazine-style layout enhancements
 function addCatalogStyles() {
     const style = document.createElement('style');
     style.textContent = `
-        /* Product Card Styling */
-        .product-card {
-            background: var(--white);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+        /* Enhanced Magazine Layout Animations */
+        .product-magazine-item {
+            animation: fadeInUp 0.6s ease-out;
         }
         
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+        .product-magazine-item:nth-child(even) {
+            animation-delay: 0.1s;
         }
         
-        .product-card-header {
-            background: var(--primary-color);
-            padding: 1.5rem;
-            position: relative;
-            color: var(--white);
+        .product-magazine-item:nth-child(odd) {
+            animation-delay: 0.2s;
         }
         
-        .product-badge-container {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-        }
-        
-        .product-info {
-            padding-right: 6rem;
-        }
-        
-        .product-title {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.25rem;
-            font-weight: var(--font-weight-semibold);
-            color: var(--white);
-            line-height: 1.3;
-        }
-        
-        .product-code {
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 400;
-        }
-        
-        .product-card-body {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            flex-grow: 1;
-        }
-        
-        .product-stock-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem;
-            background: var(--neutral-color);
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .stock-text {
-            font-size: 0.875rem;
-            color: var(--text-light);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .product-pricing {
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .price-container {
-            display: flex;
-            align-items: baseline;
-            gap: 0.25rem;
-        }
-        
-        .currency {
-            font-size: 0.875rem;
-            color: var(--text-light);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .price {
-            font-size: 1.5rem;
-            font-weight: var(--font-weight-bold);
-            color: var(--text-color);
-        }
-        
-        .add-to-cart-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            background: var(--accent-color);
-            color: var(--white);
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: var(--font-weight-semibold);
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-        }
-        
-        .add-to-cart-btn:hover:not(.disabled) {
-            background: var(--secondary-color);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .add-to-cart-btn.disabled {
-            background: var(--border-color);
-            color: var(--text-light);
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        
-        .btn-text {
-            font-size: 0.875rem;
-        }
-        
-        /* Badge Styling */
-        .badge {
-            padding: 0.375rem 0.75rem;
-            font-size: 0.75rem;
-            border-radius: 20px;
-            color: var(--white);
-            font-weight: var(--font-weight-semibold);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: var(--shadow);
-        }
-        
-        .badge-success { 
-            background: var(--accent-color);
-        }
-        
-        .badge-warning { 
-            background: var(--secondary-color);
-        }
-        
-        .badge-danger { 
-            background: var(--primary-color);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .product-card-header {
-                padding: 1rem;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            
-            .product-info {
-                padding-right: 5rem;
-            }
-            
-            .product-title {
-                font-size: 1.1rem;
-            }
-            
-            .product-card-body {
-                padding: 1rem;
-            }
-            
-            .product-pricing {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.75rem;
-            }
-            
-            .add-to-cart-btn {
-                justify-content: center;
-                width: 100%;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         
-        /* Utility Classes */
-        .h-100 { height: 100%; }
-        .flex-grow-1 { flex-grow: 1; }
-        .ml-2 { margin-left: 0.5rem; }
+        /* Loading State Enhancement */
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid black;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Pagination Styling to Match Magazine Theme */
+        .btn-group .btn {
+            border: 2px solid black !important;
+            background: white !important;
+            color: black !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+        }
+        
+        .btn-group .btn:hover:not(:disabled) {
+            background: black !important;
+            color: white !important;
+        }
+        
+        .btn-group .btn:disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+        }
+        
+        /* No Products State Styling */
+        #noProductsState {
+            text-align: center !important;
+            padding: 4rem 2rem !important;
+            border: 3px solid black !important;
+            background: white !important;
+            margin: 2rem auto !important;
+            max-width: 600px !important;
+        }
+        
+        #noProductsState h4 {
+            font-size: 2rem !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 2px !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        #noProductsState p {
+            font-size: 1.1rem !important;
+            color: #666 !important;
+            margin-bottom: 2rem !important;
+        }
+        
+        #noProductsState .btn {
+            background: black !important;
+            color: white !important;
+            border: 3px solid black !important;
+            padding: 1rem 2rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+        }
+        
+        /* Alert Enhancements */
+        .alert {
+            border: 3px solid black !important;
+            border-radius: 0 !important;
+            font-weight: 600 !important;
+        }
+        
+        .alert-danger {
+            background: white !important;
+            color: #dc3545 !important;
+            border-color: #dc3545 !important;
+        }
     `;
     document.head.appendChild(style);
 }

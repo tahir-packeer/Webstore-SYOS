@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.business.services.ItemServiceImplTest" time="3.014" tests="22" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="net.bytebuddy.experimental" value="true"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585 2026-01-09T15-49-36_319-jvmRun1 surefire-20260109154936576_1tmp surefire_0-20260109154936576_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\tahir"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
+    <property name="junit.jupiter.execution.parallel.mode.default" value="concurrent"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="24.0.1+9-30"/>
+    <property name="user.name" value="tahir"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="junit.jupiter.execution.parallel.config.strategy" value="dynamic"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="junit.jupiter.execution.parallel.enabled" value="true"/>
+    <property name="localRepository" value="C:\Users\tahir\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\tahir\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.1"/>
+    <property name="user.dir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\flutter\flutter\bin\cache\dart-sdk\bin\;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Java\jdk-24\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\flutter\flutter\bin\cache\dart-sdk\bin\;$PATH:$CATALINA_HOME/bin:$JAVA_HOME/bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tahir\.config\herd\bin;C:\Users\tahir\AppData\Local\Microsoft\WindowsApps;C:\Users\tahir\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PhpStorm 2024.2\bin;;C:\Program Files\php-8.2.22;C:\Users\tahir\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git;C:\Users\tahir\AppData\Local\Android\Sdk;C:\flutter\flutter\bin;C:\Users\tahir\AppData\Local\Pub\Cache\bin;C:\Users\tahir\AppData\Local\GitHubDesktop\bin;C:\flutter new\flutter\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\bin;;C:\Users\tahir\AppData\Local\Programs\Windsurf\bin;C:\Users\tahir\AppData\Local\Programs\Ollama;C:\Users\tahir\AppData\Local\Programs\cursor\resources\app\bin;C:\apache-maven-3.9.11\bin;;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Program Files\Java\jdk-11\bin;C:\Users\tahir\AppData\Roaming\npm;c:\Users\tahir\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;c:\Users\tahir\.vscode\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="junit.jupiter.extensions.autodetection.enabled" value="true"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.1+9-30"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="get_low_stock_shelves_Success" classname="org.example.presentation.controllers.ShelfControllerTest" time="0.662"/>
+  <testcase name="addShelf_Success" classname="org.example.presentation.controllers.ShelfControllerTest" time="0.183">
+    <system-out><![CDATA[Mixed activity 33 (browse) completed, 41 items found
+Shelf added successfully with ID: 90
+Online customer registered successfully with ID: 107
+Online customer registered successfully with ID: 105
+Online customer registered successfully with ID: 106
+Mixed activity 31 (register) completed, ID: 107
+Mixed activity 28 (register) completed, ID: 105
+]]></system-out>
+  </testcase>
+  <testcase name="get_shelf_by_shelf_id_NotFound" classname="org.example.presentation.controllers.ShelfControllerTest" time="0.014">
+    <system-out><![CDATA[No shelf found for the given ID.
+]]></system-out>
+  </testcase>
+  <testcase name="getStockQuantityByItem_NoStock" classname="org.example.presentation.controllers.StockControllerTest" time="0.104">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Successfully added 1 items
+Online customer registered successfully with ID: 94
+Online customer registered successfully with ID: 91
+Registration successful for customer 34 (ID: 91), Response time: 315 ms
+Registration successful for customer 32 (ID: 94), Response time: 316 ms
+Online customer registered successfully with ID: 93
+Registration successful for customer 45 (ID: 93), Response time: 235 ms
+Online customer registered successfully with ID: 92
+Registration successful for customer 31 (ID: 92), Response time: 318 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online order processed successfully. Order ID: 18
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer 2 order processed (Bill ID: 18), Response time: 60 ms
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="reduceStockQuantityAndUpdateStockShelfTable_Success" classname="org.example.presentation.controllers.StockControllerTest" time="2.291">
+    <system-out><![CDATA[
+=== MIXED ONLINE CUSTOMER ACTIVITIES TEST ===
+Testing 60 customers with mixed online activities...
+]]></system-out>
+  </testcase>
+  <testcase name="addItemsToStock_Success" classname="org.example.presentation.controllers.StockControllerTest" time="0.069">
+    <system-out><![CDATA[Successfully added 1 items
+Access Denied - Invalid credentials detected
+
+=== HIGH LOAD USER REGISTRATION TEST ===
+Testing 500 concurrent user registrations...
+Access Denied - Invalid credentials detected
+
+============================================================
+EXTREME LOAD STRESS TEST RESULTS
+============================================================
+Test Completed: YES
+Total Time: 816 ms (0.82 seconds)
+Total Operations: 1000
+Successful Operations: 1000
+Failed Operations: 0
+Success Rate: 100.00%
+Average Response Time: 59.69 ms
+Throughput: 1225.49 operations/second
+============================================================
+Mixed activity 3 (browse) completed, 41 items found
+Mixed activity 6 (browse) completed, 41 items found
+Mixed activity 0 (browse) completed, 41 items found
+Successfully added 1 items
+Successfully added 1 items
+Online customer registered successfully with ID: 97
+Online customer registered successfully with ID: 98
+Online customer registered successfully with ID: 99
+Mixed activity 7 (register) completed, ID: 98
+Mixed activity 1 (register) completed, ID: 97
+]]></system-out>
+  </testcase>
+  <testcase name="allocateStockToShelf_DifferentTypes_Success" classname="org.example.presentation.controllers.StockControllerTest" time="0.123">
+    <system-out><![CDATA[Mixed activity 25 (register) completed, ID: 106
+Mixed activity 36 (browse) completed, 41 items found
+Shelf with ID -1 not found.
+]]></system-out>
+  </testcase>
+  <testcase name="addItemsToStock_MultipleBatches_AccumulatesCorrectly" classname="org.example.presentation.controllers.StockControllerTest" time="0.084">
+    <system-out><![CDATA[Online customer registered successfully with ID: 109
+Mixed activity 37 (register) completed, ID: 109
+]]></system-out>
+  </testcase>
+  <testcase name="getStockQuantityByItem_NonExistentItem_ReturnsZero" classname="org.example.presentation.controllers.StockControllerTest" time="0.011">
+    <system-out><![CDATA[Mixed activity 39 (browse) completed, 42 items found
+]]></system-out>
+  </testcase>
+  <testcase name="addItemsToStock_ZeroQuantity_HandlesGracefully" classname="org.example.presentation.controllers.StockControllerTest" time="0.048">
+    <system-out><![CDATA[Customer 2 browsed inventory (42 items), Response time: 14 ms
+Customer 5 browsed inventory (42 items), Response time: 14 ms
+Customer 7 browsed inventory (42 items), Response time: 13 ms
+Customer 15 browsed inventory (42 items), Response time: 6 ms
+Customer 4 browsed inventory (42 items), Response time: 14 ms
+]]></system-out>
+  </testcase>
+  <testcase name="addItemsToStock_NearExpiryDate_Success" classname="org.example.presentation.controllers.StockControllerTest" time="0.051">
+    <system-out><![CDATA[Customer 16 browsed inventory (42 items), Response time: 6 ms
+Customer added successfully: María José O'Connor-Smith
+Customer 17 browsed inventory (42 items), Response time: 8 ms
+Customer 18 browsed inventory (42 items), Response time: 7 ms
+Customer 19 browsed inventory (42 items), Response time: 7 ms
+Customer 8 browsed inventory (42 items), Response time: 19 ms
+Customer 9 browsed inventory (42 items), Response time: 20 ms
+Customer 21 browsed inventory (42 items), Response time: 7 ms
+Customer 20 browsed inventory (42 items), Response time: 8 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testConcurrentOnlineCustomerRegistration" classname="org.example.ConcurrencyTests.OnlineCustomerConcurrencyTest" time="2.639">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 95
+Registration successful for customer 33 (ID: 95), Response time: 338 ms
+Online customer registered successfully with ID: 96
+Registration successful for customer 36 (ID: 96), Response time: 331 ms
+
+============================================================
+CONCURRENT ONLINE CUSTOMER REGISTRATION TEST RESULTS
+============================================================
+Test Completed: YES
+Total Time: 2489 ms (2.49 seconds)
+Total Operations: 50
+Successful Operations: 50
+Failed Operations: 0
+Success Rate: 100.00%
+Average Response Time: 706.44 ms
+Throughput: 20.09 operations/second
+============================================================
+
+]]></system-out>
+  </testcase>
+  <testcase name="getAllItems_ItemsExist_ReturnsAllItems" classname="org.example.business.services.ItemServiceImplTest" time="0.088">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="updateItem_ValidItem_Success" classname="org.example.business.services.ItemServiceImplTest" time="0.09">
+    <system-out><![CDATA[Mixed activity 12 (browse) completed, 41 items found
+Mixed activity 9 (browse) completed, 41 items found
+Online customer registered successfully with ID: 101
+Mixed activity 16 (register) completed, ID: 101
+Online customer registered successfully with ID: 103
+Mixed activity 22 (register) completed, ID: 103
+Online customer registered successfully with ID: 102
+Mixed activity 19 (register) completed, ID: 102
+Mixed activity 27 (browse) completed, 41 items found
+Mixed activity 30 (browse) completed, 41 items found
+]]></system-out>
+  </testcase>
+  <testcase name="itemExists_ExistingItem_ReturnsTrue" classname="org.example.business.services.ItemServiceImplTest" time="0.033">
+    <system-out><![CDATA[
+=== CONCURRENT WEBSITE INVENTORY BROWSING TEST ===
+Testing 100 concurrent customers browsing website inventory...
+Online customer registered successfully with ID: 108
+Mixed activity 34 (register) completed, ID: 108
+]]></system-out>
+  </testcase>
+  <testcase name="itemExists_NonExistingItem_ReturnsFalse" classname="org.example.business.services.ItemServiceImplTest" time="0.008"/>
+  <testcase name="getItemById_ExistingId_ReturnsItem" classname="org.example.business.services.ItemServiceImplTest" time="0.041">
+    <system-out><![CDATA[Online customer registered successfully with ID: 110
+Mixed activity 40 (register) completed, ID: 110
+Successfully added 1 items
+Mixed activity 42 (browse) completed, 42 items found
+Successfully added 1 items
+Online customer registered successfully with ID: 111
+Mixed activity 43 (register) completed, ID: 111
+Customer 6 browsed inventory (42 items), Response time: 8 ms
+Customer 3 browsed inventory (42 items), Response time: 12 ms
+Customer 1 browsed inventory (42 items), Response time: 12 ms
+]]></system-out>
+  </testcase>
+  <testcase name="getItemById_NonExistingId_ReturnsNull" classname="org.example.business.services.ItemServiceImplTest" time="0.013">
+    <system-out><![CDATA[Customer 13 browsed inventory (42 items), Response time: 5 ms
+Customer 23 browsed inventory (42 items), Response time: 7 ms
+Customer 24 browsed inventory (42 items), Response time: 7 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testExtremeLoadStress" classname="org.example.ConcurrencyTests.HighLoadConcurrencyTest" time="2.707">
+    <system-out><![CDATA[Mixed activity 15 (browse) completed, 41 items found
+Mixed activity 4 (register) completed, ID: 99
+Online customer registered successfully with ID: 100
+Mixed activity 13 (register) completed, ID: 100
+Mixed activity 21 (browse) completed, 41 items found
+Mixed activity 18 (browse) completed, 41 items found
+]]></system-out>
+  </testcase>
+  <testcase name="getCustomerFromContactNumber_NonExistentNumber_ReturnsNull" classname="org.example.presentation.controllers.CustomerControllerTest" time="0.161">
+    <system-out><![CDATA[Mixed activity 24 (browse) completed, 41 items found
+
+=== MIXED OPERATIONS LOAD TEST ===
+Testing mixed operations with 200 concurrent users...
+Successfully added 1 items
+Customer with contact number 0999999999 not found.
+]]></system-out>
+  </testcase>
+  <testcase name="getCustomerFromContactNumber_EmptyNumber_HandlesGracefully" classname="org.example.presentation.controllers.CustomerControllerTest" time="0.024">
+    <system-out><![CDATA[Customer with contact number  not found.
+Online customer registered successfully with ID: 104
+Mixed activity 10 (register) completed, ID: 104
+]]></system-out>
+  </testcase>
+  <testcase name="getCustomerFromContactNumber_NullNumber_HandlesGracefully" classname="org.example.presentation.controllers.CustomerControllerTest" time="0.038">
+    <system-out><![CDATA[Customer with contact number null not found.
+]]></system-out>
+  </testcase>
+</testsuite>

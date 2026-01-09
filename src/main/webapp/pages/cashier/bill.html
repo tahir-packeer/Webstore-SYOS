@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Receipt</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="icon" href="data:," />
+    <style>
+      /* Simple Black and White Design */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: white;
+        color: black;
+        line-height: 1.6;
+      }
+
+      /* Override navbar styles to match cashier dashboard */
+      .navbar {
+        background-color: white !important;
+        border-bottom: 1px solid #e5e5e5 !important;
+        padding: 1rem 0 !important;
+      }
+
+      .navbar .container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 0 2rem !important;
+      }
+
+      .navbar-brand {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        color: black !important;
+        text-decoration: none !important;
+      }
+
+      .navbar-nav {
+        display: flex !important;
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0.5rem !important;
+      }
+
+      .navbar-nav li {
+        margin: 0 !important;
+      }
+
+      .navbar-nav li a {
+        display: block !important;
+        color: black !important;
+        font-weight: 500 !important;
+        padding: 0.5rem 1rem !important;
+        text-decoration: none !important;
+        border: 2px solid transparent !important;
+        transition: all 0.3s ease !important;
+        white-space: nowrap !important;
+      }
+
+      .navbar-nav li a:hover,
+      .navbar-nav li a.active {
+        background: black !important;
+        color: white !important;
+        border: 2px solid black !important;
+      }
+
+      .navbar-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+      }
+
+      .user-info {
+        color: black !important;
+        font-weight: 500 !important;
+        white-space: nowrap !important;
+      }
+
+      .btn.btn-outline {
+        background: white !important;
+        color: black !important;
+        border: 2px solid black !important;
+        padding: 0.5rem 1rem !important;
+        font-weight: 500 !important;
+        transition: all 0.3s ease !important;
+        white-space: nowrap !important;
+        cursor: pointer !important;
+      }
+
+      .btn.btn-outline:hover {
+        background: black !important;
+        color: white !important;
+        border: 2px solid black !important;
+      }
+
+      .main-content {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border: 2px solid black;
+        background: white;
+      }
+
+      .receipt-header {
+        background: black;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        margin: -2rem -2rem 2rem -2rem;
+      }
+
+      .success-badge {
+        background: #28a745;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+
+      .invoice-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .invoice-item {
+        border: 2px solid black;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .invoice-item strong {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .items-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+      }
+
+      .items-table th,
+      .items-table td {
+        border: 1px solid black;
+        padding: 0.75rem;
+        text-align: left;
+      }
+
+      .items-table th {
+        background: black;
+        color: white;
+      }
+
+      .summary-section {
+        border: 2px solid black;
+        padding: 1rem;
+        margin: 2rem 0;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 0.5rem 0;
+      }
+
+      .summary-total {
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-top: 2px solid black;
+        padding-top: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin: 2rem 0;
+      }
+
+      .error-message {
+        background: #ff4444;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        margin: 1rem 0;
+        border: 2px solid #cc0000;
+      }
+
+      .loading {
+        color: #666;
+        font-style: italic;
+      }
+
+      @media print {
+        .navbar,
+        .action-buttons {
+          display: none;
+        }
+
+        .main-content {
+          margin: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar .container {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 0 1rem;
+        }
+
+        .navbar-nav {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+
+        .navbar-actions {
+          gap: 0.5rem;
+        }
+
+        .invoice-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .main-content {
+          margin: 1rem;
+          padding: 1rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="container">
+          <a href="dashboard.html" class="navbar-brand">SYOS Cashier</a>
+          <ul class="navbar-nav">
+            <li><a href="pos-system.html">Point of Sale</a></li>
+          </ul>
+          <div class="navbar-actions">
+            <span class="user-info" id="userInfo">Cashier</span>
+            <button class="btn btn-outline" onclick="logout()">Logout</button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+      <div class="receipt-header">
+        <div class="success-badge">PAYMENT SUCCESSFUL</div>
+        <h1>PAYMENT RECEIPT</h1>
+        <h2>SYOS MANAGEMENT</h2>
+      </div>
+
+      <!-- Invoice Details -->
+      <div class="invoice-grid">
+        <div class="invoice-item">
+          <strong>Invoice Number:</strong>
+          <span id="invoiceNumber">Loading...</span>
+        </div>
+        <div class="invoice-item">
+          <strong>Date:</strong>
+          <span id="billDate">Loading...</span>
+        </div>
+        <div class="invoice-item">
+          <strong>Time:</strong>
+          <span id="billTime">Loading...</span>
+        </div>
+        <div class="invoice-item">
+          <strong>Payment Method:</strong>
+          <span id="paymentMethod">Cash</span>
+        </div>
+      </div>
+
+      <!-- Customer Details -->
+      <div style="border: 2px solid black; padding: 1rem; margin: 2rem 0">
+        <h3 style="margin-bottom: 1rem">CUSTOMER DETAILS</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+          <div>
+            <strong>Name:</strong> <span id="customerName">Loading...</span>
+          </div>
+          <div>
+            <strong>Phone:</strong> <span id="customerPhone">Loading...</span>
+          </div>
+          <div>
+            <strong>Payment Type:</strong>
+            <span id="customerType">Cash Transaction</span>
+          </div>
+          <div>
+            <strong>Served By:</strong> <span id="cashierName">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <h3>ITEMS PURCHASED</h3>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>ITEM CODE</th>
+            <th>DESCRIPTION</th>
+            <th>QUANTITY</th>
+            <th>UNIT PRICE</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody id="itemsTableBody">
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 2rem">
+              Loading items...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Payment Summary -->
+      <div class="summary-section">
+        <h3 style="margin-bottom: 1rem">PAYMENT SUMMARY</h3>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span id="subtotalAmount">Loading...</span>
+        </div>
+        <div class="summary-row" id="discountRow" style="display: none">
+          <span>Discount:</span>
+          <span id="discountAmount">Rs 0.00</span>
+        </div>
+        <div class="summary-row summary-total">
+          <span>Total Paid:</span>
+          <span id="totalAmount">Loading...</span>
+        </div>
+        <div class="summary-row">
+          <span>Cash Tendered:</span>
+          <span id="cashTendered">Loading...</span>
+        </div>
+        <div
+          class="summary-row"
+          style="border-top: 1px solid #ccc; padding-top: 0.5rem"
+        >
+          <span>Change Returned:</span>
+          <span id="changeAmount">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn" onclick="window.print()">Print Receipt</button>
+        <button class="btn" onclick="downloadPDF()">Download PDF</button>
+        <button class="btn" onclick="returnToPOS()">Return to POS</button>
+        <button class="btn" onclick="newTransaction()">New Transaction</button>
+      </div>
+    </div>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+      // Cashier Bill Page
+      let billData = {};
+
+      document.addEventListener("DOMContentLoaded", function () {
+        loadBillData();
+        populateData();
+      });
+
+      function loadBillData() {
+        // Try to get data from sessionStorage (from POS system)
+        const storedData = sessionStorage.getItem("cashierBillData");
+        console.log("Stored data found:", storedData ? "Yes" : "No");
+
+        if (storedData) {
+          try {
+            billData = JSON.parse(storedData);
+            console.log("Loaded cashier bill data:", billData);
+
+            // Validate that we have essential bill data - but be more lenient
+            if (!billData.response) {
+              console.error("Invalid bill data - missing response object");
+              console.log("Creating emergency fallback...");
+              createEmergencyData();
+              return;
+            }
+
+            if (!billData.response.invoiceNumber) {
+              console.error("Invalid bill data - missing invoice number");
+              console.log("Creating emergency fallback...");
+              createEmergencyData();
+              return;
+            }
+
+            if (!billData.cartItems || billData.cartItems.length === 0) {
+              console.error("Invalid bill data - no cart items");
+              console.log("Creating emergency fallback...");
+              createEmergencyData();
+              return;
+            }
+
+            console.log("Bill data validation passed!");
+          } catch (e) {
+            console.error("Error parsing stored bill data:", e);
+            console.log("Creating emergency fallback...");
+            createEmergencyData();
+          }
+        } else {
+          console.log("No stored data found - creating emergency fallback");
+          createEmergencyData();
+        }
+      }
+
+      function createSampleData() {
+        // Show error message instead of sample data
+        console.error("No bill data found - redirecting to POS system");
+        alert("No bill data found. Please complete a transaction first.");
+        window.location.href = "pos-system.html";
+      }
+
+      function createEmergencyData() {
+        // Create minimal fallback data to show something instead of redirecting immediately
+        console.log("Creating emergency fallback data to show bill");
+        billData = {
+          response: {
+            billId: "Unknown",
+            invoiceNumber: "EMERGENCY-001",
+            total: 0,
+            finalTotal: 0,
+            discount: 0,
+          },
+          cartItems: [
+            {
+              code: "ERROR",
+              name: "Transaction data not found",
+              quantity: 1,
+              price: 0,
+              totalPrice: 0,
+            },
+          ],
+          cashTendered: 0,
+          changeAmount: 0,
+          customer: {
+            name: "Data Not Available",
+            phone: "N/A",
+          },
+        };
+      }
+
+      function populateData() {
+        // Current date/time
+        const now = new Date();
+        document.getElementById("billDate").textContent =
+          now.toLocaleDateString();
+        document.getElementById("billTime").textContent =
+          now.toLocaleTimeString();
+
+        // Invoice details
+        if (billData.response) {
+          document.getElementById("invoiceNumber").textContent =
+            billData.response.invoiceNumber || "INV-00000";
+        } else {
+          document.getElementById("invoiceNumber").textContent = "INV-00000";
+        }
+
+        // Cashier info
+        const user = SessionManager.getUser();
+        if (user) {
+          document.getElementById("userInfo").textContent = `Cashier: ${
+            user.name || user.username
+          }`;
+          document.getElementById("cashierName").textContent =
+            user.name || user.username || "Cashier";
+        }
+
+        // Customer details
+        if (billData.customer) {
+          document.getElementById("customerName").textContent =
+            billData.customer.name || "Walk-in Customer";
+          document.getElementById("customerPhone").textContent =
+            billData.customer.phone || "N/A";
+        } else {
+          document.getElementById("customerName").textContent =
+            "Walk-in Customer";
+          document.getElementById("customerPhone").textContent = "N/A";
+        }
+
+        // Items table
+        const tbody = document.getElementById("itemsTableBody");
+        tbody.innerHTML = "";
+
+        if (billData.cartItems && billData.cartItems.length > 0) {
+          billData.cartItems.forEach((item) => {
+            const row = document.createElement("tr");
+            const total = (item.price * item.quantity).toFixed(2);
+            row.innerHTML = `
+              <td>${item.code}</td>
+              <td>${item.name}</td>
+              <td style="text-align: center;">${item.quantity}</td>
+              <td style="text-align: right;">Rs ${item.price.toFixed(2)}</td>
+              <td style="text-align: right; font-weight: bold;">Rs ${total}</td>
+            `;
+            tbody.appendChild(row);
+          });
+        } else {
+          tbody.innerHTML =
+            '<tr><td colspan="5" style="text-align: center; color: red;">No transaction data available</td></tr>';
+        }
+
+        // Summary
+        if (billData.response) {
+          const subtotal = billData.response.total || 0;
+          const discount = billData.response.discount || 0;
+          const finalTotal =
+            billData.response.finalTotal || subtotal - discount;
+
+          document.getElementById(
+            "subtotalAmount"
+          ).textContent = `Rs ${subtotal.toFixed(2)}`;
+
+          if (discount > 0) {
+            document.getElementById("discountRow").style.display = "flex";
+            document.getElementById(
+              "discountAmount"
+            ).textContent = `Rs ${discount.toFixed(2)}`;
+          }
+
+          document.getElementById(
+            "totalAmount"
+          ).textContent = `Rs ${finalTotal.toFixed(2)}`;
+        } else {
+          document.getElementById("subtotalAmount").textContent = "Rs 0.00";
+          document.getElementById("totalAmount").textContent = "Rs 0.00";
+        }
+
+        // Cash and change
+        if (billData.cashTendered) {
+          document.getElementById(
+            "cashTendered"
+          ).textContent = `Rs ${billData.cashTendered.toFixed(2)}`;
+        } else {
+          document.getElementById("cashTendered").textContent = "Rs 0.00";
+        }
+        if (billData.changeAmount) {
+          document.getElementById(
+            "changeAmount"
+          ).textContent = `Rs ${billData.changeAmount.toFixed(2)}`;
+        } else {
+          document.getElementById("changeAmount").textContent = "Rs 0.00";
+        }
+
+        console.log("Cashier bill data populated successfully");
+      }
+
+      // Action functions
+      function downloadPDF() {
+        alert("PDF download feature will be implemented");
+      }
+
+      function returnToPOS() {
+        window.location.href = "pos-system.html";
+      }
+
+      function newTransaction() {
+        // Clear bill data and return to POS with reset
+        sessionStorage.removeItem("cashierBillData");
+        sessionStorage.setItem("resetPOS", "true");
+        window.location.href = "pos-system.html";
+      }
+
+      function logout() {
+        SessionManager.logout();
+        window.location.href = "../../index.html";
+      }
+    </script>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.presentation.controllers.ShelfControllerTest" time="4.269" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="net.bytebuddy.experimental" value="true"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585 2026-01-09T15-49-36_319-jvmRun1 surefire-20260109154936576_1tmp surefire_0-20260109154936576_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\tahir"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
+    <property name="junit.jupiter.execution.parallel.mode.default" value="concurrent"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="24.0.1+9-30"/>
+    <property name="user.name" value="tahir"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="junit.jupiter.execution.parallel.config.strategy" value="dynamic"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="junit.jupiter.execution.parallel.enabled" value="true"/>
+    <property name="localRepository" value="C:\Users\tahir\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\tahir\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.1"/>
+    <property name="user.dir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\flutter\flutter\bin\cache\dart-sdk\bin\;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Java\jdk-24\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\flutter\flutter\bin\cache\dart-sdk\bin\;$PATH:$CATALINA_HOME/bin:$JAVA_HOME/bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tahir\.config\herd\bin;C:\Users\tahir\AppData\Local\Microsoft\WindowsApps;C:\Users\tahir\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PhpStorm 2024.2\bin;;C:\Program Files\php-8.2.22;C:\Users\tahir\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git;C:\Users\tahir\AppData\Local\Android\Sdk;C:\flutter\flutter\bin;C:\Users\tahir\AppData\Local\Pub\Cache\bin;C:\Users\tahir\AppData\Local\GitHubDesktop\bin;C:\flutter new\flutter\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\bin;;C:\Users\tahir\AppData\Local\Programs\Windsurf\bin;C:\Users\tahir\AppData\Local\Programs\Ollama;C:\Users\tahir\AppData\Local\Programs\cursor\resources\app\bin;C:\apache-maven-3.9.11\bin;;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Program Files\Java\jdk-11\bin;C:\Users\tahir\AppData\Roaming\npm;c:\Users\tahir\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;c:\Users\tahir\.vscode\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="junit.jupiter.extensions.autodetection.enabled" value="true"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.1+9-30"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="get_all_shelves_Success" classname="org.example.presentation.controllers.ShelfControllerTest" time="2.071">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953986399
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953989412
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Mixed operation 90 (type 2) completed, Response time: 822 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: MixedUser_1767953982399
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: MixedUser_1767953982383
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: MixedUser_1767953982338
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: MixedUser_1767953982376
+Customer added successfully: LoadTestUser_1767953985542
+Customer added successfully: MixedUser_1767953982314
+Customer added successfully: MixedUser_1767953982359
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: MixedUser_1767953982309
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Error processing online order: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Order processing error for customer 4: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Order processing error for customer 10: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Order processing error for customer 3: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Order processing error for customer 5: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Access Denied - Invalid credentials detected
+Error processing online order: Insufficient website inventory for item: Mixed Item 14
+Error processing online order: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Online order processed successfully. Order ID: 24
+Mixed activity error for customer 14: Insufficient website inventory for item: Mixed Item 14
+Order processing error for customer 14: Duplicate entry 'INV-53981' for key 'bill.invoiceNumber'
+Customer 15 order processed (Bill ID: 24), Response time: 1889 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Mixed activity 45 (browse) completed, 42 items found
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 7: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 13: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 9: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Mixed activity error for customer 2: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Mixed activity error for customer 8: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 12: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Mixed activity error for customer 17: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 0: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 8: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Online customer registered successfully with ID: 112
+Mixed activity 46 (register) completed, ID: 112
+Error processing online order: Deadlock found when trying to get lock; try restarting transaction
+Mixed activity error for customer 32: Deadlock found when trying to get lock; try restarting transaction
+Error processing online order: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Mixed activity error for customer 44: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Error processing online order: Deadlock found when trying to get lock; try restarting transaction
+Error processing online order: Deadlock found when trying to get lock; try restarting transaction
+Mixed activity error for customer 26: Deadlock found when trying to get lock; try restarting transaction
+Mixed activity error for customer 41: Deadlock found when trying to get lock; try restarting transaction
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 11: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 1: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Error processing online order: Deadlock found when trying to get lock; try restarting transaction
+Mixed activity 51 (browse) completed, 42 items found
+Mixed activity 48 (browse) completed, 42 items found
+Mixed activity error for customer 11: Deadlock found when trying to get lock; try restarting transaction
+Error processing online order: Deadlock found when trying to get lock; try restarting transaction
+Mixed activity error for customer 35: Deadlock found when trying to get lock; try restarting transaction
+Mixed activity 54 (browse) completed, 42 items found
+Mixed activity 57 (browse) completed, 42 items found
+Error processing online order: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Error processing online order: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Mixed activity error for customer 29: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Mixed activity error for customer 38: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Error processing online order: Insufficient website inventory for item: Mixed Item 5
+Mixed activity error for customer 5: Insufficient website inventory for item: Mixed Item 5
+Online order processed successfully. Order ID: 49
+Customer 17 order processed (Bill ID: 49), Response time: 74 ms
+Error processing online order: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Error processing online order: Deadlock found when trying to get lock; try restarting transaction
+Mixed activity error for customer 23: Cannot add or update a child row: a foreign key constraint fails (`syos`.`billitem`, CONSTRAINT `billitem_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`))
+Mixed activity error for customer 20: Deadlock found when trying to get lock; try restarting transaction
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Mixed activity error for customer 56: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Order processing error for customer 28: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Mixed activity error for customer 53: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Order processing error for customer 16: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Order processing error for customer 18: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Order processing error for customer 29: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Order processing error for customer 21: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Mixed activity error for customer 50: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Error processing online order: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Order processing error for customer 20: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Order processing error for customer 19: Duplicate entry 'INV-53983' for key 'bill.invoiceNumber'
+Online customer registered successfully with ID: 115
+Online customer registered successfully with ID: 114
+Online customer registered successfully with ID: 113
+Mixed activity 49 (register) completed, ID: 113
+Mixed activity 55 (register) completed, ID: 114
+Mixed activity 58 (register) completed, ID: 115
+Error processing online order: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Order processing error for customer 6: Duplicate entry 'INV-39813' for key 'bill.invoiceNumber'
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Number of shelves: 88
+Shelf ID: 1, Item: Nadu Rice 5kg, Quantity: 23, Type: STORE
+Shelf ID: 2, Item: Basmati Rice 1kg, Quantity: 24, Type: STORE
+Shelf ID: 3, Item: Red Rice 1kg, Quantity: 23, Type: STORE
+Shelf ID: 4, Item: Samba Rice 5kg, Quantity: 15, Type: STORE
+Shelf ID: 5, Item: Red Onions 1kg, Quantity: 37, Type: STORE
+Shelf ID: 6, Item: Big Onions 1kg, Quantity: 39, Type: STORE
+Shelf ID: 7, Item: Tomatoes 1kg, Quantity: 50, Type: STORE
+Shelf ID: 8, Item: Green Chilies 250g, Quantity: 56, Type: STORE
+Shelf ID: 9, Item: Carrots 1kg, Quantity: 35, Type: STORE
+Shelf ID: 10, Item: Potatoes 1kg, Quantity: 45, Type: STORE
+Shelf ID: 11, Item: Bananas 1kg, Quantity: 50, Type: STORE
+Shelf ID: 12, Item: Papaya 1kg, Quantity: 24, Type: STORE
+Shelf ID: 13, Item: Fresh Milk 1L, Quantity: 40, Type: STORE
+Shelf ID: 14, Item: Curd 400g, Quantity: 20, Type: STORE
+Shelf ID: 15, Item: Butter 200g, Quantity: 12, Type: STORE
+Shelf ID: 16, Item: Chicken Eggs 12pc, Quantity: 80, Type: STORE
+Shelf ID: 17, Item: Dried Fish 250g, Quantity: 15, Type: STORE
+Shelf ID: 18, Item: Curry Powder 100g, Quantity: 30, Type: STORE
+Shelf ID: 19, Item: Chili Powder 100g, Quantity: 24, Type: STORE
+Shelf ID: 20, Item: Turmeric Powder 100g, Quantity: 20, Type: STORE
+Shelf ID: 21, Item: Coriander Powder 100g, Quantity: 35, Type: STORE
+Shelf ID: 22, Item: Cinnamon Sticks 50g, Quantity: 10, Type: STORE
+Shelf ID: 23, Item: Cardamom 25g, Quantity: 6, Type: STORE
+Shelf ID: 24, Item: Coconut Oil 500ml, Quantity: 14, Type: STORE
+Shelf ID: 25, Item: Sunflower Oil 1L, Quantity: 12, Type: STORE
+Shelf ID: 26, Item: White Sugar 1kg, Quantity: 60, Type: STORE
+Shelf ID: 27, Item: Brown Sugar 500g, Quantity: 40, Type: STORE
+Shelf ID: 28, Item: Sea Salt 1kg, Quantity: 80, Type: STORE
+Shelf ID: 29, Item: Wheat Flour 1kg, Quantity: 49, Type: STORE
+Shelf ID: 30, Item: Ceylon Black Tea 100g, Quantity: 25, Type: STORE
+Shelf ID: 31, Item: Green Tea 50g, Quantity: 15, Type: STORE
+Shelf ID: 32, Item: Coffee Powder 200g, Quantity: 19, Type: STORE
+Shelf ID: 33, Item: Milo 400g, Quantity: 18, Type: STORE
+Shelf ID: 34, Item: Biscuits Marie 200g, Quantity: 40, Type: STORE
+Shelf ID: 35, Item: Seeni Sambol 350g, Quantity: 12, Type: STORE
+Shelf ID: 36, Item: White Bread, Quantity: 40, Type: STORE
+Shelf ID: 37, Item: Brown Bread, Quantity: 50, Type: STORE
+Shelf ID: 38, Item: Instant Noodles 400g, Quantity: 29, Type: STORE
+Shelf ID: 39, Item: Nadu Rice 5kg, Quantity: 65, Type: WEBSITE
+Shelf ID: 40, Item: Basmati Rice 1kg, Quantity: 59, Type: WEBSITE
+Shelf ID: 41, Item: Red Rice 1kg, Quantity: 60, Type: WEBSITE
+Shelf ID: 42, Item: Samba Rice 5kg, Quantity: 53, Type: WEBSITE
+Shelf ID: 43, Item: Red Onions 1kg, Quantity: 50, Type: WEBSITE
+Shelf ID: 44, Item: Big Onions 1kg, Quantity: 45, Type: WEBSITE
+Shelf ID: 45, Item: Tomatoes 1kg, Quantity: 61, Type: WEBSITE
+Shelf ID: 46, Item: Green Chilies 250g, Quantity: 56, Type: WEBSITE
+Shelf ID: 47, Item: Carrots 1kg, Quantity: 50, Type: WEBSITE
+Shelf ID: 48, Item: Potatoes 1kg, Quantity: 65, Type: WEBSITE
+Shelf ID: 49, Item: Bananas 1kg, Quantity: 61, Type: WEBSITE
+Shelf ID: 50, Item: Papaya 1kg, Quantity: 74, Type: WEBSITE
+Shelf ID: 51, Item: Fresh Milk 1L, Quantity: 57, Type: WEBSITE
+Shelf ID: 52, Item: Curd 400g, Quantity: 64, Type: WEBSITE
+Shelf ID: 53, Item: Butter 200g, Quantity: 65, Type: WEBSITE
+Shelf ID: 54, Item: Chicken Eggs 12pc, Quantity: 56, Type: WEBSITE
+Shelf ID: 55, Item: Dried Fish 250g, Quantity: 55, Type: WEBSITE
+Shelf ID: 56, Item: Curry Powder 100g, Quantity: 59, Type: WEBSITE
+Shelf ID: 57, Item: Chili Powder 100g, Quantity: 60, Type: WEBSITE
+Shelf ID: 58, Item: Turmeric Powder 100g, Quantity: 60, Type: WEBSITE
+Shelf ID: 59, Item: Coriander Powder 100g, Quantity: 65, Type: WEBSITE
+Shelf ID: 60, Item: Cinnamon Sticks 50g, Quantity: 60, Type: WEBSITE
+Shelf ID: 61, Item: Cardamom 25g, Quantity: 60, Type: WEBSITE
+Shelf ID: 62, Item: Coconut Oil 500ml, Quantity: 55, Type: WEBSITE
+Shelf ID: 63, Item: Sunflower Oil 1L, Quantity: 60, Type: WEBSITE
+Shelf ID: 64, Item: White Sugar 1kg, Quantity: 85, Type: WEBSITE
+Shelf ID: 65, Item: Brown Sugar 500g, Quantity: 60, Type: WEBSITE
+Shelf ID: 66, Item: Sea Salt 1kg, Quantity: 60, Type: WEBSITE
+Shelf ID: 67, Item: Wheat Flour 1kg, Quantity: 60, Type: WEBSITE
+Shelf ID: 68, Item: Ceylon Black Tea 100g, Quantity: 59, Type: WEBSITE
+Shelf ID: 69, Item: Green Tea 50g, Quantity: 60, Type: WEBSITE
+Shelf ID: 70, Item: Coffee Powder 200g, Quantity: 52, Type: WEBSITE
+Shelf ID: 71, Item: Milo 400g, Quantity: 59, Type: WEBSITE
+Shelf ID: 72, Item: Biscuits Marie 200g, Quantity: 59, Type: WEBSITE
+Shelf ID: 73, Item: Seeni Sambol 350g, Quantity: 59, Type: WEBSITE
+Shelf ID: 74, Item: White Bread, Quantity: 57, Type: WEBSITE
+Shelf ID: 75, Item: Brown Bread, Quantity: 58, Type: WEBSITE
+Shelf ID: 76, Item: Instant Noodles 400g, Quantity: 59, Type: WEBSITE
+Shelf ID: 77, Item: Test Shelf Item 81085, Quantity: 0, Type: STORE
+Shelf ID: 78, Item: Test Shelf Item 82187, Quantity: 40, Type: STORE
+Shelf ID: 79, Item: Multi Shelf Test 81814, Quantity: 50, Type: STORE
+Shelf ID: 80, Item: Multi Shelf Test 81814, Quantity: 30, Type: WEBSITE
+Shelf ID: 81, Item: Multi Shelf Test 92335, Quantity: 50, Type: STORE
+Shelf ID: 82, Item: Multi Shelf Test 92335, Quantity: 30, Type: WEBSITE
+Shelf ID: 83, Item: Test Shelf Item 92953, Quantity: 0, Type: STORE
+Shelf ID: 84, Item: Test Shelf Item 40222, Quantity: 0, Type: STORE
+Shelf ID: 85, Item: Multi Shelf Test 45855, Quantity: 50, Type: STORE
+Shelf ID: 86, Item: Multi Shelf Test 45855, Quantity: 30, Type: WEBSITE
+Shelf ID: 87, Item: Test Shelf Item 48646, Quantity: 40, Type: STORE
+Shelf ID: 88, Item: Test Shelf Item 79062, Quantity: 0, Type: STORE
+]]></system-out>
+    <system-err><![CDATA[Registration failed for user 245: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 189: Duplicate entry '0779434450' for key 'customers.contactNumber'
+Registration failed for user 420: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 359: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 275: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 444: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 433: Duplicate entry '0779429610' for key 'customers.contactNumber'
+Registration failed for user 256: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 398: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 460: Deadlock found when trying to get lock; try restarting transaction
+Registration failed for user 414: Deadlock found when trying to get lock; try restarting transaction
+]]></system-err>
+  </testcase>
+</testsuite>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.presentation.controllers.StockControllerTest" time="3.272" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="net.bytebuddy.experimental" value="true"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585 2026-01-09T15-49-36_319-jvmRun1 surefire-20260109154936576_1tmp surefire_0-20260109154936576_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\tahir"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
+    <property name="junit.jupiter.execution.parallel.mode.default" value="concurrent"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="24.0.1+9-30"/>
+    <property name="user.name" value="tahir"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="junit.jupiter.execution.parallel.config.strategy" value="dynamic"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="junit.jupiter.execution.parallel.enabled" value="true"/>
+    <property name="localRepository" value="C:\Users\tahir\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\tahir\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.1"/>
+    <property name="user.dir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\flutter\flutter\bin\cache\dart-sdk\bin\;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Java\jdk-24\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\flutter\flutter\bin\cache\dart-sdk\bin\;$PATH:$CATALINA_HOME/bin:$JAVA_HOME/bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tahir\.config\herd\bin;C:\Users\tahir\AppData\Local\Microsoft\WindowsApps;C:\Users\tahir\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PhpStorm 2024.2\bin;;C:\Program Files\php-8.2.22;C:\Users\tahir\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git;C:\Users\tahir\AppData\Local\Android\Sdk;C:\flutter\flutter\bin;C:\Users\tahir\AppData\Local\Pub\Cache\bin;C:\Users\tahir\AppData\Local\GitHubDesktop\bin;C:\flutter new\flutter\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\bin;;C:\Users\tahir\AppData\Local\Programs\Windsurf\bin;C:\Users\tahir\AppData\Local\Programs\Ollama;C:\Users\tahir\AppData\Local\Programs\cursor\resources\app\bin;C:\apache-maven-3.9.11\bin;;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Program Files\Java\jdk-11\bin;C:\Users\tahir\AppData\Roaming\npm;c:\Users\tahir\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;c:\Users\tahir\.vscode\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="junit.jupiter.extensions.autodetection.enabled" value="true"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.1+9-30"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="addCustomer_SpecialCharactersName_Success" classname="org.example.presentation.controllers.CustomerControllerTest" time="0.636">
+    <system-out><![CDATA[Customer 29 browsed inventory (42 items), Response time: 9 ms
+Customer 28 browsed inventory (42 items), Response time: 10 ms
+Customer 30 browsed inventory (42 items), Response time: 9 ms
+Customer 25 browsed inventory (42 items), Response time: 11 ms
+Customer 31 browsed inventory (42 items), Response time: 8 ms
+Customer 35 browsed inventory (42 items), Response time: 581 ms
+Customer 36 browsed inventory (42 items), Response time: 582 ms
+Customer 32 browsed inventory (42 items), Response time: 587 ms
+Customer 34 browsed inventory (42 items), Response time: 584 ms
+Customer 33 browsed inventory (42 items), Response time: 585 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testConcurrentWebsiteInventoryBrowsing" classname="org.example.ConcurrencyTests.OnlineCustomerConcurrencyTest" time="0.692">
+    <system-out><![CDATA[Customer 37 browsed inventory (42 items), Response time: 583 ms
+Customer 41 browsed inventory (42 items), Response time: 582 ms
+Customer 42 browsed inventory (42 items), Response time: 582 ms
+Customer 39 browsed inventory (42 items), Response time: 582 ms
+Successfully added 1 items
+Customer 40 browsed inventory (42 items), Response time: 583 ms
+Customer 12 browsed inventory (42 items), Response time: 612 ms
+Customer 14 browsed inventory (42 items), Response time: 585 ms
+Customer 43 browsed inventory (42 items), Response time: 6 ms
+Customer 46 browsed inventory (42 items), Response time: 6 ms
+Customer 44 browsed inventory (42 items), Response time: 8 ms
+Customer 47 browsed inventory (42 items), Response time: 8 ms
+Customer 48 browsed inventory (42 items), Response time: 6 ms
+Customer 45 browsed inventory (42 items), Response time: 8 ms
+Customer 49 browsed inventory (42 items), Response time: 6 ms
+Customer 51 browsed inventory (42 items), Response time: 7 ms
+Customer 50 browsed inventory (42 items), Response time: 7 ms
+Customer 10 browsed inventory (42 items), Response time: 8 ms
+Customer 54 browsed inventory (42 items), Response time: 7 ms
+Customer 53 browsed inventory (42 items), Response time: 7 ms
+Customer 38 browsed inventory (42 items), Response time: 591 ms
+Customer 52 browsed inventory (42 items), Response time: 8 ms
+Customer 56 browsed inventory (42 items), Response time: 6 ms
+Customer 59 browsed inventory (42 items), Response time: 6 ms
+Customer 58 browsed inventory (42 items), Response time: 6 ms
+Customer 60 browsed inventory (42 items), Response time: 6 ms
+Customer 62 browsed inventory (42 items), Response time: 5 ms
+Customer 63 browsed inventory (42 items), Response time: 6 ms
+Customer 57 browsed inventory (42 items), Response time: 8 ms
+Customer 66 browsed inventory (42 items), Response time: 6 ms
+Customer 61 browsed inventory (42 items), Response time: 9 ms
+Customer 64 browsed inventory (42 items), Response time: 9 ms
+Customer 69 browsed inventory (42 items), Response time: 7 ms
+Customer 65 browsed inventory (42 items), Response time: 8 ms
+Customer 68 browsed inventory (42 items), Response time: 8 ms
+Customer 73 browsed inventory (42 items), Response time: 5 ms
+Customer 72 browsed inventory (42 items), Response time: 6 ms
+Customer 67 browsed inventory (42 items), Response time: 10 ms
+Customer 74 browsed inventory (42 items), Response time: 7 ms
+Customer 71 browsed inventory (42 items), Response time: 8 ms
+Customer 70 browsed inventory (42 items), Response time: 8 ms
+Customer 75 browsed inventory (42 items), Response time: 6 ms
+Customer 77 browsed inventory (42 items), Response time: 7 ms
+Customer 79 browsed inventory (42 items), Response time: 6 ms
+Customer 11 browsed inventory (42 items), Response time: 28 ms
+Customer 80 browsed inventory (42 items), Response time: 7 ms
+Customer 78 browsed inventory (42 items), Response time: 8 ms
+Customer 83 browsed inventory (42 items), Response time: 6 ms
+Customer 81 browsed inventory (42 items), Response time: 6 ms
+Customer 82 browsed inventory (42 items), Response time: 6 ms
+Customer 84 browsed inventory (42 items), Response time: 6 ms
+Customer 86 browsed inventory (42 items), Response time: 6 ms
+Customer 85 browsed inventory (42 items), Response time: 6 ms
+Customer 87 browsed inventory (42 items), Response time: 7 ms
+Customer 88 browsed inventory (42 items), Response time: 7 ms
+Customer 89 browsed inventory (42 items), Response time: 6 ms
+Customer 90 browsed inventory (42 items), Response time: 6 ms
+Customer 55 browsed inventory (42 items), Response time: 28 ms
+Customer 92 browsed inventory (42 items), Response time: 6 ms
+Customer 95 browsed inventory (42 items), Response time: 6 ms
+Customer 97 browsed inventory (42 items), Response time: 5 ms
+Customer 94 browsed inventory (42 items), Response time: 6 ms
+Customer 93 browsed inventory (42 items), Response time: 6 ms
+Customer 91 browsed inventory (42 items), Response time: 7 ms
+Customer 98 browsed inventory (42 items), Response time: 6 ms
+Customer 99 browsed inventory (42 items), Response time: 6 ms
+Customer 76 browsed inventory (42 items), Response time: 20 ms
+Customer 96 browsed inventory (42 items), Response time: 12 ms
+
+============================================================
+CONCURRENT WEBSITE INVENTORY BROWSING TEST RESULTS
+============================================================
+Test Completed: YES
+Total Time: 690 ms (0.69 seconds)
+Total Operations: 100
+Successful Operations: 100
+Failed Operations: 0
+Success Rate: 100.00%
+Average Response Time: 83.74 ms
+Throughput: 144.93 operations/second
+============================================================
+
+]]></system-out>
+  </testcase>
+  <testcase name="getStockQuantityByItem_WithStock" classname="org.example.presentation.controllers.StockControllerTest" time="0.797">
+    <system-out><![CDATA[Customer added successfully: LoadTestUser_1767953987037
+Customer added successfully: LoadTestUser_1767953991333
+Customer added successfully: LoadTestUser_1767953991802
+Customer added successfully: LoadTestUser_1767953984409
+Customer added successfully: LoadTestUser_1767953986050
+Customer added successfully: LoadTestUser_1767953989024
+Customer added successfully: LoadTestUser_1767953987105
+Customer added successfully: LoadTestUser_1767953984916
+Customer added successfully: LoadTestUser_1767953988291
+Registered user 0, Response time: 19 ms
+Customer added successfully: LoadTestUser_1767953982423
+Customer added successfully: LoadTestUser_1767953984266
+Customer added successfully: LoadTestUser_1767953990109
+Customer added successfully: LoadTestUser_1767953985933
+Customer added successfully: LoadTestUser_1767953983204
+Customer added successfully: LoadTestUser_1767953982919
+Customer added successfully: LoadTestUser_1767953988803
+Customer added successfully: LoadTestUser_1767953990281
+Customer added successfully: LoadTestUser_1767953985353
+Customer added successfully: LoadTestUser_1767953986967
+Customer added successfully: LoadTestUser_1767953982498
+Customer added successfully: LoadTestUser_1767953984360
+Registered user 100, Response time: 23 ms
+Customer added successfully: LoadTestUser_1767953991606
+Customer added successfully: LoadTestUser_1767953988739
+Customer added successfully: LoadTestUser_1767953985657
+Customer added successfully: LoadTestUser_1767953990045
+Customer added successfully: LoadTestUser_1767953988385
+Customer added successfully: LoadTestUser_1767953986983
+Customer added successfully: LoadTestUser_1767953984576
+Customer added successfully: LoadTestUser_1767953984875
+Customer added successfully: LoadTestUser_1767953983187
+Customer added successfully: LoadTestUser_1767953988288
+Customer added successfully: LoadTestUser_1767953986926
+Customer added successfully: LoadTestUser_1767953985285
+Customer added successfully: LoadTestUser_1767953986479
+Customer added successfully: LoadTestUser_1767953988617
+Customer added successfully: LoadTestUser_1767953985118
+Customer added successfully: LoadTestUser_1767953983757
+Customer added successfully: LoadTestUser_1767953988624
+Customer added successfully: LoadTestUser_1767953987951
+Customer added successfully: LoadTestUser_1767953982741
+Customer added successfully: LoadTestUser_1767953985586
+Customer added successfully: LoadTestUser_1767953982614
+Customer added successfully: LoadTestUser_1767953986912
+Customer added successfully: LoadTestUser_1767953989002
+Customer added successfully: LoadTestUser_1767953990956
+Customer added successfully: LoadTestUser_1767953983721
+Customer added successfully: LoadTestUser_1767953988231
+Customer added successfully: LoadTestUser_1767953984804
+Customer added successfully: LoadTestUser_1767953984949
+Customer added successfully: LoadTestUser_1767953984681
+Customer added successfully: LoadTestUser_1767953986675
+Customer added successfully: LoadTestUser_1767953990285
+Customer added successfully: LoadTestUser_1767953985083
+Customer added successfully: LoadTestUser_1767953987763
+Customer added successfully: LoadTestUser_1767953983878
+Customer added successfully: LoadTestUser_1767953982787
+Registered user Customer added successfully: LoadTestUser_1767953991200
+Customer added successfully: LoadTestUser_1767953991456
+50, Response time: 72 ms
+Customer added successfully: LoadTestUser_1767953984477
+Customer added successfully: LoadTestUser_1767953982871
+Customer added successfully: LoadTestUser_1767953983084
+Customer added successfully: LoadTestUser_1767953985395
+Customer added successfully: LoadTestUser_1767953983914
+Customer added successfully: LoadTestUser_1767953984335
+Customer added successfully: LoadTestUser_1767953991090
+Customer added successfully: LoadTestUser_1767953991669
+Customer added successfully: LoadTestUser_1767953985667
+Customer added successfully: LoadTestUser_1767953986069
+Customer added successfully: LoadTestUser_1767953984148
+Customer added successfully: LoadTestUser_1767953983643
+Customer added successfully: LoadTestUser_1767953987312
+Customer added successfully: LoadTestUser_1767953991474
+Customer added successfully: LoadTestUser_1767953985538
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953987000
+]]></system-out>
+  </testcase>
+</testsuite>

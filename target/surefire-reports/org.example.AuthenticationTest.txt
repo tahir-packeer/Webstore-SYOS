@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.example.AuthenticationTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.437 s -- in org.example.AuthenticationTest

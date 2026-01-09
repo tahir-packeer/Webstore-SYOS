@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.core.di.DIContainerTest" time="2.708" tests="14" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="net.bytebuddy.experimental" value="true"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585 2026-01-09T15-49-36_319-jvmRun1 surefire-20260109154936576_1tmp surefire_0-20260109154936576_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\tahir"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
+    <property name="junit.jupiter.execution.parallel.mode.default" value="concurrent"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="24.0.1+9-30"/>
+    <property name="user.name" value="tahir"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="junit.jupiter.execution.parallel.config.strategy" value="dynamic"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="junit.jupiter.execution.parallel.enabled" value="true"/>
+    <property name="localRepository" value="C:\Users\tahir\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\tahir\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.1"/>
+    <property name="user.dir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\flutter\flutter\bin\cache\dart-sdk\bin\;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Java\jdk-24\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\flutter\flutter\bin\cache\dart-sdk\bin\;$PATH:$CATALINA_HOME/bin:$JAVA_HOME/bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tahir\.config\herd\bin;C:\Users\tahir\AppData\Local\Microsoft\WindowsApps;C:\Users\tahir\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PhpStorm 2024.2\bin;;C:\Program Files\php-8.2.22;C:\Users\tahir\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git;C:\Users\tahir\AppData\Local\Android\Sdk;C:\flutter\flutter\bin;C:\Users\tahir\AppData\Local\Pub\Cache\bin;C:\Users\tahir\AppData\Local\GitHubDesktop\bin;C:\flutter new\flutter\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\bin;;C:\Users\tahir\AppData\Local\Programs\Windsurf\bin;C:\Users\tahir\AppData\Local\Programs\Ollama;C:\Users\tahir\AppData\Local\Programs\cursor\resources\app\bin;C:\apache-maven-3.9.11\bin;;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Program Files\Java\jdk-11\bin;C:\Users\tahir\AppData\Roaming\npm;c:\Users\tahir\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;c:\Users\tahir\.vscode\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="junit.jupiter.extensions.autodetection.enabled" value="true"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.1+9-30"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="createItemController_WithDependencies_Success" classname="org.example.core.di.DIContainerTest" time="1.974">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Registration successful for customer 12 (ID: 47), Response time: 2097 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="resolve_ItemGateway_CreatesSingleton" classname="org.example.core.di.DIContainerTest" time="0.013">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Stress operation 600 completed, Response time: 29 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 51
+]]></system-out>
+  </testcase>
+  <testcase name="isRegistered_RegisteredService_ReturnsTrue" classname="org.example.core.di.DIContainerTest" time="0.001">
+    <system-out><![CDATA[Registration successful for customer 4 (ID: 51), Response time: 2135 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="resolve_UnregisteredService_ThrowsException" classname="org.example.core.di.DIContainerTest" time="0.145">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="registerCustom_CustomService_ResolvesCorrectly" classname="org.example.core.di.DIContainerTest" time="0.053">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 48
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Stress operation 900 completed, Response time: 16 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Registration successful for customer 14 (ID: 48), Response time: 2314 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="createControllers_ThroughFactory_Functional" classname="org.example.core.di.DIContainerTest" time="0.013">
+    <system-out><![CDATA[
+=== SALES REPORT FOR 2023-09-08 ===
+Filter: All Transactions (Combined Report)
+========================================
+Sales Report for 2023-09-08:
+Code       Item Name]]></system-out>
+  </testcase>
+  <testcase name="clearSingletons_ThenResolve_CreatesNewSingleton" classname="org.example.core.di.DIContainerTest" time="0.007">
+    <system-out><![CDATA[Online customer registered successfully with ID: 87
+Online customer registered successfully with ID: 89
+Online customer registered successfully with ID: 88
+Registration successful for customer 49 (ID: 89), Response time: 127 ms
+Registration successful for customer 48 (ID: 88), Response time: 127 ms
+Registration successful for customer 47 (ID: 87), Response time: 127 ms
+Online customer registered successfully with ID: 90
+Registration successful for customer 46 (ID: 90), Response time: 129 ms
+Warning: Invalid store type 'INVALID_STORE', defaulting to all store types
+Number of low stock shelves: 38
+]]></system-out>
+  </testcase>
+  <testcase name="addItems_ValidList_Success" classname="org.example.business.services.ItemServiceImplTest" time="0.096">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 62
+Online customer registered successfully with ID: 67
+Registration successful for customer 16 (ID: 62), Response time: 66 ms
+Registration successful for customer 21 (ID: 67), Response time: 51 ms
+Online customer registered successfully with ID: 66
+Online customer registered successfully with ID: 70
+Online customer registered successfully with ID: 68
+Access Denied - Invalid credentials detected
+Registration successful for customer 18 (ID: 66), Response time: 54 ms
+Online customer registered successfully with ID: 69
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 64
+Online customer registered successfully with ID: 63
+Online customer registered successfully with ID: 65
+Registration successful for customer 23 (ID: 68), Response time: 51 ms
+Registration successful for customer 17 (ID: 64), Response time: 58 ms
+Registration successful for customer 22 (ID: 69), Response time: 53 ms
+Registration successful for customer 20 (ID: 63), Response time: 56 ms
+Registration successful for customer 19 (ID: 70), Response time: 56 ms
+Successfully added 1 items
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Registration successful for customer 15 (ID: 65), Response time: 71 ms
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 71
+Access Denied - Invalid credentials detected
+Registration successful for customer 24 (ID: 71), Response time: 51 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="addCustomer_ValidDetails_Success" classname="org.example.presentation.controllers.CustomerControllerTest" time="2.353">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 49
+Registration successful for customer 13 (ID: 49), Response time: 2150 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 72
+Registration successful for customer 25 (ID: 72), Response time: 59 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 78
+Access Denied - Invalid credentials detected
+Registration successful for customer 27 (ID: 78), Response time: 45 ms
+Online customer registered successfully with ID: 77
+Access Denied - Invalid credentials detected
+Registration successful for customer 35 (ID: 77), Response time: 39 ms
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 74
+Registration successful for customer 29 (ID: 74), Response time: 44 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Stress operation 700 completed, Response time: 4 msOnline customer registered successfully with ID: 73
+
+Online customer registered successfully with ID: 76
+Access Denied - Invalid credentials detected
+Registration successful for customer 28 (ID: 73), Response time: 51 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Registration successful for customer 26 (ID: 76), Response time: 53 ms
+Stress operation 200 completed, Response time: 286 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 75
+Access Denied - Invalid credentials detected
+Registration successful for customer 30 (ID: 75), Response time: 60 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="getLatestAddedShelfId_Success" classname="org.example.presentation.controllers.ShelfControllerTest" time="2.077">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 79
+Registration successful for customer 38 (ID: 79), Response time: 44 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 86
+Registration successful for customer 44 (ID: 86), Response time: 46 ms
+Online customer registered successfully with ID: 81
+Registration successful for customer 40 (ID: 81), Response time: 64 ms
+Online customer registered successfully with ID: 80
+Online customer registered successfully with ID: 83
+Online customer registered successfully with ID: 85
+Registration successful for customer 39 (ID: 80), Response time: 65 ms
+Online customer registered successfully with ID: 82
+Registration successful for customer 42 (ID: 83), Response time: 59 ms
+Online customer registered successfully with ID: 84
+Registration successful for customer 37 (ID: 85), Response time: 84 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Registration successful for customer 41 (ID: 82), Response time: 69 ms
+Registration successful for customer 43 (ID: 84), Response time: 64 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Stress operation 300 completed, Response time: 301 ms
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Online customer registered successfully with ID: 52
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Registration successful for customer 10 (ID: 52), Response time: 2255 ms
+Latest added shelf ID: 87
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="generateSalesReport_WithStoreType_GeneratesReport" classname="org.example.presentation.controllers.ReportControllerTest" time="0.222">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+
+=== SALES REPORT FOR 2023-09-08 ===
+Filter: STORE Store Transactions
+========================================
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Sales Report for 2023-09-08 [STORE]:
+Code       Item Name            Total Quantity  Total Revenue  
+------------------------------------------------------------
+Stress operation 800 completed, Response time: 21Access Denied - Invalid credentials detected
+ ms
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+  <testcase name="generateSalesReport_WithBothFilters_GeneratesReport" classname="org.example.presentation.controllers.ReportControllerTest" time="0.036">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+
+=== SALES REPORT FOR 2023-09-08 ===
+Filter: COUNTER Transactions from STORE Store
+========================================
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Sales Report for 2023-09-08 (COUNTER) [STORE]:
+Code       Item Name            Total Quantity  Total Revenue  
+------------------------------------------------------------
+]]></system-out>
+  </testcase>
+  <testcase name="generateSalesReport_InvalidTransactionType_HandlesGracefully" classname="org.example.presentation.controllers.ReportControllerTest" time="0.051">
+    <system-out><![CDATA[            Total Quantity  Total Revenue  
+------------------------------------------------------------
+]]></system-out>
+  </testcase>
+  <testcase name="addItemsToStock_FutureExpiryDate_Success" classname="org.example.presentation.controllers.StockControllerTest" time="0.287">
+    <system-out><![CDATA[Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Warning: Invalid transaction type 'INVALID_TYPE', defaulting to all transactions
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+]]></system-out>
+  </testcase>
+</testsuite>

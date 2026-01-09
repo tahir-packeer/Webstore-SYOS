@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('billTransactionStartDate').value = weekAgo.toISOString().split('T')[0];
     document.getElementById('billTransactionEndDate').value = today;
     
+    // Set initial active report (daily sales)
+    const firstLink = document.querySelector('.report-link[data-report="daily-sales"]');
+    if (firstLink) {
+        firstLink.classList.add('active');
+    }
+    
     // Load initial reports
     loadItemsNeedShelvingReport();
     loadReorderLevelReport();
@@ -27,16 +33,48 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function switchReport(reportType) {
-    // Update tab active state
-    document.querySelectorAll('.report-tab').forEach(tab => tab.classList.remove('active'));
-    event.target.classList.add('active');
+    // Update sidebar link active state
+    document.querySelectorAll('.report-link').forEach(link => {
+        link.classList.remove('active');
+    });
     
-    // Hide all sections
-    document.querySelectorAll('.report-section').forEach(section => section.classList.remove('active'));
+    // Find and activate the clicked link
+    const activeLink = document.querySelector(`[data-report="${reportType}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+    
+    // Hide all report sections
+    document.querySelectorAll('.report-section').forEach(section => {
+        section.classList.remove('active');
+    });
     
     // Show selected section
-    document.getElementById(reportType).classList.add('active');
+    const targetSection = document.getElementById(reportType);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
+    
     currentReportType = reportType;
+    
+    // Load data for the selected report type
+    switch(reportType) {
+        case 'daily-sales':
+            loadDailySalesReport();
+            break;
+        case 'items-shelving':
+            loadItemsNeedShelvingReport();
+            break;
+        case 'reorder-level':
+            loadReorderLevelReport();
+            break;
+        case 'stock-report':
+            loadStockReport();
+            break;
+        case 'bill-transaction':
+            loadBillTransactionReport();
+            break;
+    }
 }
 
 async function loadDailySalesReport() {
@@ -95,7 +133,7 @@ async function loadDailySalesReport() {
                     <td>LKR ${bill.cashTendered.toFixed(2)}</td>
                     <td>LKR ${bill.changeAmount.toFixed(2)}</td>
                     <td>${bill.itemCount}</td>
-                    <td><span class="badge badge-primary">${bill.transactionType}</span></td>
+                    <td><span class="badge badge-primary">${bill.customerType}</span></td>
                     <td><span class="badge badge-secondary">${bill.storeType}</span></td>
                 </tr>
             `).join('');
@@ -296,7 +334,7 @@ async function loadBillTransactionReport() {
                     <td>LKR ${bill.changeAmount.toFixed(2)}</td>
                     <td>${bill.itemCount}</td>
                     <td>${bill.totalItems || 0}</td>
-                    <td><span class="badge badge-primary">${bill.transactionType}</span></td>
+                    <td><span class="badge badge-primary">${bill.customerType}</span></td>
                     <td><span class="badge badge-secondary">${bill.storeType}</span></td>
                 </tr>
             `).join('');

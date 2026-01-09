@@ -1,9 +1,9 @@
 package org.example.Integration;
 
-import org.example.Controller.CustomerController;
-import org.example.Controller.OnlineController;
-import org.example.Database.DatabaseConnection;
-import org.example.Model.Customer;
+import org.example.presentation.controllers.CustomerController;
+import org.example.presentation.controllers.OnlineController;
+import org.example.persistence.database.DatabaseConnection;
+import org.example.persistence.models.Customer;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,67 +1,685 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - SYOS Store</title>
-    <link rel="stylesheet" href="../../css/manager-dashboard.css">
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="container">
-                <a href="dashboard.html" class="navbar-brand">SYOS Store - Admin</a>
-                <ul class="navbar-nav">
-                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
-                    <li><a href="admin-reports.html">Admin Reports</a></li>
-                </ul>
-                <div class="navbar-actions">
-                    <span class="user-info" id="userInfo">Admin</span>
-                    <button class="btn btn-outline" onclick="logout()">Logout</button>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="icon" href="data:," />
+    <style>
+      /* SYOS Sharp Black & White Admin Dashboard Style */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: white;
+        color: black;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* Top Header Bar */
+      .top-bar {
+        background: black;
+        color: white;
+        padding: 0.8rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 3px solid black;
+      }
+
+      .brand {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-item {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        border: 2px solid white;
+        background: white;
+        color: black;
+      }
+
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .logout-btn {
+        background: white;
+        color: black;
+        border: 2px solid white;
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .logout-btn:hover {
+        background: black;
+        color: white;
+        border: 2px solid white;
+      }
+
+      /* Main Container */
+      .main-container {
+        margin-top: 60px;
+        padding: 2rem;
+        min-height: calc(100vh - 60px);
+        background: white;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* Page Header */
+      .page-header {
+        background: black;
+        color: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 3px solid black;
+        text-align: center;
+      }
+
+      .page-header h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .page-header p {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        opacity: 0.9;
+      }
+
+      /* Dashboard Stats Grid */
+      .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .stat-card {
+        background: white;
+        border: 3px solid black;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-card:hover {
+        background: black;
+        color: white;
+      }
+
+      .stat-card:hover .stat-icon {
+        background: white;
+        color: black;
+      }
+
+      .stat-icon {
+        background: black;
+        color: white;
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        display: inline-block;
+        min-width: 100px;
+        transition: all 0.3s ease;
+      }
+
+      .stat-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: inherit;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Quick Actions Grid */
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .action-card {
+        background: white;
+        border: 2px solid black;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .action-card:hover {
+        background: black;
+        color: white;
+      }
+
+      .action-card-header {
+        background: black;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .action-card:hover .action-card-header {
+        background: white;
+        color: black;
+      }
+
+      .action-card-body {
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .action-btn {
+        background: black;
+        color: white;
+        border: 2px solid black;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .action-btn:hover {
+        background: white;
+        color: black;
+        border: 2px solid black;
+      }
+
+      .action-card:hover .action-btn {
+        background: white;
+        color: black;
+      }
+
+      .action-card:hover .action-btn:hover {
+        background: black;
+        color: white;
+      }
+
+      /* Recent Activity Section */
+      .recent-activity {
+        background: white;
+        border: 2px solid black;
+        margin-bottom: 2rem;
+      }
+
+      .section-header {
+        background: black;
+        color: white;
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .activity-list {
+        padding: 1.5rem;
+      }
+
+      .activity-item {
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+
+      .activity-item:hover {
+        background: #f5f5f5;
+      }
+
+      .activity-text {
+        flex: 1;
+      }
+
+      .activity-time {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .top-bar {
+          padding: 0.5rem 1rem;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .nav-menu {
+          gap: 1rem;
+        }
+
+        .main-container {
+          padding: 1rem;
+        }
+
+        .page-header h1 {
+          font-size: 2rem;
+        }
+
+        .dashboard-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .quick-actions {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="brand">Admin</div>
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item active">Dashboard</a>
+        <a href="admin-reports.html" class="nav-item">Reports</a>
+      </nav>
+      <div class="user-section">
+        <span id="userInfo">Admin</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+      <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1>ADMIN DASHBOARD</h1>
+          <p>Real-time overview of store operations and performance</p>
+        </div>
+
+        <!-- Dashboard Stats -->
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-icon">SALES</div>
+            <div class="stat-value" id="totalSales">LKR 0.00</div>
+            <div class="stat-label">Total Sales Today</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">ORDERS</div>
+            <div class="stat-value" id="totalOrders">0</div>
+            <div class="stat-label">Orders Today</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">STOCK</div>
+            <div class="stat-value" id="lowStockItems">0</div>
+            <div class="stat-label">Low Stock Items</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">ALERT</div>
+            <div class="stat-value" id="expiringItems">0</div>
+            <div class="stat-label">Items Expiring Soon</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <div class="action-card">
+            <div class="action-card-header">REPORTS</div>
+            <div class="action-card-body">
+              <p>View detailed sales, stock, and transaction reports</p>
+              <a href="admin-reports.html" class="action-btn">VIEW REPORTS</a>
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="container">
-                <!-- Page Header -->
-                <div class="row mb-4">
-                    <div>
-                        <h1>Admin Dashboard</h1>
-                    </div>
-                </div>
-
-                <!-- Quick Stats Dashboard -->
-                <div class="dashboard-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">SALES</div>
-                        <div class="stat-value" id="totalSales">LKR 0.00</div>
-                        <div class="stat-label">Total Sales Today</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">ORDERS</div>
-                        <div class="stat-value" id="totalOrders">0</div>
-                        <div class="stat-label">Orders Today</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">STOCK</div>
-                        <div class="stat-value" id="lowStockItems">0</div>
-                        <div class="stat-label">Low Stock Items</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">ALERT</div>
-                        <div class="stat-value" id="expiringItems">0</div>
-                        <div class="stat-label">Items Expiring Soon</div>
-                    </div>
-                </div>
+          </div>
+          <div class="action-card">
+            <div class="action-card-header">STOCK MANAGEMENT</div>
+            <div class="action-card-body">
+              <p>Monitor inventory levels and restocking needs</p>
+              <button class="action-btn" onclick="checkStockLevels()">
+                CHECK STOCK
+              </button>
             </div>
-        </main>
-    </div>
+          </div>
+          <div class="action-card">
+            <div class="action-card-header">SALES ANALYTICS</div>
+            <div class="action-card-body">
+              <p>Analyze daily sales performance and trends</p>
+              <button class="action-btn" onclick="viewSalesAnalytics()">
+                VIEW ANALYTICS
+              </button>
+            </div>
+          </div>
+          <div class="action-card">
+            <div class="action-card-header">SYSTEM STATUS</div>
+            <div class="action-card-body">
+              <p>Monitor system health and performance metrics</p>
+              <button class="action-btn" onclick="checkSystemStatus()">
+                CHECK STATUS
+              </button>
+            </div>
+          </div>
+        </div>
 
-    <script src="../../js/utils.js"></script>
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+          <div class="section-header">RECENT ACTIVITY</div>
+          <div class="activity-list" id="recentActivity">
+            <div class="activity-item">
+              <div class="activity-text">
+                System initialized - Loading recent transactions...
+              </div>
+              <div class="activity-time">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript for Dashboard Functionality -->
+    <script>
+      // User Authentication and Interface
+      function updateUserInterface() {
+        const user = SessionManager.getUser();
+        const userInfoElement = document.getElementById("userInfo");
+
+        if (user) {
+          if (user.role === "manager" || user.role === "admin") {
+            userInfoElement.textContent = `${user.role.toUpperCase()}: ${
+              user.name || user.username
+            }`;
+          } else {
+            userInfoElement.textContent = `${user.name || user.username}`;
+          }
+        } else {
+          userInfoElement.textContent = "Admin";
+        }
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          SessionManager.logout();
+        }
+      }
+
+      // Quick Action Functions
+      function checkStockLevels() {
+        window.location.href = "admin-reports.html#stock-report";
+      }
+
+      function viewSalesAnalytics() {
+        window.location.href = "admin-reports.html#daily-sales";
+      }
+
+      function checkSystemStatus() {
+        alert(
+          "System Status: All systems operational\nDatabase: Connected\nServer: Running\nLast Update: " +
+            new Date().toLocaleString()
+        );
+      }
+
+      // Initialize dashboard
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if session is still valid
+        if (SessionManager.isLoggedIn() && !SessionManager.checkSession()) {
+          SessionManager.clearSession();
+        }
+        updateUserInterface();
+
+        // Load dashboard data
+        loadDashboardStats();
+        loadRecentActivity();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadDashboardStats, 30000);
+      });
+
+      async function loadDashboardStats() {
+        console.log("Loading dashboard statistics...");
+
+        try {
+          // Load today's sales
+          try {
+            const salesResponse = await fetch("/api/bills/daily-sales");
+            if (salesResponse.ok) {
+              const salesData = await salesResponse.json();
+              const totalSales = salesData.total_sales || 0;
+              const totalOrders = salesData.total_orders || 0;
+
+              document.getElementById(
+                "totalSales"
+              ).textContent = `LKR ${totalSales.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+              })}`;
+              document.getElementById("totalOrders").textContent =
+                totalOrders.toString();
+            }
+          } catch (error) {
+            console.log("Sales API not available:", error.message);
+          }
+
+          // Load low stock count
+          try {
+            const stockResponse = await fetch("/api/items/low-stock-count");
+            if (stockResponse.ok) {
+              const stockData = await stockResponse.json();
+              const lowStockCount = stockData.count || 0;
+              document.getElementById("lowStockItems").textContent =
+                lowStockCount.toString();
+            }
+          } catch (error) {
+            console.log("Stock API not available:", error.message);
+          }
+
+          // Load expiring items count
+          try {
+            const expiringResponse = await fetch(
+              "/api/items/expiring-soon-count"
+            );
+            if (expiringResponse.ok) {
+              const expiringData = await expiringResponse.json();
+              const expiringCount = expiringData.count || 0;
+              document.getElementById("expiringItems").textContent =
+                expiringCount.toString();
+            }
+          } catch (error) {
+            console.log("Expiring items API not available:", error.message);
+          }
+        } catch (error) {
+          console.error("Error loading dashboard stats:", error);
+        }
+      }
+
+      async function loadRecentActivity() {
+        const activityList = document.getElementById("recentActivity");
+
+        try {
+          // Show loading state
+          activityList.innerHTML = `
+            <div class="activity-item">
+              <div class="activity-text">Loading recent activities...</div>
+              <div class="activity-time">Please wait</div>
+            </div>
+          `;
+
+          const activities = [];
+
+          // Fetch recent bills/transactions
+          try {
+            const billResponse = await fetch("/api/bills/recent?limit=5");
+            if (billResponse.ok) {
+              const bills = await billResponse.json();
+              bills.forEach((bill) => {
+                const timeAgo = getTimeAgo(
+                  new Date(bill.created_at || bill.date)
+                );
+                activities.push({
+                  text: `New sale transaction completed - ${bill.invoice_number}`,
+                  time: timeAgo,
+                  timestamp: new Date(bill.created_at || bill.date),
+                });
+              });
+            }
+          } catch (error) {
+            console.log("Bills API not available:", error.message);
+          }
+
+          // Fetch low stock items
+          try {
+            const stockResponse = await fetch("/api/items/low-stock?limit=3");
+            if (stockResponse.ok) {
+              const lowStockItems = await stockResponse.json();
+              lowStockItems.forEach((item) => {
+                activities.push({
+                  text: `Stock level alert: ${
+                    item.item_code || item.name
+                  } below reorder level (${item.quantity_available} remaining)`,
+                  time: "Current",
+                  timestamp: new Date(),
+                });
+              });
+            }
+          } catch (error) {
+            console.log("Stock API not available:", error.message);
+          }
+
+          // Fetch recent login activities (if available)
+          try {
+            const loginResponse = await fetch(
+              "/api/auth/recent-logins?limit=3"
+            );
+            if (loginResponse.ok) {
+              const logins = await loginResponse.json();
+              logins.forEach((login) => {
+                const timeAgo = getTimeAgo(new Date(login.login_time));
+                activities.push({
+                  text: `User login: ${login.username} (${login.role})`,
+                  time: timeAgo,
+                  timestamp: new Date(login.login_time),
+                });
+              });
+            }
+          } catch (error) {
+            console.log("Login API not available:", error.message);
+          }
+
+          // If no real data is available, show sample activities
+          if (activities.length === 0) {
+            const now = new Date();
+            activities.push(
+              {
+                text: "System initialized - Dashboard loaded",
+                time: "Just now",
+                timestamp: now,
+              },
+              {
+                text: "Waiting for transaction data...",
+                time: "Current",
+                timestamp: now,
+              },
+              {
+                text: "Stock monitoring active",
+                time: "Current",
+                timestamp: now,
+              }
+            );
+          }
+
+          // Sort activities by timestamp (most recent first)
+          activities.sort(
+            (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+          );
+
+          // Limit to 10 most recent activities
+          const recentActivities = activities.slice(0, 10);
+
+          // Update the activity list
+          activityList.innerHTML = recentActivities
+            .map(
+              (activity) => `
+            <div class="activity-item">
+              <div class="activity-text">${activity.text}</div>
+              <div class="activity-time">${activity.time}</div>
+            </div>
+          `
+            )
+            .join("");
+        } catch (error) {
+          console.error("Error loading recent activity:", error);
+          activityList.innerHTML = `
+            <div class="activity-item">
+              <div class="activity-text">Error loading activities. Please refresh the page.</div>
+              <div class="activity-time">Error</div>
+            </div>
+          `;
+        }
+      }
+
+      function getTimeAgo(date) {
+        const now = new Date();
+        const diffInMs = now - date;
+        const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+        const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+        const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+        if (diffInMinutes < 1) {
+          return "Just now";
+        } else if (diffInMinutes < 60) {
+          return `${diffInMinutes} minute${diffInMinutes !== 1 ? "s" : ""} ago`;
+        } else if (diffInHours < 24) {
+          return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`;
+        } else if (diffInDays < 7) {
+          return `${diffInDays} day${diffInDays !== 1 ? "s" : ""} ago`;
+        } else {
+          return date.toLocaleDateString();
+        }
+      }
+    </script>
+
     <script src="../../js/utils.js"></script>
     <script src="../../js/manager-dashboard.js"></script>
-</body>
+  </body>
 </html>

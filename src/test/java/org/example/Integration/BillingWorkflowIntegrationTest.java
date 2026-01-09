@@ -1,14 +1,14 @@
 package org.example.Integration;
 
-import org.example.Controller.BillController;
-import org.example.Controller.ItemController;
-import org.example.Controller.StockController;
-import org.example.Controller.CustomerController;
-import org.example.Model.Bill;
-import org.example.Model.BillItem;
-import org.example.Model.Customer;
-import org.example.Model.Item;
-import org.example.Model.Stock;
+import org.example.presentation.controllers.BillController;
+import org.example.presentation.controllers.ItemController;
+import org.example.presentation.controllers.StockController;
+import org.example.presentation.controllers.CustomerController;
+import org.example.persistence.models.Bill;
+import org.example.persistence.models.BillItem;
+import org.example.persistence.models.Customer;
+import org.example.persistence.models.Item;
+import org.example.persistence.models.Stock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;

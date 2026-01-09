@@ -1,53 +1,273 @@
 let currentStockItems = [];
 
-function switchTab(tabName) {
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(tab => tab.style.display = 'none');
+// Enhanced alert system for the command center
+function showAlert(message, type = 'success', autoHide = true) {
+    const alertSystem = document.getElementById('alert-system');
+    const alertMessage = document.getElementById('alert-message');
     
-    // Remove active class from all tab buttons
-    const tabButtons = document.querySelectorAll('.tab-button');
-    tabButtons.forEach(button => button.classList.remove('active'));
+    if (!alertSystem || !alertMessage) return;
     
-    // Show the selected tab content
-    const selectedTab = document.getElementById(tabName + '-tab');
-    if (selectedTab) {
-        selectedTab.style.display = 'block';
-    }
+    alertSystem.className = `alert-system alert-${type} show`;
+    alertMessage.textContent = message;
     
-    // Add active class to the clicked tab button
-    const clickedButton = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
-    if (clickedButton) {
-        clickedButton.classList.add('active');
-    }
-}
-
-// Alert system
-function showAlert(message, type = 'info', autoHide = true) {
-    const alertContainer = document.getElementById('alert-container');
-    if (!alertContainer) return;
-    
-    alertContainer.innerHTML = `
-        <div class="alert alert-${type}">
-            <span>${message}</span>
-        </div>
-    `;
-    
-    alertContainer.style.display = 'block';
-    
-    // Auto-hide after 5 seconds
     if (autoHide) {
         setTimeout(() => {
-            hideAlert();
+            alertSystem.classList.remove('show');
         }, 5000);
     }
 }
 
 function hideAlert() {
-    const alertContainer = document.getElementById('alert-container');
-    if (alertContainer) {
-        alertContainer.style.display = 'none';
-        alertContainer.innerHTML = '';
+    const alertSystem = document.getElementById('alert-system');
+    if (alertSystem) {
+        alertSystem.classList.remove('show');
     }
+}
+
+// Panel functions for new slide panel system
+function showStockPanel(itemId, itemName) {
+    document.getElementById('stock-item-id').value = itemId;
+    document.getElementById('stock-item-name-display').textContent = itemName;
+    document.getElementById('stock-panel').classList.add('active');
+}
+
+function showOnlineMovePanel(itemId, itemName, quantity) {
+    document.getElementById('online-item-id').value = itemId;
+    document.getElementById('online-item-name').textContent = itemName;
+    document.getElementById('online-quantity').textContent = quantity;
+    document.getElementById('online-move-panel').classList.add('active');
+}
+
+function showEditItemPanel(item) {
+    console.log('showEditItemPanel called with item:', item); // Debug log
+    
+    if (item) {
+        document.getElementById('item-id').value = item.id || '';
+        document.getElementById('item-name').value = item.name || '';
+        document.getElementById('item-price').value = item.price || '';
+        document.getElementById('store-quantity').value = item.store_quantity || 0;
+        document.getElementById('website-quantity').value = item.website_quantity || 0;
+        
+        console.log('Form populated with item ID:', item.id); // Debug log
+    } else {
+        console.log('WARNING: showEditItemPanel called with no item data!'); // Debug log
+        // Clear form for new item
+        document.getElementById('item-form').reset();
+        document.getElementById('item-id').value = '';
+    }
+    document.getElementById('item-panel').classList.add('active');
+}
+
+function showDiscountPanel(discount = null) {
+    if (discount) {
+        document.getElementById('discount-id').value = discount.id || '';
+        document.getElementById('discount-code').value = discount.code || '';
+        document.getElementById('discount-value').value = discount.discount_value || '';
+    } else {
+        document.getElementById('discount-form').reset();
+        document.getElementById('discount-id').value = '';
+    }
+    document.getElementById('discount-panel').classList.add('active');
+}
+
+function closePanel(panelId) {
+    document.getElementById(panelId).classList.remove('active');
+}
+
+// Form submission functions
+async function submitStock(event) {
+    event.preventDefault();
+    
+    const itemId = document.getElementById('stock-item-id').value;
+    const quantity = parseInt(document.getElementById('stock-quantity').value);
+    const shelfType = document.getElementById('stock-shelf-type').value;
+    
+    if (!itemId || !quantity || !shelfType) {
+        showAlert('Please fill in all fields', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/syos/api/store-manager/reshelveItems', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ stock_id: parseInt(itemId), quantity: quantity, shelf_type: shelfType })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert('Stock added successfully', 'success');
+            closePanel('stock-panel');
+            document.getElementById('stock-form').reset();
+            loadItems(); // Refresh the items list
+        } else {
+            showAlert(data.message || 'Failed to add stock', 'error');
+        }
+    } catch (error) {
+        showAlert('Error adding stock', 'error');
+    }
+}
+
+async function submitMove(event) {
+    event.preventDefault();
+    
+    const itemId = document.getElementById('online-item-id').value;
+    const quantity = parseInt(document.getElementById('online-move-quantity').value);
+    const currentQuantity = parseInt(document.getElementById('online-quantity').textContent);
+    
+    if (!itemId || !quantity) {
+        showAlert('Please enter a quantity to transfer', 'error');
+        return;
+    }
+    
+    if (quantity > currentQuantity) {
+        showAlert('Cannot transfer more than available quantity', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/syos/api/store-manager/moveOnlineToStore', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ item_id: parseInt(itemId), quantity: quantity })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert('Item transferred successfully', 'success');
+            closePanel('online-move-panel');
+            document.getElementById('online-move-form').reset();
+            loadShelfStatus(); // Refresh the shelf status
+            loadShelfItems(); // Refresh the shelf items list  
+        } else {
+            showAlert(data.message || 'Failed to transfer item', 'error');
+        }
+    } catch (error) {
+        showAlert('Error transferring item', 'error');
+    }
+}
+
+async function submitEditItem(event) {
+    event.preventDefault();
+    
+    const itemId = document.getElementById('item-id').value;
+    console.log('Edit Item - Item ID from form:', itemId); // Debug log
+    
+    const formData = {
+        name: document.getElementById('item-name').value,
+        price: parseFloat(document.getElementById('item-price').value),
+        store_quantity: parseInt(document.getElementById('store-quantity').value) || 0,
+        website_quantity: parseInt(document.getElementById('website-quantity').value) || 0
+    };
+    
+    // CRITICAL: Always include item_id for updates when editing existing items
+    if (itemId && itemId !== '' && itemId !== '0') {
+        formData.item_id = parseInt(itemId);
+        console.log('Including item_id in request:', formData.item_id); // Debug log
+    } else {
+        console.log('WARNING: No valid item ID found - this will create a new item!'); // Debug log
+        showAlert('Error: Cannot update item - missing item ID', 'error');
+        return;
+    }
+    
+    if (!formData.name || !formData.price) {
+        showAlert('Please fill in all required fields', 'error');
+        return;
+    }
+    
+    try {
+        const url = '/syos/api/store-manager/updateItem';
+        const method = 'POST';
+        
+        const response = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert(itemId ? 'Item updated successfully' : 'Item added successfully', 'success');
+            closePanel('item-panel');
+            document.getElementById('item-form').reset();
+            loadItems(); // Refresh the items list
+        } else {
+            showAlert(data.message || 'Failed to save item', 'error');
+        }
+    } catch (error) {
+        showAlert('Error saving item', 'error');
+    }
+}
+
+async function submitDiscount(event) {
+    event.preventDefault();
+    
+    const discountId = document.getElementById('discount-id').value;
+    const formData = {
+        code: document.getElementById('discount-code').value,
+        discount_value: parseFloat(document.getElementById('discount-value').value)
+    };
+    
+    if (!formData.code || !formData.discount_value) {
+        showAlert('Please fill in all fields', 'error');
+        return;
+    }
+    
+    try {
+        const url = discountId ? `/syos/api/discount-codes/${discountId}` : '/syos/api/discount-codes/';
+        const method = discountId ? 'PUT' : 'POST';
+        
+        const response = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showAlert(discountId ? 'Discount updated successfully' : 'Discount created successfully', 'success');
+            closePanel('discount-panel');
+            document.getElementById('discount-form').reset();
+            loadDiscountCodes(); // Refresh the discount codes list
+        } else {
+            showAlert(data.message || 'Failed to save discount', 'error');
+        }
+    } catch (error) {
+        showAlert('Error saving discount', 'error');
+    }
+}
+
+// Legacy support for old modal system - now redirects to panels
+function showStockModal(stockId, itemName, quantity) {
+    showStockPanel(stockId, itemName, quantity);
+}
+
+function showOnlineMoveModal(itemId, itemName, quantity) {
+    showOnlineMovePanel(itemId, itemName, quantity);
+}
+
+function showEditItemModal(itemData = null) {
+    showEditItemPanel(itemData);
+}
+
+function showDiscountModal(discountData = null) {
+    showDiscountPanel(discountData);
+}
+
+function closeModal(modalId) {
+    // Legacy function - redirect to panel close
+    const panelMap = {
+        'stock-modal': 'stock-panel',
+        'online-move-modal': 'online-move-panel',
+        'item-modal': 'edit-item-panel',
+        'discount-modal': 'discount-panel'
+    };
+    const panelId = panelMap[modalId] || modalId;
+    closePanel(panelId);
 }
 
 // Load stock data
@@ -115,7 +335,7 @@ function displayOnlineItems(shelfItems) {
     if (!container) return;
     
     if (!shelfItems || shelfItems.length === 0) {
-        container.innerHTML = '<p class="text-muted">No shelf items available</p>';
+        container.innerHTML = '<div class="loading">No shelf items available</div>';
         return;
     }
     
@@ -125,27 +345,53 @@ function displayOnlineItems(shelfItems) {
     );
     
     if (websiteItems.length === 0) {
-        container.innerHTML = '<p class="text-muted">No website items available to move</p>';
+        container.innerHTML = '<div class="loading">No website items available to move</div>';
         return;
     }
     
-    const html = websiteItems.map(item => `
-        <div class="list-item">
-            <div class="item-info">
-                <strong>${item.name || 'Unknown Item'}</strong>
-                <span class="item-code">${item.code || 'N/A'}</span>
-                <span class="shelf-type">Shelf: ${item.shelf_type || 'N/A'}</span>
-                <span class="item-quantity">Qty: ${item.quantity || 0}</span>
-            </div>
-            <div class="item-actions">
-                <button class="btn btn-sm btn-success" onclick="moveToStore(${item.item_id})">
-                    Move to Store
-                </button>
-            </div>
-        </div>
-    `).join('');
+    const html = `
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ITEM CODE</th>
+                    <th>ITEM NAME</th>
+                    <th>QUANTITY</th>
+                    <th>SHELF TYPE</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${websiteItems.map(item => `
+                    <tr>
+                        <td>${item.code || 'N/A'}</td>
+                        <td>${item.name || 'Unknown Item'}</td>
+                        <td>${item.quantity || 0}</td>
+                        <td>${item.shelf_type || 'N/A'}</td>
+                        <td>
+                            <button class="action-btn transfer-btn" 
+                                    data-item-id="${item.item_id}" 
+                                    data-item-name="${item.name || 'Unknown Item'}" 
+                                    data-quantity="${item.quantity || 0}">
+                                TRANSFER
+                            </button>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
     
     container.innerHTML = html;
+    
+    // Add event listeners for transfer buttons
+    container.querySelectorAll('.transfer-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.dataset.itemId;
+            const itemName = this.dataset.itemName;
+            const quantity = this.dataset.quantity;
+            showOnlineMovePanel(itemId, itemName, quantity);
+        });
+    });
 }
 
 // Load all items for management
@@ -170,48 +416,78 @@ function displayItems(items) {
     if (!container) return;
     
     if (!items || items.length === 0) {
-        container.innerHTML = '<p class="text-muted">No items available</p>';
+        container.innerHTML = '<div class="loading">NO ITEMS AVAILABLE</div>';
         return;
     }
     
-    const html = items.map(item => `
-        <div class="list-item">
-            <div class="item-info">
-                <strong>${item.name || 'Unknown Item'}</strong>
-                <span class="item-code">${item.code || 'N/A'}</span>
-                <span class="item-price">LKR ${item.price || '0.00'}</span>
-                <span class="item-quantity">Store: ${item.store_quantity || 0} | Website: ${item.website_quantity || 0}</span>
-            </div>
-            <div class="item-actions">
-                <button class="btn btn-sm btn-primary" onclick="editItem(${item.id})">
-                    Edit
-                </button>
-            </div>
-        </div>
-    `).join('');
+    const html = `
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ITEM CODE</th>
+                    <th>ITEM NAME</th>
+                    <th>PRICE</th>
+                    <th>STORE QTY</th>
+                    <th>WEBSITE QTY</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${items.map(item => `
+                    <tr>
+                        <td>${item.code || 'N/A'}</td>
+                        <td>${item.name || 'Unknown Item'}</td>
+                        <td>LKR ${item.price || '0.00'}</td>
+                        <td>${item.store_quantity || 0}</td>
+                        <td>${item.website_quantity || 0}</td>
+                        <td>
+                            <button class="action-btn edit-btn" data-item-id="${item.id}">
+                                EDIT
+                            </button>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
     
     container.innerHTML = html;
+    
+    // Add event listeners for edit buttons
+    container.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.dataset.itemId;
+            editItem(itemId);
+        });
+    });
 }
 
 // Edit item function
 async function editItem(itemId) {
+    console.log('editItem called with itemId:', itemId); // Debug log
+    
     try {
         const response = await fetch(`/syos/api/store-manager/getItem?id=${itemId}`);
         const data = await response.json();
         
+        console.log('API response for getItem:', data); // Debug log
+        
         if (data.success && data.data) {
             const item = data.data;
-            showEditItemModal(item);
+            console.log('Item data received:', item); // Debug log
+            showEditItemPanel(item);
         } else {
+            console.error('Failed to load item:', data); // Debug log
             showAlert('Failed to load item details', 'danger');
         }
     } catch (error) {
+        console.error('Error loading item details:', error); // Debug log
         showAlert('Error loading item details', 'danger');
     }
 }
 
 // Save item function for form submission
-function saveItem(event) {
+async function saveItem(event) {
     event.preventDefault();
     
     const itemId = document.getElementById('item-id')?.value;
@@ -222,44 +498,36 @@ function saveItem(event) {
         website_quantity: parseInt(document.getElementById('website-quantity')?.value) || 0
     };
     
-    // Add item_id for updates (not for new items)
-    if (itemId && itemId.trim() !== '') {
+    // Include item_id in the request body for updates
+    if (itemId) {
         formData.item_id = parseInt(itemId);
     }
     
     if (!formData.name || !formData.price) {
-        showAlert('Please fill in required fields (Name and Price)', 'danger');
+        showAlert('Please fill in all required fields', 'error');
         return;
     }
     
-    submitEditItem(formData);
-}
-
-// Submit item form data
-async function submitEditItem(formData) {
     try {
-        const isEdit = formData.item_id && formData.item_id > 0;
-        showAlert(isEdit ? 'Updating item...' : 'Creating item...', 'info');
-        
-        const response = await fetch('/syos/api/store-manager/updateItem', {
+        const url = '/syos/api/store-manager/updateItem';
+        const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         });
         
         const data = await response.json();
         
         if (data.success) {
-            showAlert(`Item ${isEdit ? 'updated' : 'created'} successfully!`, 'success');
-            closeModal('item-modal');
-            loadItems(); // Refresh items list
+            showAlert(itemId ? 'Item updated successfully' : 'Item added successfully', 'success');
+            closePanel('item-panel');
+            document.getElementById('item-form').reset();
+            loadItems(); // Refresh the items list
         } else {
-            showAlert(data.message || `Failed to ${isEdit ? 'update' : 'create'} item`, 'danger');
+            showAlert(data.message || 'Failed to save item', 'error');
         }
     } catch (error) {
-        showAlert('Error with item operation', 'danger');
+        showAlert('Error saving item', 'error');
     }
 }
 
@@ -285,20 +553,32 @@ function displayShelfStatus(shelfItems) {
     if (!container) return;
     
     if (!shelfItems || shelfItems.length === 0) {
-        container.innerHTML = '<p class="text-muted">No shelf items available</p>';
+        container.innerHTML = '<div class="loading">NO SHELF ITEMS AVAILABLE</div>';
         return;
     }
     
-    const html = shelfItems.map(item => `
-        <div class="list-item">
-            <div class="item-info">
-                <strong>${item.name || 'Unknown Item'}</strong>
-                <span class="item-code">${item.code || 'N/A'}</span>
-                <span class="shelf-type">Type: ${item.shelf_type || 'N/A'}</span>
-                <span class="item-quantity">Qty: ${item.quantity || 0}</span>
-            </div>
-        </div>
-    `).join('');
+    const html = `
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ITEM CODE</th>
+                    <th>ITEM NAME</th>
+                    <th>SHELF TYPE</th>
+                    <th>QUANTITY</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${shelfItems.map(item => `
+                    <tr>
+                        <td>${item.code || 'N/A'}</td>
+                        <td>${item.name || 'Unknown Item'}</td>
+                        <td>${item.shelf_type || 'N/A'}</td>
+                        <td>${item.quantity || 0}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
     
     container.innerHTML = html;
 }
@@ -320,89 +600,7 @@ async function moveToStore(itemId) {
     }
 }
 
-// Modal function for online move
-function showOnlineMoveModal(item) {
-    document.querySelector('#online-move-modal h3').textContent = `Move Item to Store: ${item.name || 'Unknown Item'}`;
-    
-    if (document.getElementById('online-item-id')) {
-        document.getElementById('online-item-id').value = item.id || '';
-    }
-    if (document.getElementById('online-item-name')) {
-        document.getElementById('online-item-name').textContent = item.name || '';
-    }
-    if (document.getElementById('online-quantity')) {
-        document.getElementById('online-quantity').textContent = item.website_quantity || 0;
-    }
-    
-    const modal = document.getElementById('online-move-modal');
-    if (modal) {
-        modal.style.display = 'block';
-        modal.classList.add('active');
-    }
-}
 
-// Modal close functions
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
-        modal.classList.remove('active');
-        
-        // Clean up event listeners to prevent memory leaks
-        if (modalId === 'discount-modal') {
-            const form = document.getElementById('discount-form');
-            if (form) {
-                const inputs = form.querySelectorAll('input[type="text"], input[type="number"]');
-                inputs.forEach(input => {
-                    input.removeEventListener('keydown', handleDiscountKeyDown);
-                });
-            }
-        }
-    }
-}
-
-// Additional modal functions for item management and discount codes
-function showEditItemModal(item = null) {
-    const title = item ? `Edit Item: ${item.name}` : 'Add New Item';
-    const modal = document.getElementById('item-modal');
-    
-    if (modal) {
-        const titleElement = modal.querySelector('h3');
-        if (titleElement) {
-            titleElement.textContent = title;
-        }
-        
-        // Populate form fields if item exists
-        if (item) {
-            const fields = {
-                'item-id': item.id || '',
-                'item-name': item.name || '',
-                'item-price': item.price || '',
-                'store-quantity': item.store_quantity || '',
-                'website-quantity': item.website_quantity || ''
-            };
-            
-            Object.keys(fields).forEach(fieldId => {
-                const element = document.getElementById(fieldId);
-                if (element) {
-                    element.value = fields[fieldId];
-                }
-            });
-        } else {
-            // Clear form for new item
-            const fieldIds = ['item-id', 'item-name', 'item-price', 'reorder-level', 'store-quantity', 'website-quantity'];
-            fieldIds.forEach(fieldId => {
-                const element = document.getElementById(fieldId);
-                if (element) {
-                    element.value = '';
-                }
-            });
-        }
-        
-        modal.style.display = 'block';
-        modal.classList.add('active');
-    }
-}
 
 
 
@@ -415,29 +613,9 @@ function reshelveItem(productId) {
     // Find the item in global storage
     const item = currentStockItems.find(stock => stock.id === productId);
     if (item) {
-        showStockModal(item);
+        showStockPanel(item.id, item.name);
     } else {
-    }
-}
-
-// Modal function for stock
-function showStockModal(item) {
-    document.querySelector('#stock-modal h3').textContent = `Move Stock: ${item.name || 'Unknown Item'}`;
-    
-    if (document.getElementById('stock-id')) {
-        document.getElementById('stock-id').value = item.id || '';
-    }
-    if (document.getElementById('stock-item-name')) {
-        document.getElementById('stock-item-name').textContent = item.name || '';
-    }
-    if (document.getElementById('available-quantity')) {
-        document.getElementById('available-quantity').textContent = item.quantity || 0;
-    }
-    
-    const modal = document.getElementById('stock-modal');
-    if (modal) {
-        modal.style.display = 'block';
-        modal.classList.add('active');
+        showAlert('Item not found', 'error');
     }
 }
 
@@ -478,39 +656,10 @@ async function moveStockToShelf(event) {
     }
 }
 
-// Move online to store function
+// Move online to store function - for form submission compatibility
 async function moveOnlineToStore(event) {
-    event.preventDefault();
-    
-    const formData = new FormData(event.target);
-    const requestData = {
-        item_id: parseInt(formData.get('item_id')),
-        quantity: parseInt(formData.get('quantity'))
-    };
-    
-    try {
-        showAlert('Moving items from online to store...', 'info');
-        
-        const response = await fetch('/syos/api/store-manager/moveOnlineToStore', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            showAlert('Items moved from online to store successfully!', 'success');
-            closeModal('online-move-modal');
-            loadShelfItems(); // Refresh shelf items list
-        } else {
-            showAlert(data.message || 'Failed to move items from online to store', 'danger');
-        }
-    } catch (error) {
-        showAlert('Error moving items from online to store', 'danger');
-    }
+    // This redirects to our new submitMove function
+    return await submitMove(event);
 }
 
 
@@ -537,190 +686,72 @@ function displayDiscountCodes(codes) {
     const container = document.getElementById('discount-codes-list');
     
     if (!codes || codes.length === 0) {
-        container.innerHTML = '<p class="text-muted">No discount codes found. <a href="#" onclick="showDiscountModal()">Create your first discount code</a></p>';
+        container.innerHTML = '<div class="loading">NO DISCOUNT CODES FOUND</div>';
         return;
     }
     
-    container.innerHTML = '';
+    const html = `
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>CODE</th>
+                    <th>DISCOUNT VALUE</th>
+                    <th>CREATED DATE</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${codes.map(code => `
+                    <tr>
+                        <td><strong>${code.code}</strong></td>
+                        <td>Rs. ${code.discount_value.toFixed(2)}</td>
+                        <td>${new Date(code.created_date).toLocaleDateString()}</td>
+                        <td>
+                            <button class="action-btn" onclick="editDiscountCode(${code.id}, '${code.code}', ${code.discount_value})">
+                                EDIT
+                            </button>
+                            <button class="action-btn secondary" onclick="deleteDiscountCode(${code.id})">
+                                DELETE
+                            </button>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
     
-    codes.forEach(code => {
-        const codeElement = document.createElement('div');
-        codeElement.className = 'item-card p-3 mb-3';
-        codeElement.style.cssText = `
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            background: white;
-            box-shadow: var(--shadow);
-        `;
-        
-        codeElement.innerHTML = `
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="item-info">
-                    <div><strong>${code.code}</strong></div>
-                    <div class="discount-value">Discount: Rs. ${code.discount_value.toFixed(2)}</div>
-                    <div class="created-date">Created: ${new Date(code.created_date).toLocaleDateString()}</div>
-                </div>
-                <div class="item-actions">
-                    <button class="btn btn-sm btn-primary" onclick="editDiscountCode(${code.id}, '${code.code}', ${code.discount_value})">Edit</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteDiscountCode(${code.id})">Delete</button>
-                </div>
-            </div>
-        `;
-        
-        container.appendChild(codeElement);
-    });
+    container.innerHTML = html;
 }
 
+// Enhanced discount modal function that redirects to panel
 function showDiscountModal(id = null, code = '', discount_value = '') {
-    const modal = document.getElementById('discount-modal');
-    const form = document.getElementById('discount-form');
-    const title = document.getElementById('discount-modal-title');
-    
-    if (!modal || !form || !title) {
-        return;
-    }
-    
-    // Reset form
-    form.reset();
-    document.getElementById('discount-id').value = '';
-    
     if (id) {
-        title.textContent = 'Edit Discount Code';
-        // Load existing data for editing
-        document.getElementById('discount-id').value = id;
-        document.getElementById('discount-code').value = code;
-        document.getElementById('discount-value').value = discount_value;
+        showDiscountPanel({id: id, code: code, discount_value: discount_value});
     } else {
-        title.textContent = 'Add Discount Code';
-    }
-    
-    // Show modal with proper CSS classes
-    modal.classList.add('active');
-    
-    // Add keyboard event handlers to prevent Enter key issues
-    const inputs = form.querySelectorAll('input[type="text"], input[type="number"]');
-    inputs.forEach(input => {
-        input.removeEventListener('keydown', handleDiscountKeyDown); // Remove existing listeners
-        input.addEventListener('keydown', handleDiscountKeyDown);
-    });
-}
-
-// Separate function to handle keyboard events in discount modal
-function handleDiscountKeyDown(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        e.stopPropagation();
-        handleSaveDiscountCode();
-        return false;
+        showDiscountPanel();
     }
 }
 
 function editDiscountCode(id, code, discount_value) {
-    showDiscountModal(id, code, discount_value);
+    showDiscountPanel({id: id, code: code, discount_value: discount_value});
 }
 
 function handleSaveDiscountCode() {
-    // This function is overridden by discount-manager.js
+    // This function redirects to the panel submit function
+    const form = document.getElementById('discount-form');
+    if (form) {
+        const event = new Event('submit');
+        submitDiscount(event);
+    }
     return false;
 }
 
-// Simplified save function
-async function saveDiscountCodeDirect(discountData, discountId) {
-    try {
-        let url, method;
-        
-        if (discountId) {
-            url = `/syos/api/discount-codes/${discountId}`;
-            method = 'PUT';
-        } else {
-            url = '/syos/api/discount-codes/';
-            method = 'POST';
-        }
-        
-        const response = await fetch(url, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(discountData)
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            const action = discountId ? 'updated' : 'created';
-            showAlert(`Discount code ${action} successfully!`, 'success');
-            closeModal('discount-modal');
-            loadDiscountCodes();
-        } else {
-            showAlert(result.error || `Failed to ${discountId ? 'update' : 'create'} discount code`, 'error');
-        }
-    } catch (error) {
-        showAlert('Error saving discount code. Please try again.', 'error');
-    }
-}
-
-async function saveDiscountCode(event) {
-    event.preventDefault();
-    event.stopPropagation();
+async function deleteDiscountCode(id) {
+    // Find the code name for confirmation
+    const container = document.getElementById('discount-codes-list');
+    const row = container.querySelector(`button[onclick*="${id}"]`)?.closest('tr');
+    const code = row ? row.querySelector('td strong')?.textContent || 'this discount code' : 'this discount code';
     
-    const form = event.target;
-    const formData = new FormData(form);
-    const discountId = formData.get('id');
-    
-    const discountData = {
-        code: formData.get('code').trim().toUpperCase(),
-        discount_value: parseFloat(formData.get('discount_value'))
-    };
-    
-    if (!discountData.code) {
-        showAlert('Please enter a discount code', 'warning');
-        return false;
-    }
-    
-    if (discountData.discount_value <= 0) {
-        showAlert('Discount value must be greater than 0', 'warning');
-        return false;
-    }
-    
-    try {
-        let response;
-        if (discountId) {
-            response = await fetch(`/syos/api/discount-codes/${discountId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(discountData)
-            });
-        } else {
-            response = await fetch('/syos/api/discount-codes/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(discountData)
-            });
-        }
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            const action = discountId ? 'updated' : 'created';
-            showAlert(`Discount code ${action} successfully!`, 'success');
-            closeModal('discount-modal');
-            loadDiscountCodes();
-        } else {
-            showAlert(result.error || `Failed to ${discountId ? 'update' : 'create'} discount code`, 'error');
-        }
-    } catch (error) {
-        showAlert('Error saving discount code. Please try again.', 'error');
-    }
-    
-    return false;
-}
-
-async function deleteDiscountCode(id, code) {
     if (!confirm(`Are you sure you want to delete the discount code "${code}"?`)) {
         return;
     }
@@ -740,6 +771,47 @@ async function deleteDiscountCode(id, code) {
         }
     } catch (error) {
         showAlert('Error deleting discount code. Please try again.', 'error');
+    }
+}
+
+// Tab switching function for the dashboard
+function switchTab(tabName) {
+    // Hide all tab contents
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => {
+        content.style.display = 'none';
+    });
+    
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show selected tab content
+    const selectedContent = document.getElementById(tabName);
+    if (selectedContent) {
+        selectedContent.style.display = 'block';
+    }
+    
+    // Add active class to selected tab
+    const selectedTab = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+    }
+    
+    // Load data for the selected tab
+    switch(tabName) {
+        case 'inventory':
+            loadShelfItems();
+            loadShelfStatus();
+            break;
+        case 'items':
+            loadItems();
+            break;
+        case 'discounts':
+            loadDiscountCodes();
+            break;
     }
 }
 
@@ -774,24 +846,40 @@ function searchTable(containerId, searchValue) {
     const container = document.getElementById(containerId);
     if (!container) return;
     
-    // For dynamically populated containers, search within all content
-    const items = container.querySelectorAll('.item-row, .item-card, div[style*="border"], div[class*="item"]');
     const filter = searchValue.toLowerCase();
     
-    // If no specific items found, search all div children
-    const searchElements = items.length > 0 ? items : container.children;
-    
-    for (let i = 0; i < searchElements.length; i++) {
-        const element = searchElements[i];
-        const text = element.textContent || element.innerText || '';
+    // Look for table rows in the container
+    const table = container.querySelector('table');
+    if (table) {
+        // Search table rows (skip header row)
+        const rows = table.querySelectorAll('tbody tr');
         
-        // Skip loading messages or empty content
-        if (text.toLowerCase().includes('loading') || text.trim() === '') continue;
+        rows.forEach(row => {
+            const text = row.textContent || row.innerText || '';
+            
+            if (text.toLowerCase().indexOf(filter) > -1 || filter === '') {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    } else {
+        // Fallback for non-table content
+        const items = container.querySelectorAll('.item-row, .item-card, div[style*="border"], div[class*="item"]');
+        const searchElements = items.length > 0 ? items : container.children;
         
-        if (text.toLowerCase().indexOf(filter) > -1 || filter === '') {
-            element.style.display = '';
-        } else {
-            element.style.display = 'none';
+        for (let i = 0; i < searchElements.length; i++) {
+            const element = searchElements[i];
+            const text = element.textContent || element.innerText || '';
+            
+            // Skip loading messages or empty content
+            if (text.toLowerCase().includes('loading') || text.trim() === '') continue;
+            
+            if (text.toLowerCase().indexOf(filter) > -1 || filter === '') {
+                element.style.display = '';
+            } else {
+                element.style.display = 'none';
+            }
         }
     }
 }

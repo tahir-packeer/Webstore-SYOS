@@ -481,7 +481,7 @@ class Router {
     static redirectToDashboard(role) {
         const dashboardRoutes = {
             'CUSTOMER': '/syos/pages/customer/dashboard.html',
-            'cashier': '/syos/pages/cashier/dashboard.html',
+            'cashier': '/syos/pages/cashier/pos-system.html',
             'store manager': '/syos/pages/store-manager/dashboard.html',
             'admin': '/syos/pages/manager/dashboard.html'
         };

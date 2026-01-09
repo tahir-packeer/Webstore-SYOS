@@ -1,278 +1,1165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store Manager Dashboard - SYOS Store</title>
-    <link rel="stylesheet" href="../../css/store-manager.css">
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="container">
-                <a href="dashboard.html" class="navbar-brand">SYOS Store - Store Manager</a>
-                <div class="navbar-actions">
-                    <span class="user-info" id="userInfo">Store Manager</span>
-                    <button class="btn btn-outline" onclick="logout()">Logout</button>
-                </div>
-            </div>
-        </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store Manager - SYOS Command Center</title>
+    <link rel="icon" href="data:," />
+    <style>
+      /* SYOS Store Manager Command Center - Sharp Black & White Design */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="container">
-                <!-- Alert Container -->
-                <div id="alert-container" style="display: none; margin-bottom: 1rem;"></div>
+      body {
+        font-family: "Arial", sans-serif;
+        background: white;
+        color: black;
+        line-height: 1.4;
+        overflow-x: hidden;
+      }
 
-                <!-- Page Header -->
-                <div class="row mb-4">
-                    <div>
-                        <h1>Store Manager Dashboard</h1>
-                        <p>Manage inventory, shelves, items, and discount codes</p>
-                    </div>
-                </div>
+      /* Command Header */
+      .command-header {
+        background: black;
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 4px solid white;
+      }
 
-                <!-- Management Tabs -->
-                <div class="management-tabs">
-                    <button class="tab-button active" onclick="switchTab('inventory')">Inventory Management</button>
-                    <button class="tab-button" onclick="switchTab('items')">Item Management</button>
-                    <button class="tab-button" onclick="switchTab('discounts')">Discount Codes</button>
-                </div>
+      .brand-command {
+        font-size: 1.6rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
 
-                <!-- Inventory Management Tab -->
-                <div id="inventory-tab" class="tab-content active">
-                    <div class="management-grid">
-                        <!-- Online to Store Movement -->
-                        <div class="management-card">
-                            <div class="card-header">
-                                <h3>Move Online to Store</h3>
-                                <button class="btn btn-primary btn-sm" onclick="loadShelfItems()">Refresh</button>
-                            </div>
-                            <div class="search-container">
-                                <input type="text" id="onlineItemsSearch" class="search-input" 
-                                       placeholder="Search online items by code, name, or quantity..." 
-                                       onkeyup="searchTable('online-items-list', this.value)">
-                            </div>
-                            <div id="online-items-list" class="table-container">
-                                <p>Loading online items...</p>
-                            </div>
-                        </div>
-                    </div>
+      .command-actions {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
 
-                    <!-- Current Shelf Status -->
-                    <div class="management-card">
-                        <div class="card-header">
-                            <h3>Current Shelf Status</h3>
-                            <button class="btn btn-primary btn-sm" onclick="loadShelfStatus()">Refresh</button>
-                        </div>
-                        <div class="search-container">
-                            <input type="text" id="shelfStatusSearch" class="search-input" 
-                                   placeholder="Search shelf status by item code, name, or shelf type..." 
-                                   onkeyup="searchTable('shelf-status', this.value)">
-                        </div>
-                        <div id="shelf-status" class="table-container">
-                            <p>Loading shelf status...</p>
-                        </div>
-                    </div>
-                </div>
+      .user-status {
+        background: white;
+        color: black;
+        padding: 0.5rem 1rem;
+        border: 2px solid white;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
 
-                <!-- Item Management Tab -->
-                <div id="items-tab" class="tab-content">
-                    <div class="management-card">
-                        <div class="card-header">
-                            <h3>Item Management</h3>
-                            <div>
-                                <button class="btn btn-success btn-sm" onclick="showEditItemModal()">Add New Item</button>
-                                <button class="btn btn-primary btn-sm" onclick="loadItems()">Refresh</button>
-                            </div>
-                        </div>
-                        <div class="search-container">
-                            <input type="text" id="itemsListSearch" class="search-input" 
-                                   placeholder="Search items by code, name, price, or category..." 
-                                   onkeyup="searchTable('items-list', this.value)">
-                        </div>
-                        <div id="items-list" class="table-container">
-                            <p>Loading items...</p>
-                        </div>
-                    </div>
-                </div>
+      .logout-cmd {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+        padding: 0.5rem 1.5rem;
+        cursor: pointer;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+      }
 
-                <!-- Discount Codes Tab -->
-                <div id="discounts-tab" class="tab-content">
-                    <div class="management-card">
-                        <div class="card-header">
-                            <h3>Discount Codes</h3>
-                            <div>
-                                <button class="btn btn-success btn-sm" onclick="showDiscountModal()">Add New Code</button>
-                                <button class="btn btn-primary btn-sm" onclick="loadDiscountCodes()">Refresh</button>
-                            </div>
-                        </div>
-                        <div class="search-container">
-                            <input type="text" id="discountCodesSearch" class="search-input" 
-                                   placeholder="Search discount codes by code, percentage, or status..." 
-                                   onkeyup="searchTable('discount-codes-list', this.value)">
-                        </div>
-                        <div id="discount-codes-list" class="table-container">
-                            <p>Loading discount codes...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+      .logout-cmd:hover {
+        background: white;
+        color: black;
+      }
 
-    <!-- Modals -->
-    <!-- Stock Movement Modal -->
-    <div id="stock-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Move Stock to Shelf</h3>
-                <button class="close-btn" onclick="closeModal('stock-modal')">&times;</button>
-            </div>
-            <form id="stock-form" onsubmit="moveStockToShelf(event)">
-                <input type="hidden" id="stock-id" name="stock_id">
-                <div class="form-group">
-                    <label>Item:</label>
-                    <span id="stock-item-name"></span>
-                </div>
-                <div class="form-group">
-                    <label>Available Quantity:</label>
-                    <span id="available-quantity"></span>
-                </div>
-                <div class="form-group">
-                    <label for="move-quantity">Quantity to Move:</label>
-                    <input type="number" id="move-quantity" name="quantity" min="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="shelf-type">Move to:</label>
-                    <select id="shelf-type" name="shelf_type" required>
-                        <option value="STORE">Store Shelf</option>
-                        <option value="WEBSITE">Website Shelf</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Move Items</button>
-                    <button type="button" class="btn btn-outline" onclick="closeModal('stock-modal')">Cancel</button>
-                </div>
-            </form>
+      /* Main Command Layout */
+      .command-layout {
+        display: flex;
+        margin-top: 80px;
+        height: calc(100vh - 80px);
+      }
+
+      /* Side Command Panel */
+      .side-command {
+        width: 250px;
+        background: black;
+        color: white;
+        padding: 2rem 0;
+        border-right: 4px solid white;
+      }
+
+      .command-title {
+        padding: 0 2rem 2rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid white;
+        margin-bottom: 2rem;
+      }
+
+      .command-menu {
+        list-style: none;
+      }
+
+      .command-item {
+        margin: 0;
+      }
+
+      .command-link {
+        display: block;
+        padding: 1rem 2rem;
+        color: white;
+        text-decoration: none;
+        border-left: 4px solid transparent;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .command-link:hover,
+      .command-link.active {
+        background: white;
+        color: black;
+        border-left: 4px solid black;
+      }
+
+      .command-icon {
+        margin-right: 0.5rem;
+        font-weight: bold;
+      }
+
+      /* Main Content Area */
+      .main-command {
+        flex: 1;
+        padding: 2rem;
+        background: white;
+        overflow-y: auto;
+      }
+
+      .command-section {
+        display: none;
+      }
+
+      .command-section.active {
+        display: block;
+      }
+
+      .section-header {
+        background: black;
+        color: white;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 0.5rem;
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+      }
+
+      /* Alert System */
+      .alert-system {
+        background: black;
+        color: white;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        border: 2px solid black;
+        display: none;
+      }
+
+      .alert-system.show {
+        display: block;
+      }
+
+      .alert-success {
+        background: white;
+        color: black;
+        border: 2px solid black;
+      }
+
+      .alert-error {
+        background: black;
+        color: white;
+        border: 2px solid black;
+      }
+
+      /* Command Cards */
+      .command-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .command-card {
+        background: white;
+        border: 3px solid black;
+        overflow: hidden;
+      }
+
+      .card-command-header {
+        background: black;
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .cmd-btn {
+        background: white;
+        color: black;
+        border: 2px solid white;
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        transition: all 0.3s ease;
+      }
+
+      .cmd-btn:hover {
+        background: black;
+        color: white;
+      }
+
+      .cmd-btn-primary {
+        background: black;
+        color: white;
+        border: 2px solid black;
+      }
+
+      .cmd-btn-primary:hover {
+        background: white;
+        color: black;
+      }
+
+      .cmd-btn-success {
+        background: white;
+        color: black;
+        border: 2px solid white;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      /* Search Command */
+      .search-command {
+        margin-bottom: 1.5rem;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid black;
+        background: white;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .search-input:focus {
+        outline: none;
+        background: black;
+        color: white;
+      }
+
+      /* Data Tables */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      .data-table th {
+        background: black;
+        color: white;
+        padding: 1rem;
+        text-align: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        border-right: 1px solid white;
+      }
+
+      .data-table th:last-child {
+        border-right: none;
+      }
+
+      .data-table td {
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid black;
+        border-right: 1px solid #ddd;
+        font-size: 0.9rem;
+      }
+
+      .data-table td:last-child {
+        border-right: none;
+      }
+
+      .data-table tbody tr:hover {
+        background: #f5f5f5;
+      }
+
+      .action-btn {
+        background: black;
+        color: white;
+        border: 1px solid black;
+        padding: 0.3rem 0.6rem;
+        cursor: pointer;
+        font-size: 0.8rem;
+        margin-right: 0.3rem;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .action-btn:hover {
+        background: white;
+        color: black;
+      }
+
+      .action-btn-danger {
+        background: white;
+        color: black;
+        border: 1px solid black;
+      }
+
+      .action-btn-danger:hover {
+        background: black;
+        color: white;
+      }
+
+      /* Slide Panel System */
+      .slide-panel {
+        position: fixed;
+        top: 0;
+        right: -500px;
+        width: 500px;
+        height: 100vh;
+        background: white;
+        border-left: 4px solid black;
+        transition: right 0.4s ease;
+        z-index: 2000;
+        overflow-y: auto;
+      }
+
+      .slide-panel.active {
+        right: 0;
+      }
+
+      .slide-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        z-index: 1500;
+      }
+
+      .slide-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .panel-header {
+        background: black;
+        color: white;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .panel-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .panel-close {
+        background: white;
+        color: black;
+        border: 2px solid white;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .panel-close:hover {
+        background: black;
+        color: white;
+      }
+
+      .panel-body {
+        padding: 2rem;
+      }
+
+      /* Form Styling */
+      .form-command {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+
+      .form-input {
+        padding: 1rem;
+        border: 2px solid black;
+        background: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        background: black;
+        color: white;
+      }
+
+      .form-select {
+        padding: 1rem;
+        border: 2px solid black;
+        background: white;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .form-btn {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid black;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+      }
+
+      .form-btn-primary {
+        background: black;
+        color: white;
+      }
+
+      .form-btn-primary:hover {
+        background: white;
+        color: black;
+      }
+
+      .form-btn-secondary {
+        background: white;
+        color: black;
+      }
+
+      .form-btn-secondary:hover {
+        background: black;
+        color: white;
+      }
+
+      /* Status Indicators */
+      .status-indicator {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .status-active {
+        background: black;
+        color: white;
+      }
+
+      .status-inactive {
+        background: white;
+        color: black;
+        border: 1px solid black;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .command-layout {
+          flex-direction: column;
+        }
+
+        .side-command {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+
+        .command-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .slide-panel {
+          width: 100%;
+          right: -100%;
+        }
+      }
+
+      /* Loading Animation */
+      .loading {
+        text-align: center;
+        padding: 2rem;
+        font-style: italic;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Command Header -->
+    <header class="command-header">
+      <div class="brand-command">SYOS Command Center</div>
+      <div class="command-actions">
+        <div class="user-status" id="userInfo">Store Manager</div>
+        <button class="logout-cmd" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Main Command Layout -->
+    <div class="command-layout">
+      <!-- Side Command Panel -->
+      <nav class="side-command">
+        <div class="command-title">Operations</div>
+        <ul class="command-menu">
+          <li class="command-item">
+            <a
+              class="command-link active"
+              onclick="switchCommand('inventory')"
+              data-section="inventory"
+            >
+              <span class="command-icon">📦</span>Inventory Control
+            </a>
+          </li>
+          <li class="command-item">
+            <a
+              class="command-link"
+              onclick="switchCommand('items')"
+              data-section="items"
+            >
+              <span class="command-icon">🏷️</span>Item Management
+            </a>
+          </li>
+          <li class="command-item">
+            <a
+              class="command-link"
+              onclick="switchCommand('discounts')"
+              data-section="discounts"
+            >
+              <span class="command-icon">💰</span>Discount Codes
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content Area -->
+      <main class="main-command">
+        <!-- Alert System -->
+        <div id="alert-system" class="alert-system">
+          <div id="alert-message"></div>
         </div>
+
+        <!-- Inventory Control Section -->
+        <section id="inventory-section" class="command-section active">
+          <div class="section-header">
+            <h1 class="section-title">Inventory Control</h1>
+            <p class="section-subtitle">
+              Manage stock movement and shelf status
+            </p>
+          </div>
+
+          <div class="command-grid">
+            <!-- Online to Store Movement -->
+            <div class="command-card">
+              <div class="card-command-header">
+                <h3 class="card-title">Online → Store Transfer</h3>
+                <div class="card-actions">
+                  <button class="cmd-btn" onclick="loadShelfItems()">
+                    Refresh
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="search-command">
+                  <input
+                    type="text"
+                    id="onlineItemsSearch"
+                    class="search-input"
+                    placeholder="Search online inventory..."
+                    onkeyup="searchTable('online-items-list', this.value)"
+                  />
+                </div>
+                <div id="online-items-list" class="loading">
+                  Loading online inventory...
+                </div>
+              </div>
+            </div>
+
+            <!-- Current Shelf Status -->
+            <div class="command-card">
+              <div class="card-command-header">
+                <h3 class="card-title">Shelf Status Monitor</h3>
+                <div class="card-actions">
+                  <button class="cmd-btn" onclick="loadShelfStatus()">
+                    Refresh
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="search-command">
+                  <input
+                    type="text"
+                    id="shelfStatusSearch"
+                    class="search-input"
+                    placeholder="Search shelf status..."
+                    onkeyup="searchTable('shelf-status', this.value)"
+                  />
+                </div>
+                <div id="shelf-status" class="loading">
+                  Loading shelf status...
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Item Management Section -->
+        <section id="items-section" class="command-section">
+          <div class="section-header">
+            <h1 class="section-title">Item Management</h1>
+            <p class="section-subtitle">Control product catalog and pricing</p>
+          </div>
+
+          <div class="command-card">
+            <div class="card-command-header">
+              <h3 class="card-title">Product Database</h3>
+              <div class="card-actions">
+                <button
+                  class="cmd-btn-success cmd-btn"
+                  onclick="showEditItemPanel()"
+                >
+                  Add Item
+                </button>
+                <button class="cmd-btn" onclick="loadItems()">Refresh</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="search-command">
+                <input
+                  type="text"
+                  id="itemsListSearch"
+                  class="search-input"
+                  placeholder="Search products..."
+                  onkeyup="searchTable('items-list', this.value)"
+                />
+              </div>
+              <div id="items-list" class="loading">
+                Loading product database...
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Discount Codes Section -->
+        <section id="discounts-section" class="command-section">
+          <div class="section-header">
+            <h1 class="section-title">Discount Management</h1>
+            <p class="section-subtitle">Create and manage promotional codes</p>
+          </div>
+
+          <div class="command-card">
+            <div class="card-command-header">
+              <h3 class="card-title">Discount Code Database</h3>
+              <div class="card-actions">
+                <button
+                  class="cmd-btn-success cmd-btn"
+                  onclick="showDiscountPanel()"
+                >
+                  Create Code
+                </button>
+                <button class="cmd-btn" onclick="loadDiscountCodes()">
+                  Refresh
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="search-command">
+                <input
+                  type="text"
+                  id="discountCodesSearch"
+                  class="search-input"
+                  placeholder="Search discount codes..."
+                  onkeyup="searchTable('discount-codes-list', this.value)"
+                />
+              </div>
+              <div id="discount-codes-list" class="loading">
+                Loading discount codes...
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
 
-    <!-- Online to Store Movement Modal -->
-    <div id="online-move-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Move Online Items to Store</h3>
-                <button class="close-btn" onclick="closeModal('online-move-modal')">&times;</button>
+    <!-- Slide Panel Overlay -->
+    <div
+      id="slide-overlay"
+      class="slide-overlay"
+      onclick="closeSlidePanel()"
+    ></div>
+
+    <!-- Stock Movement Panel -->
+    <div id="stock-panel" class="slide-panel">
+      <div class="panel-header">
+        <h3 class="panel-title">Stock Movement</h3>
+        <button class="panel-close" onclick="closeSlidePanel()">&times;</button>
+      </div>
+      <div class="panel-body">
+        <form
+          id="stock-form"
+          class="form-command"
+          onsubmit="moveStockToShelf(event)"
+        >
+          <input type="hidden" id="stock-id" name="stock_id" />
+
+          <div class="form-group">
+            <label class="form-label">Item Information</label>
+            <div
+              style="
+                background: #f5f5f5;
+                padding: 1rem;
+                border: 2px solid black;
+              "
+            >
+              <strong id="stock-item-name">-</strong>
             </div>
-            <form id="online-move-form" onsubmit="moveOnlineToStore(event)">
-                <input type="hidden" id="online-item-id" name="item_id">
-                <div class="form-group">
-                    <label>Item:</label>
-                    <span id="online-item-name"></span>
-                </div>
-                <div class="form-group">
-                    <label>Online Quantity:</label>
-                    <span id="online-quantity"></span>
-                </div>
-                <div class="form-group">
-                    <label for="online-move-quantity">Quantity to Move:</label>
-                    <input type="number" id="online-move-quantity" name="quantity" min="1" required>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Move to Store</button>
-                    <button type="button" class="btn btn-outline" onclick="closeModal('online-move-modal')">Cancel</button>
-                </div>
-            </form>
-        </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Available Quantity</label>
+            <div
+              style="
+                background: #f5f5f5;
+                padding: 1rem;
+                border: 2px solid black;
+              "
+            >
+              <strong id="available-quantity">-</strong>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="move-quantity"
+              >Quantity to Move</label
+            >
+            <input
+              type="number"
+              id="move-quantity"
+              name="quantity"
+              class="form-input"
+              min="1"
+              required
+              placeholder="Enter quantity"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="shelf-type">Destination Shelf</label>
+            <select
+              id="shelf-type"
+              name="shelf_type"
+              class="form-select"
+              required
+            >
+              <option value="">Select destination</option>
+              <option value="STORE">Store Shelf</option>
+              <option value="WEBSITE">Website Shelf</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="form-btn form-btn-primary">
+              Execute Move
+            </button>
+            <button
+              type="button"
+              class="form-btn form-btn-secondary"
+              onclick="closeSlidePanel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <!-- Item Edit Modal -->
-    <div id="item-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="item-modal-title">Edit Item</h3>
-                <button class="close-btn" onclick="closeModal('item-modal')">&times;</button>
+    <!-- Online Move Panel -->
+    <div id="online-move-panel" class="slide-panel">
+      <div class="panel-header">
+        <h3 class="panel-title">Online Transfer</h3>
+        <button class="panel-close" onclick="closeSlidePanel()">&times;</button>
+      </div>
+      <div class="panel-body">
+        <form
+          id="online-move-form"
+          class="form-command"
+          onsubmit="submitMove(event)"
+        >
+          <input type="hidden" id="online-item-id" name="item_id" />
+
+          <div class="form-group">
+            <label class="form-label">Item Information</label>
+            <div
+              style="
+                background: #f5f5f5;
+                padding: 1rem;
+                border: 2px solid black;
+              "
+            >
+              <strong id="online-item-name">-</strong>
             </div>
-            <form id="item-form" onsubmit="saveItem(event)">
-                <input type="hidden" id="item-id" name="item_id">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="item-name">Item Name:</label>
-                        <input type="text" id="item-name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="item-price">Price (LKR):</label>
-                        <input type="number" id="item-price" name="price" step="0.01" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="store-quantity">Store Quantity:</label>
-                        <input type="number" id="store-quantity" name="store_quantity" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="website-quantity">Website Quantity:</label>
-                        <input type="number" id="website-quantity" name="website_quantity" min="0">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save Item</button>
-                    <button type="button" class="btn btn-outline" onclick="closeModal('item-modal')">Cancel</button>
-                </div>
-            </form>
-        </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Online Quantity</label>
+            <div
+              style="
+                background: #f5f5f5;
+                padding: 1rem;
+                border: 2px solid black;
+              "
+            >
+              <strong id="online-quantity">-</strong>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="online-move-quantity"
+              >Quantity to Transfer</label
+            >
+            <input
+              type="number"
+              id="online-move-quantity"
+              name="quantity"
+              class="form-input"
+              min="1"
+              required
+              placeholder="Enter quantity"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="form-btn form-btn-primary">
+              Transfer to Store
+            </button>
+            <button
+              type="button"
+              class="form-btn form-btn-secondary"
+              onclick="closeSlidePanel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <!-- Discount Code Modal -->
-    <div id="discount-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="discount-modal-title">Add Discount Code</h3>
-                <button class="close-btn" onclick="closeModal('discount-modal')">&times;</button>
-            </div>
-            <form id="discount-form" autocomplete="off" novalidate>
-                <input type="hidden" id="discount-id" name="id" autocomplete="off">
-                <div class="form-group">
-                    <label for="discount-code">Discount Code:</label>
-                    <input type="text" 
-                           id="discount-code" 
-                           name="code" 
-                           required 
-                           placeholder="e.g., SAVE10" 
-                           autocomplete="new-password"
-                           aria-label="Discount Code"
-                           aria-describedby="discount-code-help">
-                    <small id="discount-code-help">Enter a unique discount code</small>
-                </div>
-                <div class="form-group">
-                    <label for="discount-value">Discount Value (Rs):</label>
-                    <input type="number" 
-                           id="discount-value" 
-                           name="discount_value" 
-                           step="0.01" 
-                           min="0" 
-                           required 
-                           placeholder="e.g., 50.00" 
-                           autocomplete="off"
-                           aria-label="Discount Value in Rupees"
-                           aria-describedby="discount-value-help">
-                    <small id="discount-value-help">Enter discount amount in rupees</small>
-                </div>
-                <div class="form-group">
-                    <button type="button" 
-                            class="btn btn-primary" 
-                            onclick="handleSaveDiscountCode()"
-                            aria-label="Save Discount Code">Save Discount Code</button>
-                    <button type="button" 
-                            class="btn btn-outline" 
-                            onclick="closeModal('discount-modal')"
-                            aria-label="Cancel and Close Modal">Cancel</button>
-                </div>
-            </form>
-        </div>
+    <!-- Item Edit Panel -->
+    <div id="item-panel" class="slide-panel">
+      <div class="panel-header">
+        <h3 class="panel-title" id="item-panel-title">Edit Item</h3>
+        <button class="panel-close" onclick="closeSlidePanel()">&times;</button>
+      </div>
+      <div class="panel-body">
+        <form
+          id="item-form"
+          class="form-command"
+          onsubmit="submitEditItem(event)"
+        >
+          <input type="hidden" id="item-id" name="item_id" />
+
+          <div class="form-group">
+            <label class="form-label" for="item-name">Product Name</label>
+            <input
+              type="text"
+              id="item-name"
+              name="name"
+              class="form-input"
+              required
+              placeholder="Enter product name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="item-price">Price (LKR)</label>
+            <input
+              type="number"
+              id="item-price"
+              name="price"
+              class="form-input"
+              step="0.01"
+              min="0"
+              required
+              placeholder="0.00"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="store-quantity"
+              >Store Quantity</label
+            >
+            <input
+              type="number"
+              id="store-quantity"
+              name="store_quantity"
+              class="form-input"
+              min="0"
+              placeholder="0"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="website-quantity"
+              >Website Quantity</label
+            >
+            <input
+              type="number"
+              id="website-quantity"
+              name="website_quantity"
+              class="form-input"
+              min="0"
+              placeholder="0"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="form-btn form-btn-primary">
+              Save Product
+            </button>
+            <button
+              type="button"
+              class="form-btn form-btn-secondary"
+              onclick="closeSlidePanel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+
+    <!-- Discount Panel -->
+    <div id="discount-panel" class="slide-panel">
+      <div class="panel-header">
+        <h3 class="panel-title" id="discount-panel-title">Create Discount</h3>
+        <button class="panel-close" onclick="closeSlidePanel()">&times;</button>
+      </div>
+      <div class="panel-body">
+        <form
+          id="discount-form"
+          class="form-command"
+          autocomplete="off"
+          novalidate
+        >
+          <input type="hidden" id="discount-id" name="id" autocomplete="off" />
+
+          <div class="form-group">
+            <label class="form-label" for="discount-code">Discount Code</label>
+            <input
+              type="text"
+              id="discount-code"
+              name="code"
+              class="form-input"
+              required
+              placeholder="e.g., SAVE10"
+              autocomplete="new-password"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="discount-value"
+              >Discount Value (Rs)</label
+            >
+            <input
+              type="number"
+              id="discount-value"
+              name="discount_value"
+              class="form-input"
+              step="0.01"
+              min="0"
+              required
+              placeholder="0.00"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="button"
+              class="form-btn form-btn-primary"
+              onclick="handleSaveDiscountCode()"
+            >
+              Create Code
+            </button>
+            <button
+              type="button"
+              class="form-btn form-btn-secondary"
+              onclick="closeSlidePanel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Enhanced JavaScript for Command Center -->
+    <script>
+      // Command Center Navigation
+      function switchCommand(section) {
+        // Update navigation
+        document.querySelectorAll(".command-link").forEach((link) => {
+          link.classList.remove("active");
+        });
+        document
+          .querySelector(`[data-section="${section}"]`)
+          .classList.add("active");
+
+        // Update sections
+        document.querySelectorAll(".command-section").forEach((sec) => {
+          sec.classList.remove("active");
+        });
+        document.getElementById(`${section}-section`).classList.add("active");
+      }
+
+      // Slide Panel System - delegated to store-manager.js
+      function showSlidePanel(panelId) {
+        // This function is handled by store-manager.js
+        const panel = document.getElementById(panelId);
+        if (panel) {
+          panel.classList.add("active");
+        }
+      }
+
+      function closeSlidePanel() {
+        // This function is handled by store-manager.js
+        document.querySelectorAll(".slide-panel").forEach((panel) => {
+          panel.classList.remove("active");
+        });
+      }
+
+      // Panel functions delegated to store-manager.js
+
+      // Alert System
+      function showAlert(message, type = "success") {
+        const alertSystem = document.getElementById("alert-system");
+        const alertMessage = document.getElementById("alert-message");
+
+        alertSystem.className = `alert-system alert-${type} show`;
+        alertMessage.textContent = message;
+
+        setTimeout(() => {
+          alertSystem.classList.remove("show");
+        }, 5000);
+      }
+
+      // Initialize Command Center
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load initial data
+        loadShelfItems();
+        loadShelfStatus();
+        loadItems();
+        loadDiscountCodes();
+
+        // Set up user info
+        updateUserInterface();
+      });
+
+      function updateUserInterface() {
+        const user = SessionManager?.getUser();
+        const userInfoElement = document.getElementById("userInfo");
+
+        if (user) {
+          userInfoElement.textContent = `${
+            user.role?.toUpperCase() || "MANAGER"
+          }: ${user.name || user.username}`;
+        } else {
+          userInfoElement.textContent = "STORE MANAGER";
+        }
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout from Command Center?")) {
+          SessionManager?.logout();
+        }
+      }
+
+      // ESC key to close panels
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeSlidePanel();
+        }
+      });
+
+      // Alias functions for backward compatibility
+      window.switchTab = switchCommand;
+      window.showEditItemModal = showEditItemPanel;
+      window.showDiscountModal = showDiscountPanel;
+      window.closeModal = closeSlidePanel;
+    </script>
+
     <script src="../../js/utils.js"></script>
     <script src="../../js/store-manager.js"></script>
     <script src="../../js/discount-manager.js"></script>
-</body>
+  </body>
 </html>

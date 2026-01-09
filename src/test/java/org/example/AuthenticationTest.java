@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.Controller.Authentication;
-import org.example.Model.User;
+import org.example.presentation.controllers.Authentication;
+import org.example.persistence.models.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,16 +11,16 @@ public class AuthenticationTest {
 
     @Test
     void get_CashierDetails_when_loggedInAsCashier() {
-       Authentication authentication = new Authentication();
+        Authentication authentication = new Authentication();
 
-       String name = "cashier1";
-       String password = "cash123";
+        String name = "cashier1";
+        String password = "cashier123";
 
-       User user = authentication.authenticateUser(name, password);
+        User user = authentication.authenticateUser(name, password);
 
-       assertNotNull(user, "User should not be null after successful authentication");
-       assertEquals("cashier1", user.getName(), "Username should match");
-       assertEquals("cashier", user.getType(), "User should have role cashier");
+        assertNotNull(user, "User should not be null after successful authentication");
+        assertEquals("cashier1", user.getName(), "Username should match");
+        assertEquals("cashier", user.getType(), "User should have role cashier");
     }
 
     @Test
@@ -28,13 +28,13 @@ public class AuthenticationTest {
         Authentication authentication = new Authentication();
 
         String name = "manager1";
-        String password = "store123";
+        String password = "manager123";
 
         User user = authentication.authenticateUser(name, password);
 
         assertNotNull(user, "User should not be null after successful authentication");
         assertEquals("manager1", user.getName(), "Username should match");
-        assertEquals("storemanager", user.getType(), "User should have role storemanager");
+        assertEquals("store manager", user.getType(), "User should have role store manager");
     }
 
     @Test
@@ -48,7 +48,7 @@ public class AuthenticationTest {
 
         assertNotNull(user, "User should not be null after successful authentication");
         assertEquals("admin", user.getName(), "Username should match");
-        assertEquals("manager", user.getType(), "User should have role manager");
+        assertEquals("admin", user.getType(), "User should have role admin");
     }
 
     @Test

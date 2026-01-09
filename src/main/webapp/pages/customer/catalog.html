@@ -1,101 +1,956 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Catalog - SYOS Store</title>
-    <link rel="stylesheet" href="../../css/main.css">
-</head>
-<body>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../../css/main.css" />
+    <style>
+      /* Override search and sort input styles to match login page */
+      #searchInput:focus,
+      #sortSelect:focus {
+        outline: none !important;
+        border-color: black !important;
+        background: white !important;
+        box-shadow: none !important;
+      }
+
+      #searchInput,
+      #sortSelect {
+        border: 2px solid black !important;
+        border-radius: 0 !important;
+        background: white !important;
+        color: black !important;
+      }
+
+      /* Override navbar styles to match login page */
+      .navbar {
+        background: white !important;
+        border-bottom: 2px solid black !important;
+        box-shadow: none !important;
+        padding: 1rem 2rem !important;
+      }
+
+      .navbar .container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+      }
+
+      .navbar-brand {
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: black !important;
+        text-decoration: none !important;
+      }
+
+      .navbar-nav {
+        display: flex !important;
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0.5rem !important;
+      }
+
+      .navbar-nav li {
+        margin: 0 !important;
+      }
+
+      .navbar-nav li a {
+        display: block !important;
+        color: black !important;
+        font-weight: 500 !important;
+        padding: 0.5rem 1rem !important;
+        text-decoration: none !important;
+        border-radius: 0 !important;
+        border: 2px solid transparent !important;
+        transition: all 0.3s ease !important;
+        white-space: nowrap !important;
+      }
+
+      .navbar-nav li a:hover,
+      .navbar-nav li a.active {
+        background: black !important;
+        color: white !important;
+        border: 2px solid black !important;
+      }
+
+      .navbar-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+      }
+
+      .btn.btn-outline {
+        background: white !important;
+        color: black !important;
+        border: 2px solid black !important;
+        border-radius: 0 !important;
+        padding: 0.75rem 1.5rem !important;
+        font-weight: 500 !important;
+        transition: all 0.3s ease !important;
+        white-space: nowrap !important;
+      }
+
+      .btn.btn-outline:hover {
+        background: black !important;
+        color: white !important;
+        border: 2px solid black !important;
+      }
+
+      .user-info {
+        color: black !important;
+        font-weight: 500 !important;
+        white-space: nowrap !important;
+      }
+
+      .cart-count {
+        background: black !important;
+        color: white !important;
+        border-radius: 0 !important;
+        padding: 0.2rem 0.5rem !important;
+        font-size: 0.8rem !important;
+        margin-left: 0.5rem !important;
+      }
+
+      /* 2-Column Magazine-Style Product Display */
+
+      /* FORCE OVERRIDE ALL EXISTING PRODUCT STYLES */
+      #productsContainer {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: 2rem 1rem !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: transparent !important;
+      }
+
+      #productsContainer.magazine-layout {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      } /* COMPLETELY OVERRIDE GRID SYSTEM */
+      #productsContainer .col-4,
+      #productsContainer .col-md-4,
+      #productsContainer .col-lg-4,
+      #productsContainer .col-sm-4,
+      #productsContainer [class*="col-"] {
+        flex: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* FORCE REMOVE OLD CARD STYLES */
+      .product-card,
+      .product-card-header,
+      .product-card-body {
+        display: none !important;
+      }
+
+      .product-magazine-item {
+        display: flex !important;
+        flex-direction: column !important;
+        margin: 0 !important;
+        border: 3px solid black !important;
+        background: white !important;
+        height: 400px !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        overflow: hidden !important;
+        width: 100% !important;
+        flex: none !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      .product-magazine-item:hover {
+        box-shadow: 10px 10px 0px black !important;
+        transform: translate(-5px, -5px) !important;
+      }
+
+      .product-magazine-item.reverse {
+        flex-direction: column !important;
+      }
+
+      .product-visual-section {
+        height: 140px !important;
+        background: linear-gradient(45deg, #f8f9fa, #e9ecef) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        position: relative !important;
+        padding: 1rem !important;
+      }
+
+      .product-visual-content {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        justify-content: space-between !important;
+      }
+
+      .product-icon {
+        width: 60px !important;
+        height: 60px !important;
+        background: black !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.5rem !important;
+        color: white !important;
+        font-weight: bold !important;
+        flex-shrink: 0 !important;
+      }
+
+      .product-details-section {
+        flex: 1 !important;
+        padding: 2rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+      }
+
+      .product-header {
+        margin-bottom: 1rem !important;
+      }
+
+      .product-name {
+        font-size: 1.8rem !important;
+        font-weight: 900 !important;
+        color: black !important;
+        margin: 0 0 0.5rem 0 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+      }
+
+      .product-code-display {
+        font-size: 0.9rem !important;
+        color: #666 !important;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 2px !important;
+      }
+
+      .product-middle-section {
+        flex-grow: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+
+      .product-stock-display {
+        padding: 0.5rem 0.75rem !important;
+        border: 2px solid black !important;
+        background: white !important;
+        text-align: center !important;
+        font-weight: 600 !important;
+        min-width: 80px !important;
+      }
+
+      .stock-label {
+        font-size: 0.7rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        color: #666 !important;
+        margin-bottom: 0.25rem !important;
+      }
+
+      .stock-number {
+        font-size: 1rem !important;
+        font-weight: 900 !important;
+        color: black !important;
+      }
+
+      .product-footer {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-top: 1rem !important;
+      }
+
+      .product-price-display {
+        font-size: 2.5rem !important;
+        font-weight: 900 !important;
+        color: black !important;
+        line-height: 1 !important;
+      }
+
+      .price-currency {
+        font-size: 1rem !important;
+        vertical-align: top !important;
+      }
+
+      .magazine-add-btn {
+        background: black !important;
+        color: white !important;
+        border: 3px solid black !important;
+        padding: 1rem 2rem !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        border-radius: 0 !important;
+      }
+
+      .magazine-add-btn:hover {
+        background: white !important;
+        color: black !important;
+        transform: scale(1.05) !important;
+      }
+
+      .magazine-add-btn:disabled,
+      .magazine-add-btn.disabled {
+        background: #ccc !important;
+        border-color: #ccc !important;
+        color: #666 !important;
+        cursor: not-allowed !important;
+        transform: none !important;
+      }
+
+      .status-badge {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 1rem !important;
+        padding: 0.5rem 1rem !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        border: 2px solid !important;
+      }
+
+      .status-in-stock {
+        background: white !important;
+        color: #28a745 !important;
+        border-color: #28a745 !important;
+      }
+
+      .status-low-stock {
+        background-color: #ffc107 !important;
+        color: black !important;
+      }
+
+      .status-limited-stock {
+        background-color: #fd7e14 !important;
+        color: white !important;
+      }
+
+      .status-out-stock {
+        background: white !important;
+        color: #dc3545 !important;
+        border-color: #dc3545 !important;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        #productsContainer {
+          grid-template-columns: 1fr !important;
+          gap: 1.5rem !important;
+          padding: 1rem !important;
+        }
+
+        .product-magazine-item {
+          height: 350px !important;
+        }
+
+        .product-visual-section {
+          height: 120px !important;
+          padding: 0.75rem !important;
+        }
+
+        .product-icon {
+          width: 50px !important;
+          height: 50px !important;
+          font-size: 1.2rem !important;
+        }
+
+        .product-details-section {
+          padding: 1.5rem !important;
+        }
+
+        .product-name {
+          font-size: 1.4rem !important;
+        }
+
+        .product-price-display {
+          font-size: 2rem !important;
+        }
+
+        .product-footer {
+          flex-direction: column !important;
+          gap: 1rem !important;
+          align-items: stretch !important;
+        }
+
+        .magazine-add-btn {
+          width: 100% !important;
+          text-align: center !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <div class="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="container">
-                <a href="dashboard.html" class="navbar-brand">SYOS Store</a>
-                <ul class="navbar-nav">
-                    <li><a href="dashboard.html">Home</a></li>
-                    <li><a href="catalog.html" class="active">Shop</a></li>
-                    <li><a href="cart.html">Cart <span class="cart-count">0</span></a></li>
-                </ul>
-                <div class="navbar-actions">
-                    <span class="user-info" id="userInfo">Guest</span>
-                    <button class="btn btn-outline" onclick="handleAuth()" id="authButton">Login</button>
-                </div>
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="container">
+          <a href="catalog.html" class="navbar-brand">SYOS Webstore</a>
+          <ul class="navbar-nav">
+            <li><a href="catalog.html" class="active">Browse</a></li>
+            <li>
+              <a href="cart.html">Cart <span class="cart-count">0</span></a>
+            </li>
+          </ul>
+          <div class="navbar-actions">
+            <span class="user-info" id="userInfo">Guest</span>
+            <button
+              class="btn btn-outline"
+              onclick="handleAuth()"
+              id="authButton"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="container">
+          <!-- Page Header -->
+          <div class="row mb-4">
+            <div class="col-12" style="text-align: center">
+              <h1>Welcome to Synex Outlet Store</h1>
+              <p></p>
             </div>
-        </nav>
+          </div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="container">
-                <!-- Page Header -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h1>Product Catalog</h1>
-                        <p>Browse our wide selection of quality products</p>
-                    </div>
+          <!-- Search and Filters -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div style="display: flex; gap: 1rem; align-items: end">
+                <div style="flex: 3">
+                  <label
+                    class="form-label"
+                    style="
+                      display: block;
+                      margin-bottom: 0.5rem;
+                      font-weight: 500;
+                      color: black;
+                    "
+                    >Search Products</label
+                  >
+                  <input
+                    type="text"
+                    id="searchInput"
+                    class="form-control"
+                    placeholder="Search by product name or code..."
+                    style="
+                      width: 100%;
+                      padding: 0.875rem;
+                      border: 2px solid black;
+                      border-radius: 0;
+                      font-size: 1rem;
+                      transition: all 0.3s ease;
+                      background: white;
+                      color: black;
+                    "
+                  />
                 </div>
+                <div style="flex: 1">
+                  <label
+                    class="form-label"
+                    style="
+                      display: block;
+                      margin-bottom: 0.5rem;
+                      font-weight: 500;
+                      color: black;
+                    "
+                    >Sort By</label
+                  >
+                  <select
+                    id="sortSelect"
+                    class="form-control"
+                    style="
+                      width: 100%;
+                      padding: 0.875rem;
+                      border: 2px solid black;
+                      border-radius: 0;
+                      font-size: 1rem;
+                      transition: all 0.3s ease;
+                      background: white;
+                      color: black;
+                    "
+                  >
+                    <option value="name-asc">Name (A to Z)</option>
+                    <option value="name-desc">Name (Z to A)</option>
+                    <option value="price-low">Price (Low to High)</option>
+                    <option value="price-high">Price (High to Low)</option>
+                    <option value="stock-high">Stock (High to Low)</option>
+                    <option value="stock-low">Stock (Low to High)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                <!-- Search and Filters -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="form-group">
-                                    <label class="form-label">Search Products</label>
-                                    <input type="text" id="searchInput" class="form-control" placeholder="Search by product name or code...">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label class="form-label">Sort By</label>
-                                    <select id="sortSelect" class="form-control">
-                                        <option value="price">Price (Low to High)</option>
-                                        <option value="price-desc">Price (High to Low)</option>
-                                    </select>
-                                </div>
+          <!-- Loading State -->
+          <div id="loadingState" class="text-center p-5" style="display: block">
+            <div class="spinner">
+              <div class="loading"></div>
+            </div>
+            <p>Loading products...</p>
+          </div>
+
+          <!-- Products Grid -->
+          <div
+            id="productsContainer"
+            class="magazine-layout"
+            style="display: none"
+          >
+            <!-- Products will be loaded here -->
+          </div>
+
+          <!-- No Products Found -->
+          <div
+            id="noProductsState"
+            class="text-center p-5"
+            style="display: none"
+          >
+            <div class="mb-3">
+              <div style="font-size: 3rem; color: var(--text-light)">
+                No Products
+              </div>
+            </div>
+            <h4>No Products Found</h4>
+            <p class="text-muted">
+              Try adjusting your search terms or check back later for new
+              products
+            </p>
+            <button class="btn btn-secondary" onclick="clearSearch()">
+              Clear Search
+            </button>
+          </div>
+
+          <!-- Pagination -->
+          <div
+            id="paginationContainer"
+            class="text-center mt-4"
+            style="display: none"
+          >
+            <div class="btn-group">
+              <button
+                class="btn btn-outline"
+                onclick="changePage(-1)"
+                id="prevButton"
+              >
+                ← Previous
+              </button>
+              <span class="btn btn-outline" id="pageInfo">Page 1 of 1</span>
+              <button
+                class="btn btn-outline"
+                onclick="changePage(1)"
+                id="nextButton"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Self-contained product loading without external dependencies
+
+      // API client to fetch from database
+      function loadProducts() {
+        const loadingState = document.getElementById("loadingState");
+        const container = document.getElementById("productsContainer");
+
+        // Show loading state
+        loadingState.style.display = "block";
+        container.style.display = "none";
+
+        // Fetch products from the database API (website shelf items)
+        fetch("/syos/api/stock?type=website")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((products) => {
+            console.log("Fetched products from database:", products);
+            // Map database fields to expected frontend fields
+            const mappedProducts = products.map((product) => ({
+              id: product.id,
+              code: product.code,
+              name: product.name,
+              price: product.price,
+              availableQty: product.quantity, // Map quantity to availableQty for consistency
+              availability: product.availability,
+            }));
+            allProducts = mappedProducts; // Store globally for search/sort
+            displayProducts(mappedProducts);
+          })
+          .catch((error) => {
+            console.error("Error fetching products:", error);
+
+            // Fallback to test products if API fails
+            const fallbackProducts = [
+              {
+                id: 1,
+                code: "RICE001",
+                name: "Basmati Rice 1kg",
+                price: 450.0,
+                availableQty: 50,
+              },
+              {
+                id: 2,
+                code: "TEA001",
+                name: "Ceylon Black Tea 100g",
+                price: 580.0,
+                availableQty: 19,
+              },
+              {
+                id: 3,
+                code: "OIL001",
+                name: "Coconut Oil 500ml",
+                price: 625.0,
+                availableQty: 15,
+              },
+              {
+                id: 4,
+                code: "EGGS001",
+                name: "Free Range Eggs 12pc",
+                price: 320.0,
+                availableQty: 35,
+              },
+            ];
+
+            console.log("Using fallback products due to API error");
+            allProducts = fallbackProducts; // Store globally for search/sort
+            displayProducts(fallbackProducts);
+          });
+      }
+      function displayProducts(products) {
+        const container = document.getElementById("productsContainer");
+        const loadingState = document.getElementById("loadingState");
+        const noResultsDiv = document.getElementById("noResultsDiv");
+
+        loadingState.style.display = "none";
+
+        if (products.length === 0) {
+          // Show no results message
+          container.style.display = "none";
+          if (noResultsDiv) {
+            noResultsDiv.style.display = "block";
+          }
+          return;
+        }
+
+        // Hide no results and show products
+        if (noResultsDiv) {
+          noResultsDiv.style.display = "none";
+        }
+        container.style.display = "grid";
+        container.classList.add("magazine-layout");
+
+        container.innerHTML = "";
+
+        products.forEach((product, index) => {
+          // Enhanced stock status logic using both quantity and availability
+          let stockStatus, stockClass;
+          if (!product.availability || product.availableQty <= 0) {
+            stockStatus = "Out of Stock";
+            stockClass = "status-out-stock";
+          } else if (product.availableQty <= 5) {
+            stockStatus = "Low Stock";
+            stockClass = "status-low-stock";
+          } else if (product.availableQty <= 20) {
+            stockStatus = "Limited Stock";
+            stockClass = "status-limited-stock";
+          } else {
+            stockStatus = "In Stock";
+            stockClass = "status-in-stock";
+          }
+
+          const productIcon = product.name.substring(0, 2).toUpperCase();
+
+          const productHTML = `
+                <div class="product-magazine-item">
+                    <div class="product-visual-section">
+                        <div class="status-badge ${stockClass}">${stockStatus}</div>
+                        <div class="product-visual-content">
+                            <div class="product-icon">${productIcon}</div>
+                            <div class="product-stock-display">
+                                <div class="stock-label">Available Stock</div>
+                                <div class="stock-number">${
+                                  product.availableQty
+                                } units</div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Loading State -->
-                <div id="loadingState" class="text-center p-5">
-                    <div class="spinner">
-                        <div class="loading"></div>
+                    <div class="product-details-section">
+                        <div class="product-header">
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-code-display">Code: ${
+                              product.code
+                            }</div>
+                        </div>
+                        <div class="product-middle-section">
+                            <div class="product-description">
+                                <p style="color: #666; font-style: italic;">Ready for immediate purchase and delivery.</p>
+                            </div>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price-display">
+                                <span class="price-currency">LKR</span> ${product.price.toFixed(
+                                  2
+                                )}
+                            </div>
+                            <button class="magazine-add-btn ${
+                              !product.availability || product.availableQty <= 0
+                                ? "disabled"
+                                : ""
+                            }" 
+                                    onclick="addToCart(${product.id}, '${
+            product.name
+          }', ${product.price})"
+                                    ${
+                                      !product.availability ||
+                                      product.availableQty <= 0
+                                        ? "disabled"
+                                        : ""
+                                    }>
+                                ${
+                                  !product.availability ||
+                                  product.availableQty <= 0
+                                    ? "Out of Stock"
+                                    : "Add to Cart"
+                                }
+                            </button>
+                        </div>
                     </div>
-                    <p>Loading products...</p>
                 </div>
+            `;
 
-                <!-- Products Grid -->
-                <div id="productsContainer" class="row" style="display: none;">
-                    <!-- Products will be loaded here -->
-                </div>
+          container.innerHTML += productHTML;
+        });
+      }
 
-                <!-- No Products Found -->
-                <div id="noProductsState" class="text-center p-5" style="display: none;">
-                    <div class="mb-3">
-                        <div style="font-size: 3rem; color: var(--text-light);">No Products</div>
-                    </div>
-                    <h4>No Products Found</h4>
-                    <p class="text-muted">Try adjusting your search terms or check back later for new products</p>
-                    <button class="btn btn-secondary" onclick="clearSearch()">Clear Search</button>
-                </div>
+      function addToCart(productId, productName, productPrice) {
+        // Check if button is disabled
+        const button = event.target;
+        if (button.disabled || button.classList.contains("disabled")) {
+          console.log("Cannot add out of stock item to cart");
+          return;
+        }
 
-                <!-- Pagination -->
-                <div id="paginationContainer" class="text-center mt-4" style="display: none;">
-                    <div class="btn-group">
-                        <button class="btn btn-outline" onclick="changePage(-1)" id="prevButton">← Previous</button>
-                        <span class="btn btn-outline" id="pageInfo">Page 1 of 1</span>
-                        <button class="btn btn-outline" onclick="changePage(1)" id="nextButton">Next →</button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+        // Find the full product data from allProducts
+        const product = allProducts.find((p) => p.id === productId);
+        if (!product) {
+          console.error("Product not found");
+          return;
+        }
 
+        // Create cart item with proper structure
+        const cartItem = {
+          id: product.id,
+          code: product.code,
+          name: product.name,
+          price: product.price,
+          maxQuantity: product.availableQty,
+          availability: product.availability,
+        };
+
+        // Use CartManager to add to cart
+        if (typeof CartManager !== "undefined") {
+          CartManager.addToCart(cartItem, 1);
+
+          // Show success message
+          const originalText = button.textContent;
+          button.textContent = "Added!";
+          button.style.backgroundColor = "#28a745";
+
+          // Reset button after 2 seconds
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.style.backgroundColor = "";
+          }, 2000);
+
+          console.log("Product added to cart successfully:", cartItem);
+        } else {
+          console.error("CartManager not available");
+          alert("Error: Cart system not loaded");
+        }
+      }
+
+      // Global variable to store all products
+      let allProducts = [];
+
+      // Search functionality
+      function filterProducts() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase()
+          .trim();
+        const sortBy = document.getElementById("sortSelect").value;
+
+        // If no products loaded yet, return
+        if (!allProducts || allProducts.length === 0) {
+          return;
+        }
+
+        let filteredProducts = allProducts.filter(
+          (product) =>
+            product.name.toLowerCase().includes(searchTerm) ||
+            product.code.toLowerCase().includes(searchTerm)
+        );
+
+        // Sort products
+        switch (sortBy) {
+          case "name-asc":
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+          case "name-desc":
+            filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+          case "price-low":
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+          case "price-high":
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+          case "stock-high":
+            filteredProducts.sort((a, b) => b.availableQty - a.availableQty);
+            break;
+          case "stock-low":
+            filteredProducts.sort((a, b) => a.availableQty - b.availableQty);
+            break;
+          default:
+            // Default to name ascending
+            filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        displayProducts(filteredProducts);
+
+        // Update result count
+        console.log(
+          `Showing ${filteredProducts.length} of ${allProducts.length} products`
+        );
+      }
+
+      // Clear search
+      function clearSearch() {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("sortSelect").value = "name-asc";
+
+        // Re-apply default sort to all products
+        if (allProducts && allProducts.length > 0) {
+          const sortedProducts = [...allProducts].sort((a, b) =>
+            a.name.localeCompare(b.name)
+          );
+          displayProducts(sortedProducts);
+        }
+
+        console.log("Search cleared, showing all products");
+      }
+
+      // Initialize when page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(loadProducts, 500);
+
+        // Add event listeners for search and sort with throttling
+        let searchTimeout;
+        document
+          .getElementById("searchInput")
+          .addEventListener("input", function () {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(filterProducts, 300); // Throttle search by 300ms
+          });
+
+        document
+          .getElementById("sortSelect")
+          .addEventListener("change", filterProducts);
+
+        // Initialize cart count when CartManager is available
+        setTimeout(() => {
+          if (typeof CartManager !== "undefined") {
+            CartManager.updateCartCount();
+          }
+        }, 100);
+
+        console.log(
+          "Catalog page initialized with search and sort functionality"
+        );
+
+        // Initialize user interface based on login status
+        updateUserInterface();
+      });
+
+      // Authentication functions
+      function handleAuth() {
+        const user = SessionManager.getUser();
+        if (user) {
+          // User is logged in, so logout
+          SessionManager.logout();
+        } else {
+          // User is not logged in, redirect to login
+          window.location.href = "/syos/index.html";
+        }
+      }
+
+      function updateUserInterface() {
+        const user = SessionManager.getUser();
+        const userInfoElement = document.getElementById("userInfo");
+        const authButtonElement = document.getElementById("authButton");
+
+        if (user) {
+          // User is logged in
+          if (user.role === "customer") {
+            userInfoElement.textContent = `Welcome, ${
+              user.name || user.username
+            }`;
+          } else {
+            userInfoElement.textContent = `${user.role}: ${
+              user.name || user.username
+            }`;
+          }
+          authButtonElement.textContent = "Logout";
+          authButtonElement.onclick = handleAuth;
+        } else {
+          // User is not logged in
+          userInfoElement.textContent = "Guest";
+          authButtonElement.textContent = "Login";
+          authButtonElement.onclick = handleAuth;
+        }
+      }
+
+      // Check session on page load and update UI accordingly
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if session is still valid
+        if (SessionManager.isLoggedIn() && !SessionManager.checkSession()) {
+          SessionManager.clearSession();
+        }
+        updateUserInterface();
+      });
+    </script>
+
+    <!-- Include utilities for CartManager and other shared functionality -->
     <script src="../../js/utils.js"></script>
-    <script src="../../js/customer-catalog.js"></script>
-</body>
-</html>
-</body>
+  </body>
 </html>

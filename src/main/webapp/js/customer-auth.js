@@ -48,24 +48,59 @@ function initializeLogin() {
         const hideLoading = UIUtils.showLoading(submitButton);
 
         try {
-            const response = await APIClient.post(API_ENDPOINTS.CUSTOMER_LOGIN, credentials);
+            // First try customer login
+            let response, userData, isStaff = false;
             
-            const userData = {
-                id: response.id,
-                email: email,
-                name: response.name,
-                contactNumber: response.contactNumber,
-                address: response.address,
-                role: 'CUSTOMER',
-                loginTime: new Date().toISOString()
-            };
+            try {
+                response = await APIClient.post(API_ENDPOINTS.CUSTOMER_LOGIN, credentials);
+                userData = {
+                    id: response.id,
+                    email: email,
+                    name: response.name,
+                    contactNumber: response.contactNumber,
+                    address: response.address,
+                    role: 'CUSTOMER',
+                    loginTime: new Date().toISOString()
+                };
+            } catch (customerError) {
+                // If customer login fails, try staff login with username field
+                try {
+                    const staffCredentials = {
+                        username: email, // Staff API expects username field
+                        password: password
+                    };
+                    response = await APIClient.post(API_ENDPOINTS.STAFF_LOGIN, staffCredentials);
+                    userData = {
+                        id: response.id,
+                        email: email,
+                        name: response.name,
+                        type: response.type,
+                        role: response.type || 'STAFF',
+                        loginTime: new Date().toISOString()
+                    };
+                    isStaff = true;
+                } catch (staffError) {
+                    throw new Error('Invalid credentials');
+                }
+            }
             
             SessionManager.setUser(userData);
             UIUtils.showAlert('Welcome back!', 'success');
             
-            // Redirect to customer dashboard
+            // Redirect based on user role
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                if (isStaff) {
+                    // Check if user is cashier and redirect directly to POS system
+                    if (userData.type === 'cashier') {
+                        window.location.href = '../cashier/pos-system.html';
+                    } else {
+                        // Other staff roles go to their respective dashboards
+                        window.location.href = '../manager/dashboard.html';
+                    }
+                } else {
+                    // Regular customers go to customer catalog
+                    window.location.href = 'catalog.html';
+                }
             }, 1000);
             
         } catch (error) {

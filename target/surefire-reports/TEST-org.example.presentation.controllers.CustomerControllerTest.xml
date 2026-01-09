@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.presentation.controllers.CustomerControllerTest" time="4.298" tests="2" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="net.bytebuddy.experimental" value="true"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585 2026-01-09T15-49-36_319-jvmRun1 surefire-20260109154936576_1tmp surefire_0-20260109154936576_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\tahir"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
+    <property name="junit.jupiter.execution.parallel.mode.default" value="concurrent"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="24.0.1+9-30"/>
+    <property name="user.name" value="tahir"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="junit.jupiter.execution.parallel.config.strategy" value="dynamic"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="junit.jupiter.execution.parallel.enabled" value="true"/>
+    <property name="localRepository" value="C:\Users\tahir\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\tahir\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.1"/>
+    <property name="user.dir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\flutter\flutter\bin\cache\dart-sdk\bin\;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Java\jdk-24\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\flutter\flutter\bin\cache\dart-sdk\bin\;$PATH:$CATALINA_HOME/bin:$JAVA_HOME/bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tahir\.config\herd\bin;C:\Users\tahir\AppData\Local\Microsoft\WindowsApps;C:\Users\tahir\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PhpStorm 2024.2\bin;;C:\Program Files\php-8.2.22;C:\Users\tahir\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git;C:\Users\tahir\AppData\Local\Android\Sdk;C:\flutter\flutter\bin;C:\Users\tahir\AppData\Local\Pub\Cache\bin;C:\Users\tahir\AppData\Local\GitHubDesktop\bin;C:\flutter new\flutter\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\bin;;C:\Users\tahir\AppData\Local\Programs\Windsurf\bin;C:\Users\tahir\AppData\Local\Programs\Ollama;C:\Users\tahir\AppData\Local\Programs\cursor\resources\app\bin;C:\apache-maven-3.9.11\bin;;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Program Files\Java\jdk-11\bin;C:\Users\tahir\AppData\Roaming\npm;c:\Users\tahir\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;c:\Users\tahir\.vscode\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="junit.jupiter.extensions.autodetection.enabled" value="true"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.1+9-30"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="addCustomer_DuplicateNames_DifferentPhones_Success" classname="org.example.presentation.controllers.CustomerControllerTest" time="0.435">
+    <system-out><![CDATA[Customer added successfully: LoadTestUser_1767953982492
+Customer added successfully: LoadTestUser_1767953984096
+Customer added successfully: LoadTestUser_1767953991790
+Customer added successfully: LoadTestUser_1767953987063
+Customer added successfully: LoadTestUser_1767953989118
+Registered user 150, Response time: 83 ms
+Customer added successfully: LoadTestUser_1767953988004
+Customer added successfully: LoadTestUser_1767953990128
+Customer added successfully: LoadTestUser_1767953991109
+Customer added successfully: MixedUser_1767953982360
+Customer added successfully: LoadTestUser_1767953988451
+Customer added successfully: LoadTestUser_1767953991664
+Customer added successfully: LoadTestUser_1767953982987
+Customer added successfully: LoadTestUser_1767953990147
+Customer added successfully: LoadTestUser_1767953985769
+Customer added successfully: LoadTestUser_1767953983942
+Customer added successfully: LoadTestUser_1767953983237
+Customer added successfully: LoadTestUser_1767953983289
+Customer added successfully: LoadTestUser_1767953988655
+Customer added successfully: LoadTestUser_1767953990829
+Customer added successfully: LoadTestUser_1767953985217
+Customer added successfully: LoadTestUser_1767953982820
+Customer added successfully: LoadTestUser_1767953984019
+Customer added successfully: LoadTestUser_1767953983578
+Customer added successfully: LoadTestUser_1767953990327
+Customer added successfully: LoadTestUser_1767953986876
+Customer added successfully: LoadTestUser_1767953990864
+Customer added successfully: LoadTestUser_1767953986372
+Customer added successfully: LoadTestUser_1767953985009
+Customer added successfully: LoadTestUser_1767953983934
+Customer added successfully: LoadTestUser_1767953987709
+Customer added successfully: LoadTestUser_1767953985606
+Customer added successfully: LoadTestUser_1767953991832
+Customer added successfully: LoadTestUser_1767953982957
+Customer added successfully: LoadTestUser_1767953990788
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953986390
+Customer added successfully: LoadTestUser_1767953986904
+Customer added successfully: LoadTestUser_1767953985341
+Customer added successfully: LoadTestUser_1767953987476
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953992137
+Customer added successfully: LoadTestUser_1767953984867
+Customer added successfully: LoadTestUser_1767953983330
+Customer added successfully: LoadTestUser_1767953984154
+Customer added successfully: LoadTestUser_1767953986911
+Customer added successfully: LoadTestUser_1767953987299
+Customer added successfully: LoadTestUser_1767953987027
+Customer added successfully: LoadTestUser_1767953988765
+Customer added successfully: LoadTestUser_1767953991531
+Customer added successfully: LoadTestUser_1767953987262
+Customer added successfully: LoadTestUser_1767953991787
+Customer added successfully: LoadTestUser_1767953992168
+Customer added successfully: LoadTestUser_1767953982405
+Customer added successfully: LoadTestUser_1767953986446
+Customer added successfully: LoadTestUser_1767953982765
+Customer added successfully: LoadTestUser_1767953987556
+Customer added successfully: LoadTestUser_1767953989338
+Customer added successfully: LoadTestUser_1767953988911
+Customer added successfully: LoadTestUser_1767953986654
+Customer added successfully: LoadTestUser_1767953991155
+Customer added successfully: LoadTestUser_1767953991351
+Customer added successfully: LoadTestUser_1767953989306
+Customer added successfully: LoadTestUser_1767953983759
+Customer added successfully: LoadTestUser_1767953989956
+Customer added successfully: LoadTestUser_1767953985503
+Customer added successfully: LoadTestUser_1767953984594
+Customer added successfully: LoadTestUser_1767953989627
+Customer added successfully: LoadTestUser_1767953983547
+Customer added successfully: LoadTestUser_1767953986106
+Customer added successfully: LoadTestUser_1767953983132
+Customer added successfully: LoadTestUser_1767953985887
+Customer added successfully: LoadTestUser_1767953992211
+Customer added successfully: LoadTestUser_1767953991922
+Customer added successfully: LoadTestUser_1767953986929
+Customer added successfully: LoadTestUser_1767953986836
+Customer added successfully: LoadTestUser_1767953983968
+Customer added successfully: LoadTestUser_1767953985899
+Customer added successfully: LoadTestUser_1767953987434
+Customer added successfully: LoadTestUser_1767953991214
+Customer added successfully: LoadTestUser_1767953984109
+Customer added successfully: LoadTestUser_1767953991656
+Customer added successfully: LoadTestUser_1767953992126
+Customer added successfully: LoadTestUser_1767953988485
+Access Denied - Invalid credentials detected
+Customer added successfully: John Doe
+Customer added successfully: LoadTestUser_1767953986605
+Customer added successfully: LoadTestUser_1767953984453
+Customer added successfully: LoadTestUser_1767953988346
+Customer added successfully: LoadTestUser_1767953986997
+Customer added successfully: LoadTestUser_1767953989635
+Customer added successfully: LoadTestUser_1767953988358
+Customer added successfully: LoadTestUser_1767953985528
+Customer added successfully: LoadTestUser_1767953989139
+Customer added successfully: LoadTestUser_1767953986203
+Customer added successfully: LoadTestUser_1767953992111
+Customer added successfully: LoadTestUser_1767953991947
+Customer added successfully: LoadTestUser_1767953991373
+Customer added successfully: LoadTestUser_1767953992086
+Customer added successfully: LoadTestUser_1767953990292
+Customer added successfully: LoadTestUser_1767953990233
+Customer added successfully: LoadTestUser_1767953987157
+Customer added successfully: LoadTestUser_1767953991933
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953983454
+Customer added successfully: LoadTestUser_1767953990621
+Customer added successfully: LoadTestUser_1767953989994
+Customer added successfully: LoadTestUser_1767953989394
+Customer added successfully: LoadTestUser_1767953982646
+Customer added successfully: LoadTestUser_1767953983605
+Customer added successfully: LoadTestUser_1767953986473
+Customer added successfully: LoadTestUser_1767953988869
+Customer added successfully: LoadTestUser_1767953991028
+Customer added successfully: LoadTestUser_1767953987462
+Customer added successfully: LoadTestUser_1767953992306
+Customer added successfully: LoadTestUser_1767953992024
+Customer added successfully: LoadTestUser_1767953992299
+Customer added successfully: LoadTestUser_1767953986188
+Customer added successfully: LoadTestUser_1767953986946
+Customer added successfully: LoadTestUser_1767953986376
+Customer added successfully: LoadTestUser_1767953992544
+Customer added successfully: LoadTestUser_1767953983658
+Customer added successfully: MixedUser_1767953982498
+Customer added successfully: LoadTestUser_1767953983329
+Customer added successfully: LoadTestUser_1767953982979
+Customer added successfully: LoadTestUser_1767953983008
+Customer added successfully: LoadTestUser_1767953985964
+Customer added successfully: LoadTestUser_1767953983837
+Customer added successfully: MixedUser_1767953982464
+Customer added successfully: LoadTestUser_1767953986347
+Customer added successfully: LoadTestUser_1767953983618
+Customer added successfully: LoadTestUser_1767953984309
+Customer added successfully: LoadTestUser_1767953985259
+Customer added successfully: LoadTestUser_1767953988747
+Customer added successfully: LoadTestUser_1767953991713
+Customer added successfully: LoadTestUser_1767953990790
+Customer added successfully: LoadTestUser_1767953990027
+Customer added successfully: LoadTestUser_1767953992361
+Customer added successfully: LoadTestUser_1767953991340
+Customer added successfully: LoadTestUser_1767953991169
+Customer added successfully: LoadTestUser_1767953991009
+Customer added successfully: LoadTestUser_1767953987446
+Customer added successfully: LoadTestUser_1767953991913
+Customer added successfully: LoadTestUser_1767953990444
+Customer added successfully: LoadTestUser_1767953990873
+Customer added successfully: LoadTestUser_1767953989855
+Customer added successfully: LoadTestUser_1767953986182
+Customer added successfully: LoadTestUser_1767953992091
+Customer added successfully: LoadTestUser_1767953988293
+Customer added successfully: LoadTestUser_1767953983963
+Customer added successfully: LoadTestUser_1767953985524
+Customer added successfully: LoadTestUser_1767953983207
+Customer added successfully: LoadTestUser_1767953984618
+Customer added successfully: LoadTestUser_1767953985774
+Customer added successfully: LoadTestUser_1767953988490
+Customer added successfully: LoadTestUser_1767953987200
+Customer added successfully: LoadTestUser_1767953990097
+Customer added successfully: LoadTestUser_1767953983065
+Registered user 200, Response time: 74 ms
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953987507
+Customer added successfully: LoadTestUser_1767953989088
+Customer added successfully: LoadTestUser_1767953991845
+Customer added successfully: LoadTestUser_1767953986591
+Customer added successfully: MixedUser_1767953982517
+Mixed operation Customer added successfully: LoadTestUser_1767953987430
+120 (type 0) completed, Response time: 53 ms
+Customer added successfully: LoadTestUser_1767953992468
+Customer added successfully: LoadTestUser_1767953989365
+Customer added successfully: LoadTestUser_1767953986613
+Customer added successfully: LoadTestUser_1767953984901
+Customer added successfully: LoadTestUser_1767953984490
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953988909
+Customer added successfully: LoadTestUser_1767953988080
+Customer added successfully: LoadTestUser_1767953992445
+Customer added successfully: LoadTestUser_1767953986734
+Customer added successfully: LoadTestUser_1767953989047
+Customer added successfully: LoadTestUser_1767953983879
+Customer added successfully: LoadTestUser_1767953986059
+Registered user 300, Response time: 55 ms
+Customer added successfully: LoadTestUser_1767953985994
+Customer added successfully: MixedUser_1767953982272
+Customer added successfully: LoadTestUser_1767953990150
+Customer added successfully: LoadTestUser_1767953983519
+Customer added successfully: MixedUser_1767953982247
+Customer added successfully: LoadTestUser_1767953990309
+Customer added successfully: LoadTestUser_1767953991924
+Customer added successfully: LoadTestUser_1767953987135
+Customer added successfully: LoadTestUser_1767953985399
+Customer added successfully: MixedUser_1767953982256
+Customer added successfully: LoadTestUser_1767953987024
+Customer added successfully: LoadTestUser_1767953988882
+Customer added successfully: LoadTestUser_1767953988068
+Customer added successfully: LoadTestUser_1767953991773
+Customer added successfully: LoadTestUser_1767953985023
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953986517
+Customer added successfully: LoadTestUser_1767953991835
+Customer added successfully: LoadTestUser_1767953992669
+Customer added successfully: LoadTestUser_1767953983813
+Customer added successfully: LoadTestUser_1767953991039
+Customer added successfully: LoadTestUser_1767953987795
+Customer added successfully: LoadTestUser_1767953984689
+Customer added successfully: LoadTestUser_1767953988607
+Customer added successfully: LoadTestUser_1767953991460
+Customer added successfully: LoadTestUser_1767953992089
+Customer added successfully: MixedUser_1767953982594
+Customer added successfully: LoadTestUser_1767953990344
+Customer added successfully: LoadTestUser_1767953983306
+Customer added successfully: LoadTestUser_1767953989868
+Customer added successfully: LoadTestUser_1767953989954
+Customer added successfully: LoadTestUser_1767953988399
+Customer added successfully: LoadTestUser_1767953987824
+Customer added successfully: MixedUser_1767953982568
+Customer added successfully: LoadTestUser_1767953992317
+Customer added successfully: LoadTestUser_1767953986524
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953982981
+Customer added successfully: LoadTestUser_1767953992557
+Customer added successfully: LoadTestUser_1767953985069
+Customer added successfully: LoadTestUser_1767953983393
+Customer added successfully: LoadTestUser_1767953989631
+Customer added successfully: LoadTestUser_1767953985914
+Customer added successfully: LoadTestUser_1767953988116
+Customer added successfully: LoadTestUser_1767953991990
+Customer added successfully: LoadTestUser_1767953988703
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953991159
+Customer added successfully: LoadTestUser_1767953991100
+Customer added successfully: LoadTestUser_1767953985313
+Customer added successfully: LoadTestUser_1767953985190
+Customer added successfully: LoadTestUser_1767953985751
+Customer added successfully: LoadTestUser_1767953990854
+Customer added successfully: MixedUser_1767953982627
+Customer added successfully: LoadTestUser_1767953988365
+Customer added successfully: LoadTestUser_1767953992007
+Customer added successfully: LoadTestUser_1767953989845
+Customer added successfully: LoadTestUser_1767953992465
+Customer added successfully: LoadTestUser_1767953984016
+Customer added successfully: LoadTestUser_1767953992796
+Customer added successfully: LoadTestUser_1767953992253
+Access Denied - Invalid credentials detected
+Mixed operation 150 (type 2) completed, Response time: 7 ms
+Customer added successfully: LoadTestUser_1767953989605
+Customer added successfully: LoadTestUser_1767953989106
+Customer added successfully: LoadTestUser_1767953987335
+Customer added successfully: LoadTestUser_1767953987193
+Customer added successfully: LoadTestUser_1767953990622
+Customer added successfully: MixedUser_1767953982646
+Customer added successfully: LoadTestUser_1767953986177
+Customer added successfully: LoadTestUser_1767953983832
+Customer added successfully: LoadTestUser_1767953985589
+Customer added successfully: LoadTestUser_1767953984314
+Customer added successfully: LoadTestUser_1767953992279
+Customer added successfully: LoadTestUser_1767953991187
+Access Denied - Invalid credentials detected
+Customer added successfully: John Doe
+Customer added successfully: LoadTestUser_1767953986380
+Customer added successfully: LoadTestUser_1767953983679
+Customer added successfully: LoadTestUser_1767953984420
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953983113
+Customer added successfully: LoadTestUser_1767953989132
+Customer added successfully: MixedUser_1767953982475
+Customer added successfully: LoadTestUser_1767953983419
+Customer added successfully: LoadTestUser_1767953988858
+Customer added successfully: LoadTestUser_1767953989992
+Customer added successfully: LoadTestUser_1767953986388
+Customer added successfully: LoadTestUser_1767953992755
+Customer added successfully: LoadTestUser_1767953988455
+Customer added successfully: LoadTestUser_1767953992214
+Customer added successfully: LoadTestUser_1767953990471
+Customer added successfully: LoadTestUser_1767953989298
+Customer added successfully: LoadTestUser_1767953989476
+Customer added successfully: LoadTestUser_1767953990507
+Customer added successfully: LoadTestUser_1767953991480
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953992540
+]]></system-out>
+  </testcase>
+  <testcase name="customerOperations_DataIntegrity_Maintained" classname="org.example.presentation.controllers.CustomerControllerTest" time="0.261">
+    <system-out><![CDATA[Customer added successfully: LoadTestUser_1767953986763
+Customer added successfully: LoadTestUser_1767953983128
+Customer added successfully: LoadTestUser_1767953988593
+Customer added successfully: LoadTestUser_1767953990693
+Customer added successfully: LoadTestUser_1767953985427
+Customer added successfully: LoadTestUser_1767953985868
+Customer added successfully: LoadTestUser_1767953988698
+Customer added successfully: LoadTestUser_1767953987891
+Customer added successfully: LoadTestUser_1767953985246
+Customer added successfully: LoadTestUser_1767953986588
+Customer added successfully: LoadTestUser_1767953991198
+Customer added successfully: LoadTestUser_1767953983162
+Customer added successfully: LoadTestUser_1767953991307
+Customer added successfully: LoadTestUser_1767953987793
+Customer added successfully: LoadTestUser_1767953983592
+Registered user 250, Response time: 205 ms
+Customer added successfully: LoadTestUser_1767953989483
+Customer added successfully: LoadTestUser_1767953987019
+Customer added successfully: LoadTestUser_1767953990094
+Customer added successfully: LoadTestUser_1767953983117
+Customer added successfully: LoadTestUser_1767953988198
+Customer added successfully: LoadTestUser_1767953985297
+Customer added successfully: LoadTestUser_1767953986214
+Customer added successfully: MixedUser_1767953982678
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953986561
+Customer added successfully: LoadTestUser_1767953991051
+Customer added successfully: MixedUser_1767953982707
+Customer added successfully: LoadTestUser_1767953985760
+Customer added successfully: LoadTestUser_1767953989151
+Customer added successfully: LoadTestUser_1767953984120
+Customer added successfully: LoadTestUser_1767953983661
+Customer added successfully: LoadTestUser_1767953988391
+Customer added successfully: LoadTestUser_1767953988059
+Customer added successfully: LoadTestUser_1767953984267
+Customer added successfully: LoadTestUser_1767953991850
+Customer added successfully: LoadTestUser_1767953989525
+Customer added successfully: LoadTestUser_1767953985929
+Customer added successfully: LoadTestUser_1767953991260
+Customer added successfully: LoadTestUser_1767953984840
+Customer added successfully: LoadTestUser_1767953990039
+Customer added successfully: LoadTestUser_1767953982825
+Customer added successfully: LoadTestUser_1767953984603
+Customer added successfully: LoadTestUser_1767953984341
+Customer added successfully: LoadTestUser_1767953989682
+Customer added successfully: MixedUser_1767953982756
+Customer added successfully: LoadTestUser_1767953986995
+Customer added successfully: LoadTestUser_1767953985056
+Customer added successfully: LoadTestUser_1767953991400
+Registered user Customer added successfully: LoadTestUser_1767953990855
+450, Response time: 20 ms
+Customer added successfully: LoadTestUser_1767953990143
+Customer added successfully: LoadTestUser_1767953989356
+Customer added successfully: LoadTestUser_1767953984962
+Customer added successfully: LoadTestUser_1767953987756
+Customer added successfully: LoadTestUser_1767953987900
+Customer added successfully: LoadTestUser_1767953986806
+Customer added successfully: LoadTestUser_1767953989687
+Customer added successfully: LoadTestUser_1767953988278
+Customer added successfully: MixedUser_1767953982732
+Customer added successfully: LoadTestUser_1767953989071
+Customer added successfully: LoadTestUser_1767953988030
+Customer added successfully: LoadTestUser_1767953984688
+Customer added successfully: LoadTestUser_1767953986251
+Customer added successfully: LoadTestUser_1767953985105
+Customer added successfully: LoadTestUser_1767953985221
+Customer added successfully: LoadTestUser_1767953992517
+Customer added successfully: LoadTestUser_1767953983774
+Customer added successfully: LoadTestUser_1767953986692
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953987344
+Customer added successfully: LoadTestUser_1767953989829
+Customer added successfully: LoadTestUser_1767953984994
+Customer added successfully: LoadTestUser_1767953985708
+Customer added successfully: LoadTestUser_1767953985379
+Customer added successfully: LoadTestUser_1767953985043
+Customer added successfully: LoadTestUser_1767953985647
+Customer added successfully: LoadTestUser_1767953989880
+Customer added successfully: LoadTestUser_1767953988924
+Customer added successfully: LoadTestUser_1767953992882
+Customer added successfully: LoadTestUser_1767953991935
+Customer added successfully: LoadTestUser_1767953986631
+Customer added successfully: LoadTestUser_1767953989748
+Customer added successfully: MixedUser_1767953982783
+Customer added successfully: LoadTestUser_1767953988714
+Customer added successfully: LoadTestUser_1767953990768
+Customer added successfully: LoadTestUser_1767953989434
+Customer added successfully: LoadTestUser_1767953990725
+Customer added successfully: LoadTestUser_1767953985822
+Customer added successfully: LoadTestUser_1767953988315
+Customer added successfully: LoadTestUser_1767953990501
+Customer added successfully: LoadTestUser_1767953992966
+Customer added successfully: LoadTestUser_1767953990381
+Customer added successfully: LoadTestUser_1767953984703
+Customer added successfully: LoadTestUser_1767953990123
+Customer added successfully: LoadTestUser_1767953986055
+Customer added successfully: LoadTestUser_1767953992338
+Customer added successfully: LoadTestUser_1767953990510
+Customer added successfully: LoadTestUser_1767953986900
+Customer added successfully: LoadTestUser_1767953985375
+Customer added successfully: LoadTestUser_1767953986334
+Customer added successfully: MixedUser_1767953982530
+Customer added successfully: LoadTestUser_1767953989205
+Customer added successfully: LoadTestUser_1767953985355
+Customer added successfully: LoadTestUser_1767953988894
+Customer added successfully: LoadTestUser_1767953983589
+Customer added successfully: LoadTestUser_1767953990270
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953984919
+Customer added successfully: LoadTestUser_1767953985848
+Customer added successfully: LoadTestUser_1767953991238
+Customer added successfully: LoadTestUser_1767953989582
+Customer added successfully: LoadTestUser_1767953988238
+Customer added successfully: LoadTestUser_1767953990610
+Customer added successfully: LoadTestUser_1767953987703
+Customer added successfully: LoadTestUser_1767953988118
+Customer added successfully: MixedUser_1767953982811
+Customer added successfully: LoadTestUser_1767953984707
+Customer added successfully: LoadTestUser_1767953987160
+Customer added successfully: LoadTestUser_1767953990179
+Customer added successfully: LoadTestUser_1767953986942
+Customer added successfully: LoadTestUser_1767953984675
+Customer added successfully: LoadTestUser_1767953985098
+Customer added successfully: LoadTestUser_1767953983970
+Customer added successfully: LoadTestUser_1767953989158
+Customer added successfully: LoadTestUser_1767953988093
+Customer added successfully: LoadTestUser_1767953989866
+Customer added successfully: LoadTestUser_1767953984262
+Customer added successfully: LoadTestUser_1767953990812
+Access Denied - Invalid credentials detected
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953989209
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953986343
+Customer added successfully: MixedUser_1767953982842
+Customer added successfully: MixedUser_1767953982608
+Customer added successfully: LoadTestUser_1767953988333
+Customer added successfully: LoadTestUser_1767953983470
+Customer added successfully: LoadTestUser_1767953983739
+Customer added successfully: LoadTestUser_1767953985878
+Customer added successfully: LoadTestUser_1767953987882
+Customer added successfully: MixedUser_1767953982856
+Access Denied - Invalid credentials detected
+Customer added successfully: MixedUser_1767953982868
+Customer added successfully: LoadTestUser_1767953987118
+Customer added successfully: LoadTestUser_1767953991094
+Mixed operation 180 (type 0) completed, Response time: 27 ms
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953983046
+Customer added successfully: LoadTestUser_1767953987324
+Customer added successfully: LoadTestUser_1767953983012
+Customer added successfully: LoadTestUser_1767953985278
+Access Denied - Invalid credentials detected
+Customer added successfully: LoadTestUser_1767953991037
+Customer added successfully: MixedUser_1767953982885
+Customer added successfully: LoadTestUser_1767953989386
+Customer added successfully: LoadTestUser_1767953989902
+Customer added successfully: MixedUser_1767953982894
+Customer added successfully: LoadTestUser_1767953990776
+Customer added successfully: MixedUser_1767953982899
+Customer added successfully: LoadTestUser_1767953989622
+Registered user 400, Response time: 189 ms
+Customer added successfully: LoadTestUser_1767953990250
+Customer added successfully: LoadTestUser_1767953992899
+Customer added successfully: LoadTestUser_1767953984975
+Customer added successfully: LoadTestUser_1767953990550
+Customer added successfully: LoadTestUser_1767953986717
+Customer added successfully: LoadTestUser_1767953983266
+Customer added successfully: LoadTestUser_1767953990175
+Customer added successfully: LoadTestUser_1767953985911
+Customer added successfully: LoadTestUser_1767953993010
+Customer added successfully: LoadTestUser_1767953990805
+Customer added successfully: LoadTestUser_1767953983696
+Customer added successfully: LoadTestUser_1767953987333
+Customer added successfully: LoadTestUser_1767953992103
+Customer added successfully: LoadTestUser_1767953992812
+Customer added successfully: LoadTestUser_1767953991168
+Customer added successfully: LoadTestUser_1767953992488
+Customer added successfully: LoadTestUser_1767953989432
+Customer added successfully: LoadTestUser_1767953992275
+Customer added successfully: LoadTestUser_1767953984397
+Registered user 350, Response time: 282 ms
+Access Denied - Invalid credentials detected
+Customer added successfully: MixedUser_1767953982658
+Customer added successfully: LoadTestUser_1767953983133
+Customer added successfully: LoadTestUser_1767953985331
+
+=== HIGH LOAD AUTHENTICATION TEST ===
+Testing 500 concurrent authentication attempts...
+Customer added successfully: Integrity Test
+]]></system-out>
+  </testcase>
+</testsuite>

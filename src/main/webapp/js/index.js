@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof SessionManager !== 'undefined' && SessionManager.isLoggedIn() && SessionManager.checkSession()) {
         const userRole = SessionManager.getUserRole();
         console.log('✅ User already logged in with role:', userRole);
-        Router.redirectToDashboard(userRole);
+        if (userRole === 'CUSTOMER') {
+            window.location.href = '/syos/pages/customer/catalog.html';
+        } else {
+            Router.redirectToDashboard(userRole);
+        }
     } else {
         console.log('ℹ️ No active session found');
     }
@@ -261,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     closeAllModals();
 
                     setTimeout(() => {
-                        Router.redirectToDashboard('CUSTOMER');
+                        window.location.href = '/syos/pages/customer/catalog.html';
                     }, 1000);
                 } else {
                     throw new Error('Invalid email or password');
@@ -270,7 +274,33 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('❌ Customer login error:', error);
                 
-                const errorMessage = error.message || 'Login failed. Please check your credentials.';
+                let errorMessage = 'Login failed. Please check your credentials.';
+                
+                // Handle 401 Unauthorized errors specifically
+                if (error.message && error.message.includes('401')) {
+                    errorMessage = 'Invalid email or password';
+                } else if (error.message && (
+                    error.message.includes('Invalid email or password') ||
+                    error.message.includes('authentication failed') ||
+                    error.message.includes('unauthorized')
+                )) {
+                    errorMessage = 'Invalid email or password';
+                } else if (error.message) {
+                    // Check if the error message contains JSON with error field
+                    try {
+                        if (error.message.includes('{"error":')) {
+                            const jsonMatch = error.message.match(/\{"error":"([^"]+)"\}/);
+                            if (jsonMatch && jsonMatch[1]) {
+                                errorMessage = jsonMatch[1];
+                            }
+                        }
+                    } catch (parseError) {
+                        // If JSON parsing fails, use the original error message
+                        errorMessage = error.message.includes('Invalid email or password') 
+                            ? 'Invalid email or password' 
+                            : errorMessage;
+                    }
+                }
                 
                 showError(errorMessage, 'customer');
             } finally {
@@ -370,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     customerRegisterForm.reset();
 
                     setTimeout(() => {
-                        Router.redirectToDashboard('CUSTOMER');
+                        window.location.href = '/syos/pages/customer/catalog.html';
                     }, 1500);
                 } else {
                     throw new Error(response.message || 'Registration failed. Please try again.');
@@ -397,6 +427,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Error and Success Message Functions
+function showError(message, context = 'general') {
+    console.error('❌ Error (' + context + '):', message);
+    
+    // Try to use UIUtils if available, otherwise use alert
+    if (typeof UIUtils !== 'undefined' && UIUtils.showAlert) {
+        UIUtils.showAlert(message, 'danger');
+    } else {
+        // Create a simple error display or use alert as fallback
+        alert('Error: ' + message);
+    }
+}
+
+function showSuccess(message, context = 'general') {
+    console.log('✅ Success (' + context + '):', message);
+    
+    // Try to use UIUtils if available, otherwise use alert
+    if (typeof UIUtils !== 'undefined' && UIUtils.showAlert) {
+        UIUtils.showAlert(message, 'success');
+    } else {
+        // Create a simple success display or use alert as fallback
+        alert(message);
+    }
+}
+
 // Keyboard Support
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
@@ -412,6 +467,8 @@ window.closeAllModals = closeAllModals;
 window.redirectToCustomerLogin = redirectToCustomerLogin;
 window.redirectToCustomerRegister = redirectToCustomerRegister;
 window.browseCatalog = browseCatalog;
+window.showError = showError;
+window.showSuccess = showSuccess;
 
 console.log('✅ All functions exposed globally:', {
     showCustomerOptions: typeof window.showCustomerOptions,
@@ -420,5 +477,7 @@ console.log('✅ All functions exposed globally:', {
     closeAllModals: typeof window.closeAllModals,
     redirectToCustomerLogin: typeof window.redirectToCustomerLogin,
     redirectToCustomerRegister: typeof window.redirectToCustomerRegister,
-    browseCatalog: typeof window.browseCatalog
+    browseCatalog: typeof window.browseCatalog,
+    showError: typeof window.showError,
+    showSuccess: typeof window.showSuccess
 });

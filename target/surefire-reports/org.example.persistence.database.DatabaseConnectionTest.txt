@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.example.persistence.database.DatabaseConnectionTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.849 s -- in org.example.persistence.database.DatabaseConnectionTest

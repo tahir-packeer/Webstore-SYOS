@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.Controller.Authentication;
-import org.example.View.OnlineStore;
+import org.example.presentation.controllers.Authentication;
+import org.example.presentation.views.OnlineStore;
 
 import java.sql.SQLException;
 import java.text.ParseException;

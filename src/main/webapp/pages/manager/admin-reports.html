@@ -1,323 +1,950 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Reports - SYOS Store</title>
-    <link rel="stylesheet" href="../../css/admin-reports.css">
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="container">
-                <a href="dashboard.html" class="navbar-brand">SYOS Store - Admin Reports</a>
-                <ul class="navbar-nav">
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="admin-reports.html" class="active">Admin Reports</a></li>
-                </ul>
-                <div class="navbar-actions">
-                    <span class="user-info" id="userInfo">Admin</span>
-                    <button class="btn btn-outline" onclick="logout()">Logout</button>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Reports</title>
+    <link rel="icon" href="data:," />
+    <style>
+      /* SYOS Sharp Black & White Admin Style */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: white;
+        color: black;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* Top Header Bar */
+      .top-bar {
+        background: black;
+        color: white;
+        padding: 0.8rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 3px solid black;
+      }
+
+      .brand {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-item {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        border: 2px solid white;
+        background: white;
+        color: black;
+      }
+
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .logout-btn {
+        background: white;
+        color: black;
+        border: 2px solid white;
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .logout-btn:hover {
+        background: black;
+        color: white;
+        border: 2px solid white;
+      }
+
+      /* Main Container */
+      .main-container {
+        margin-top: 80px;
+        display: flex;
+        height: calc(100vh - 80px);
+      }
+
+      /* Left Sidebar Navigation */
+      .reports-sidebar {
+        width: 250px;
+        background: black;
+        color: white;
+        padding: 2rem 0;
+        border-right: 4px solid white;
+      }
+
+      .sidebar-title {
+        padding: 0 2rem 2rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid white;
+        margin-bottom: 2rem;
+      }
+
+      .reports-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .report-item {
+        margin: 0;
+      }
+
+      .report-link {
+        display: block;
+        padding: 1rem 2rem;
+        color: white;
+        text-decoration: none;
+        border-left: 4px solid transparent;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .report-link:hover,
+      .report-link.active {
+        background: white;
+        color: black;
+        border-left: 4px solid black;
+      }
+
+      .report-icon {
+        margin-right: 0.5rem;
+        font-weight: bold;
+      }
+
+      /* Main Content Area */
+      .reports-content {
+        flex: 1;
+        padding: 2rem;
+        overflow-y: auto;
+        background: white;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* Page Header */
+      .page-header {
+        background: black;
+        color: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 3px solid black;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      /* Legacy Report Tabs - Replaced by Sidebar */
+      .report-tabs {
+        display: none;
+      }
+
+      .report-tab {
+        display: none;
+      }
+
+      /* Report Sections */
+      .report-section {
+        display: none;
+      }
+
+      .report-section.active {
+        display: block;
+      }
+
+      /* Cards */
+      .card {
+        background: white;
+        border: 2px solid black;
+        margin-bottom: 2rem;
+      }
+
+      .card-header {
+        background: black;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-bottom: 2px solid black;
+      }
+
+      .card-header h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      /* Controls */
+      .date-controls {
+        display: flex;
+        gap: 1rem;
+        align-items: end;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group-inline {
+        display: flex;
+        flex-direction: column;
+        min-width: 150px;
+      }
+
+      .form-label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: black;
+      }
+
+      .form-control {
+        padding: 0.75rem;
+        border: 2px solid black;
+        background: white;
+        color: black;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        outline: none;
+        background: #f9f9f9;
+        border-color: black;
+      }
+
+      /* Buttons */
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: 2px solid black;
+        background: black;
+        color: white;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn:hover {
+        background: white;
+        color: black;
+        border: 2px solid black;
+      }
+
+      .btn-primary {
+        background: black;
+        color: white;
+      }
+
+      .btn-outline {
+        background: white;
+        color: black;
+      }
+
+      /* Summary Cards */
+      .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .summary-card {
+        background: black;
+        color: white;
+        padding: 1.5rem;
+        border: 2px solid black;
+        text-align: center;
+      }
+
+      .summary-card h4 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .summary-card .value {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      /* Tables */
+      .table-responsive {
+        border: 2px solid black;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+        background: white;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        min-width: 900px;
+        table-layout: auto;
+      }
+
+      .table th {
+        background: black;
+        color: white;
+        padding: 0.8rem;
+        text-align: left;
+        font-weight: bold;
+        border-right: 1px solid white;
+        white-space: nowrap;
+        font-size: 0.9rem;
+      }
+
+      .table th:last-child {
+        border-right: none;
+      }
+
+      .table td {
+        padding: 0.6rem 0.8rem;
+        border-bottom: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        vertical-align: top;
+        white-space: nowrap;
+        font-size: 0.85rem;
+      }
+
+      .table td:last-child {
+        border-right: none;
+      }
+
+      .table tbody tr:hover {
+        background: #f5f5f5;
+      }
+
+      .table .loading {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        white-space: normal;
+        padding: 2rem;
+      }
+
+      /* Badge styling for transaction types */
+      .badge {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 1px solid black;
+      }
+
+      .badge-primary {
+        background: black;
+        color: white;
+      }
+
+      .badge-secondary {
+        background: white;
+        color: black;
+      }
+
+      /* Search */
+      .search-container {
+        margin-bottom: 1rem;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid black;
+        background: white;
+        font-size: 0.9rem;
+      }
+
+      .search-input:focus {
+        outline: none;
+        background: #f9f9f9;
+      }
+
+      /* Loading States */
+      .loading {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+        font-style: italic;
+      }
+
+      .no-data {
+        text-align: center;
+        padding: 2rem;
+        color: #999;
+        background: #f9f9f9;
+        border: 2px dashed #ddd;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .top-bar {
+          padding: 0.5rem 1rem;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .nav-menu {
+          gap: 1rem;
+        }
+
+        .main-container {
+          padding: 1rem;
+        }
+
+        .date-controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .form-group-inline {
+          min-width: auto;
+        }
+
+        .report-tabs {
+          flex-direction: column;
+        }
+
+        .report-tab {
+          border-right: none;
+          border-bottom: 2px solid black;
+        }
+
+        .report-tab:last-child {
+          border-bottom: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="brand">Admin Reports</div>
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item">Dashboard</a>
+        <a href="admin-reports.html" class="nav-item active">Reports</a>
+      </nav>
+      <div class="user-section">
+        <span id="userInfo">Admin</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+      <!-- Left Sidebar Navigation -->
+      <nav class="reports-sidebar">
+        <div class="sidebar-title">Reports</div>
+        <ul class="reports-menu">
+          <li class="report-item">
+            <a
+              class="report-link active"
+              onclick="switchReport('daily-sales')"
+              data-report="daily-sales"
+            >
+              <span class="report-icon">📊</span>Daily Sales
+            </a>
+          </li>
+          <li class="report-item">
+            <a
+              class="report-link"
+              onclick="switchReport('items-shelving')"
+              data-report="items-shelving"
+            >
+              <span class="report-icon">📦</span>Need Shelving
+            </a>
+          </li>
+          <li class="report-item">
+            <a
+              class="report-link"
+              onclick="switchReport('reorder-level')"
+              data-report="reorder-level"
+            >
+              <span class="report-icon">⚠️</span>Reorder Level
+            </a>
+          </li>
+          <li class="report-item">
+            <a
+              class="report-link"
+              onclick="switchReport('stock-report')"
+              data-report="stock-report"
+            >
+              <span class="report-icon">📋</span>Stock Report
+            </a>
+          </li>
+          <li class="report-item">
+            <a
+              class="report-link"
+              onclick="switchReport('bill-transaction')"
+              data-report="bill-transaction"
+            >
+              <span class="report-icon">🧾</span>Bill Report
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content Area -->
+      <div class="reports-content">
+        <div class="container">
+
+        <!-- Daily Sales Report -->
+        <div id="daily-sales" class="report-section active">
+          <div class="card">
+            <div class="card-header">
+              <h3>DAILY SALES REPORT</h3>
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="container">
-                <!-- Page Header -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h1>Administrative Reports</h1>
-                    </div>
+            <div class="card-body">
+              <div class="date-controls">
+                <div class="form-group-inline">
+                  <label class="form-label">DATE</label>
+                  <input
+                    type="date"
+                    id="dailySalesDate"
+                    class="form-control"
+                    onchange="loadDailySalesReport()"
+                  />
                 </div>
-
-                <!-- Report Type Tabs -->
-                <div class="report-tabs">
-                    <button class="report-tab active" onclick="switchReport('daily-sales')">Daily Sales</button>
-                    <button class="report-tab" onclick="switchReport('items-shelving')">Items Need Shelving</button>
-                    <button class="report-tab" onclick="switchReport('reorder-level')">Reorder Level</button>
-                    <button class="report-tab" onclick="switchReport('stock-report')">Stock Report</button>
-                    <button class="report-tab" onclick="switchReport('bill-transaction')">Bill Report</button>
+                <div class="form-group-inline">
+                  <label class="form-label">TRANSACTION TYPE</label>
+                  <select
+                    id="dailySalesTransactionType"
+                    class="form-control"
+                    onchange="loadDailySalesReport()"
+                  >
+                    <option value="">All Types</option>
+                    <option value="CASH">Cash</option>
+                    <option value="CARD">Card</option>
+                    <option value="ONLINE">Online</option>
+                  </select>
                 </div>
-
-                <!-- Daily Sales Report -->
-                <div id="daily-sales" class="report-section active">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3>Daily Sales Report</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="date-controls">
-                                <div class="form-group-inline">
-                                    <label class="form-label">Date</label>
-                                    <input type="date" id="dailySalesDate" class="form-control" onchange="loadDailySalesReport()">
-                                </div>
-                                <div class="form-group-inline">
-                                    <label class="form-label">Transaction Type</label>
-                                    <select id="dailySalesTransactionType" class="form-control" onchange="loadDailySalesReport()">
-                                        <option value="">All Types</option>
-                                        <option value="CASH">Cash</option>
-                                        <option value="CARD">Card</option>
-                                        <option value="ONLINE">Online</option>
-                                    </select>
-                                </div>
-                                <div class="form-group-inline">
-                                    <label class="form-label">Store Type</label>
-                                    <select id="dailySalesStoreType" class="form-control" onchange="loadDailySalesReport()">
-                                        <option value="">All Stores</option>
-                                        <option value="PHYSICAL">Physical</option>
-                                        <option value="ONLINE">Online</option>
-                                    </select>
-                                </div>
-                                <button class="btn btn-primary" onclick="loadDailySalesReport()">Generate Report</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="dailySalesSummary" class="summary-cards"></div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Daily Sales Transactions</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="search-container">
-                                <input type="text" id="dailySalesSearch" class="search-input" 
-                                       placeholder="Search by invoice number, amount, payment method, or type..." 
-                                       onkeyup="searchTable('dailySalesData', this.value)">
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead id="dailySalesHeader">
-                                        <tr>
-                                            <th>Invoice #</th>
-                                            <th>Time</th>
-                                            <th>Total Amount</th>
-                                            <th>Discount</th>
-                                            <th>Payment</th>
-                                            <th>Change</th>
-                                            <th>Items</th>
-                                            <th>Type</th>
-                                            <th>Store</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="dailySalesData">
-                                        <tr><td colspan="9" class="text-center">Select a date to view sales data</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group-inline">
+                  <label class="form-label">STORE TYPE</label>
+                  <select
+                    id="dailySalesStoreType"
+                    class="form-control"
+                    onchange="loadDailySalesReport()"
+                  >
+                    <option value="">All Stores</option>
+                    <option value="PHYSICAL">Physical</option>
+                    <option value="ONLINE">Online</option>
+                  </select>
                 </div>
-
-                <!-- Items Need Shelving Report -->
-                <div id="items-shelving" class="report-section">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3>Items Needing Shelving</h3>
-                            <button class="btn btn-primary" onclick="loadItemsNeedShelvingReport()">Refresh Report</button>
-                        </div>
-                    </div>
-
-                    <div id="itemsShelvingSummary" class="summary-cards"></div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Items with Low Shelf Stock</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="search-container">
-                                <input type="text" id="itemsShelvingSearch" class="search-input" 
-                                       placeholder="Search by item code, name, or shelf type..." 
-                                       onkeyup="searchTable('itemsShelvingData', this.value)">
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Item Code</th>
-                                            <th>Item Name</th>
-                                            <th>Shelf Qty</th>
-                                            <th>Stock Available</th>
-                                            <th>Shelf Type</th>
-                                            <th>Priority</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="itemsShelvingData">
-                                        <tr><td colspan="6" class="text-center">Loading...</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reorder Level Report -->
-                <div id="reorder-level" class="report-section">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3>Reorder Level Report (Items below 50)</h3>
-                            <button class="btn btn-primary" onclick="loadReorderLevelReport()">Refresh Report</button>
-                        </div>
-                    </div>
-
-                    <div id="reorderLevelSummary" class="summary-cards"></div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Items Below Reorder Level (< 50 units)</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="search-container">
-                                <input type="text" id="reorderLevelSearch" class="search-input" 
-                                       placeholder="Search by item code, name, or stock level..." 
-                                       onkeyup="searchTable('reorderLevelData', this.value)">
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Item Code</th>
-                                            <th>Item Name</th>
-                                            <th>Current Stock</th>
-                                            <th>Reorder Level</th>
-                                            <th>Shortfall</th>
-                                            <th>Action Required</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="reorderLevelData">
-                                        <tr><td colspan="6" class="text-center">Loading...</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Stock Report -->
-                <div id="stock-report" class="report-section">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3>Complete Stock Report</h3>
-                            <button class="btn btn-primary" onclick="loadStockReport()">Refresh Report</button>
-                        </div>
-                    </div>
-
-                    <div id="stockReportSummary" class="summary-cards"></div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>All Items Stock Status</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="search-container">
-                                <input type="text" id="stockReportSearch" class="search-input" 
-                                       placeholder="Search by item code, name, quantity, or expiry date..." 
-                                       onkeyup="searchTable('stockReportData', this.value)">
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Item Code</th>
-                                            <th>Item Name</th>
-                                            <th>Total Quantity</th>
-                                            <th>Batches</th>
-                                            <th>Earliest Expiry</th>
-                                            <th>Latest Purchase</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="stockReportData">
-                                        <tr><td colspan="6" class="text-center">Loading...</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bill Transaction Report -->
-                <div id="bill-transaction" class="report-section">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3>Bill Transaction Report</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="date-controls">
-                                <div class="form-group-inline">
-                                    <label class="form-label">Start Date</label>
-                                    <input type="date" id="billTransactionStartDate" class="form-control" onchange="loadBillTransactionReport()">
-                                </div>
-                                <div class="form-group-inline">
-                                    <label class="form-label">End Date</label>
-                                    <input type="date" id="billTransactionEndDate" class="form-control" onchange="loadBillTransactionReport()">
-                                </div>
-                                <div class="form-group-inline">
-                                    <label class="form-label">Transaction Type</label>
-                                    <select id="billTransactionType" class="form-control" onchange="loadBillTransactionReport()">
-                                        <option value="">All Types</option>
-                                        <option value="CASH">Cash</option>
-                                        <option value="CARD">Card</option>
-                                        <option value="ONLINE">Online</option>
-                                    </select>
-                                </div>
-                                <div class="form-group-inline">
-                                    <label class="form-label">Store Type</label>
-                                    <select id="billStoreType" class="form-control" onchange="loadBillTransactionReport()">
-                                        <option value="">All Stores</option>
-                                        <option value="PHYSICAL">Physical</option>
-                                        <option value="ONLINE">Online</option>
-                                    </select>
-                                </div>
-                                <button class="btn btn-primary" onclick="loadBillTransactionReport()">Generate Report</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="billTransactionSummary" class="summary-cards"></div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Transaction Details</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="search-container">
-                                <input type="text" id="billTransactionSearch" class="search-input" 
-                                       placeholder="Search by invoice, date, amount, payment method, or store..." 
-                                       onkeyup="searchTable('billTransactionData', this.value)">
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Invoice #</th>
-                                            <th>Date/Time</th>
-                                            <th>Total Amount</th>
-                                            <th>Discount</th>
-                                            <th>Payment</th>
-                                            <th>Change</th>
-                                            <th>Items</th>
-                                            <th>Qty</th>
-                                            <th>Type</th>
-                                            <th>Store</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="billTransactionData">
-                                        <tr><td colspan="10" class="text-center">Select date range to view transactions</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button
+                  class="btn btn-primary"
+                  onclick="loadDailySalesReport()"
+                >
+                  GENERATE REPORT
+                </button>
+              </div>
             </div>
-        </main>
-    </div>
+          </div>
 
-    <script src="../../js/utils.js"></script>
+          <div id="dailySalesSummary" class="summary-cards"></div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>DAILY SALES TRANSACTIONS</h3>
+            </div>
+            <div class="card-body">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="dailySalesSearch"
+                  class="search-input"
+                  placeholder="Search by invoice number, amount, payment method, or type..."
+                  onkeyup="searchTable('dailySalesData', this.value)"
+                />
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead id="dailySalesHeader">
+                    <tr>
+                      <th>INVOICE #</th>
+                      <th>TIME</th>
+                      <th>TOTAL AMOUNT</th>
+                      <th>DISCOUNT</th>
+                      <th>PAYMENT</th>
+                      <th>CHANGE</th>
+                      <th>ITEMS</th>
+                      <th>TYPE</th>
+                      <th>STORE</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dailySalesData">
+                    <tr>
+                      <td colspan="9" class="loading">Loading sales data...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Items Need Shelving Report -->
+        <div id="items-shelving" class="report-section">
+          <div class="card">
+            <div class="card-header">
+              <h3>ITEMS NEEDING SHELVING</h3>
+            </div>
+            <div class="card-body">
+              <button
+                class="btn btn-primary"
+                onclick="loadItemsNeedShelvingReport()"
+              >
+                REFRESH REPORT
+              </button>
+            </div>
+          </div>
+
+          <div id="itemsShelvingSummary" class="summary-cards"></div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>ITEMS WITH LOW SHELF STOCK</h3>
+            </div>
+            <div class="card-body">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="itemsShelvingSearch"
+                  class="search-input"
+                  placeholder="Search by item code, name, or shelf type..."
+                  onkeyup="searchTable('itemsShelvingData', this.value)"
+                />
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ITEM CODE</th>
+                      <th>ITEM NAME</th>
+                      <th>SHELF QTY</th>
+                      <th>STOCK AVAILABLE</th>
+                      <th>SHELF TYPE</th>
+                      <th>PRIORITY</th>
+                    </tr>
+                  </thead>
+                  <tbody id="itemsShelvingData">
+                    <tr>
+                      <td colspan="6" class="loading">
+                        Loading shelving data...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reorder Level Report -->
+        <div id="reorder-level" class="report-section">
+          <div class="card">
+            <div class="card-header">
+              <h3>REORDER LEVEL REPORT (ITEMS BELOW 50)</h3>
+            </div>
+            <div class="card-body">
+              <button
+                class="btn btn-primary"
+                onclick="loadReorderLevelReport()"
+              >
+                REFRESH REPORT
+              </button>
+            </div>
+          </div>
+
+          <div id="reorderLevelSummary" class="summary-cards"></div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>ITEMS BELOW REORDER LEVEL (< 50 UNITS)</h3>
+            </div>
+            <div class="card-body">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="reorderLevelSearch"
+                  class="search-input"
+                  placeholder="Search by item code, name, or stock level..."
+                  onkeyup="searchTable('reorderLevelData', this.value)"
+                />
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ITEM CODE</th>
+                      <th>ITEM NAME</th>
+                      <th>CURRENT STOCK</th>
+                      <th>REORDER LEVEL</th>
+                      <th>SHORTFALL</th>
+                      <th>ACTION REQUIRED</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reorderLevelData">
+                    <tr>
+                      <td colspan="6" class="loading">
+                        Loading reorder data...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stock Report -->
+        <div id="stock-report" class="report-section">
+          <div class="card">
+            <div class="card-header">
+              <h3>COMPLETE STOCK REPORT</h3>
+            </div>
+            <div class="card-body">
+              <button class="btn btn-primary" onclick="loadStockReport()">
+                REFRESH REPORT
+              </button>
+            </div>
+          </div>
+
+          <div id="stockReportSummary" class="summary-cards"></div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>ALL ITEMS STOCK STATUS</h3>
+            </div>
+            <div class="card-body">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="stockReportSearch"
+                  class="search-input"
+                  placeholder="Search by item code, name, quantity, or expiry date..."
+                  onkeyup="searchTable('stockReportData', this.value)"
+                />
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ITEM CODE</th>
+                      <th>ITEM NAME</th>
+                      <th>TOTAL QUANTITY</th>
+                      <th>BATCHES</th>
+                      <th>EARLIEST EXPIRY</th>
+                      <th>LATEST PURCHASE</th>
+                    </tr>
+                  </thead>
+                  <tbody id="stockReportData">
+                    <tr>
+                      <td colspan="6" class="loading">Loading stock data...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bill Transaction Report -->
+        <div id="bill-transaction" class="report-section">
+          <div class="card">
+            <div class="card-header">
+              <h3>BILL TRANSACTION REPORT</h3>
+            </div>
+            <div class="card-body">
+              <div class="date-controls">
+                <div class="form-group-inline">
+                  <label class="form-label">START DATE</label>
+                  <input
+                    type="date"
+                    id="billTransactionStartDate"
+                    class="form-control"
+                    onchange="loadBillTransactionReport()"
+                  />
+                </div>
+                <div class="form-group-inline">
+                  <label class="form-label">END DATE</label>
+                  <input
+                    type="date"
+                    id="billTransactionEndDate"
+                    class="form-control"
+                    onchange="loadBillTransactionReport()"
+                  />
+                </div>
+                <div class="form-group-inline">
+                  <label class="form-label">TRANSACTION TYPE</label>
+                  <select
+                    id="billTransactionType"
+                    class="form-control"
+                    onchange="loadBillTransactionReport()"
+                  >
+                    <option value="">All Types</option>
+                    <option value="CASH">Cash</option>
+                    <option value="CARD">Card</option>
+                    <option value="ONLINE">Online</option>
+                  </select>
+                </div>
+                <div class="form-group-inline">
+                  <label class="form-label">STORE TYPE</label>
+                  <select
+                    id="billStoreType"
+                    class="form-control"
+                    onchange="loadBillTransactionReport()"
+                  >
+                    <option value="">All Stores</option>
+                    <option value="PHYSICAL">Physical</option>
+                    <option value="ONLINE">Online</option>
+                  </select>
+                </div>
+                <button
+                  class="btn btn-primary"
+                  onclick="loadBillTransactionReport()"
+                >
+                  GENERATE REPORT
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="billTransactionSummary" class="summary-cards"></div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>TRANSACTION DETAILS</h3>
+            </div>
+            <div class="card-body">
+              <div class="search-container">
+                <input
+                  type="text"
+                  id="billTransactionSearch"
+                  class="search-input"
+                  placeholder="Search by invoice, date, amount, payment method, or store..."
+                  onkeyup="searchTable('billTransactionData', this.value)"
+                />
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="min-width: 120px">INVOICE #</th>
+                      <th style="min-width: 140px">DATE/TIME</th>
+                      <th style="min-width: 120px">TOTAL AMOUNT</th>
+                      <th style="min-width: 100px">DISCOUNT</th>
+                      <th style="min-width: 120px">PAYMENT</th>
+                      <th style="min-width: 100px">CHANGE</th>
+                      <th style="min-width: 80px">ITEMS</th>
+                      <th style="min-width: 80px">QTY</th>
+                      <th style="min-width: 100px">TYPE</th>
+                      <th style="min-width: 100px">STORE</th>
+                    </tr>
+                  </thead>
+                  <tbody id="billTransactionData">
+                    <tr>
+                      <td colspan="10" class="loading">
+                        Loading transaction data...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript for Authentication and Reports -->
+    <script>
+      // User Authentication and Interface
+      function updateUserInterface() {
+        const user = SessionManager.getUser();
+        const userInfoElement = document.getElementById("userInfo");
+
+        if (user) {
+          if (user.role === "manager" || user.role === "admin") {
+            userInfoElement.textContent = `${user.role.toUpperCase()}: ${
+              user.name || user.username
+            }`;
+          } else {
+            userInfoElement.textContent = `${user.name || user.username}`;
+          }
+        } else {
+          userInfoElement.textContent = "Admin";
+        }
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          SessionManager.logout();
+        }
+      }
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if session is still valid
+        if (SessionManager.isLoggedIn() && !SessionManager.checkSession()) {
+          SessionManager.clearSession();
+        }
+        updateUserInterface();
+
+        // Set today's date as default for reports
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("dailySalesDate").value = today;
+        document.getElementById("billTransactionStartDate").value = today;
+        document.getElementById("billTransactionEndDate").value = today;
+
+        // Load initial report
+        loadDailySalesReport();
+      });
+    </script>
+
     <script src="../../js/utils.js"></script>
     <script src="../../js/admin-reports.js"></script>
-</body>
+  </body>
 </html>

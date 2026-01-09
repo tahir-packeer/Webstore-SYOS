@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: org.example.RealConcurrencyTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 17.21 s <<< FAILURE! -- in org.example.RealConcurrencyTest
+org.example.RealConcurrencyTest -- Time elapsed: 17.21 s <<< ERROR!
+java.lang.RuntimeException: ❌ SYOS Application is not running on http://localhost:8080/syos. Please start it with 'mvn jetty:run' first. Error: Application not responding properly. Status: 404
+	at org.example.RealConcurrencyTest.checkApplicationRunning(RealConcurrencyTest.java:77)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.RecursiveAction.exec(RecursiveAction.java:194)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+

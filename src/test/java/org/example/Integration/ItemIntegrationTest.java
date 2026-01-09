@@ -1,9 +1,9 @@
 package org.example.Integration;
 
-import org.example.Controller.ItemController;
-import org.example.Model.Item;
-import org.example.Builder.ItemBuilder;
-import org.example.DI.DIContainer;
+import org.example.presentation.controllers.ItemController;
+import org.example.persistence.models.Item;
+import org.example.shared.patterns.builders.ItemBuilder;
+import org.example.core.di.DIContainer;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;

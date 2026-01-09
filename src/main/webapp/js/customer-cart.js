@@ -92,36 +92,80 @@ function displayCartItems() {
 
 function createCartItemElement(item, index) {
     const itemElement = document.createElement('div');
-    itemElement.className = 'cart-item mb-3 p-3';
-    itemElement.style.cssText = `
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        background: white;
-    `;
+    itemElement.className = 'cart-item';
     
     itemElement.innerHTML = `
         <div class="row align-items-center">
             <div class="col-6">
-                <h5>${item.name}</h5>
-                <p class="text-muted">Code: ${item.code}</p>
-                <p class="text-primary">${UIUtils.formatCurrency(item.price)}</p>
+                <h5 style="margin: 0 0 0.5rem 0; font-weight: bold; color: black;">${item.name}</h5>
+                <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;">Code: ${item.code}</p>
+                <p style="margin: 0.25rem 0; color: black; font-weight: 600; font-size: 1.1rem;">${UIUtils.formatCurrency(item.price)}</p>
             </div>
             <div class="col-3">
-                <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-sm btn-outline" onclick="updateQuantity(${index}, ${item.quantity - 1})">-</button>
-                    <input type="number" class="form-control text-center" style="width: 80px;" 
-                           value="${item.quantity}" min="1" 
+                <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: center;">
+                    <button style="
+                        background: white; 
+                        color: black; 
+                        border: 2px solid black; 
+                        width: 30px; 
+                        height: 30px; 
+                        cursor: pointer; 
+                        font-weight: bold;
+                        border-radius: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    " onclick="updateQuantity(${index}, ${item.quantity - 1})" 
+                       onmouseover="this.style.background='black'; this.style.color='white';"
+                       onmouseout="this.style.background='white'; this.style.color='black';">-</button>
+                    <input type="number" style="
+                        width: 60px; 
+                        text-align: center; 
+                        border: 2px solid black; 
+                        padding: 0.25rem;
+                        border-radius: 0;
+                        background: white;
+                        color: black;
+                        font-weight: bold;
+                    " value="${item.quantity}" min="1" 
                            onchange="updateQuantity(${index}, parseInt(this.value))">
-                    <button class="btn btn-sm btn-outline" onclick="updateQuantity(${index}, ${item.quantity + 1})">+</button>
+                    <button style="
+                        background: white; 
+                        color: black; 
+                        border: 2px solid black; 
+                        width: 30px; 
+                        height: 30px; 
+                        cursor: pointer; 
+                        font-weight: bold;
+                        border-radius: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    " onclick="updateQuantity(${index}, ${item.quantity + 1})"
+                       onmouseover="this.style.background='black'; this.style.color='white';"
+                       onmouseout="this.style.background='white'; this.style.color='black';">+</button>
                 </div>
             </div>
             <div class="col-2 text-center">
-                <strong>${UIUtils.formatCurrency(item.price * item.quantity)}</strong>
+                <strong style="font-size: 1.1rem; color: black;">${UIUtils.formatCurrency(item.price * item.quantity)}</strong>
             </div>
             <div class="col-1 text-center">
-                <button class="btn btn-sm btn-danger" onclick="removeItem(${index})" title="Remove item">
-                    ×
-                </button>
+                <button style="
+                    background: #dc3545; 
+                    color: white; 
+                    border: 2px solid #dc3545; 
+                    width: 30px; 
+                    height: 30px; 
+                    cursor: pointer; 
+                    font-weight: bold;
+                    border-radius: 0;
+                    font-size: 1.2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                " onclick="removeItem(${index})" title="Remove item"
+                   onmouseover="this.style.background='white'; this.style.color='#dc3545';"
+                   onmouseout="this.style.background='#dc3545'; this.style.color='white';">×</button>
             </div>
         </div>
     `;
@@ -321,8 +365,17 @@ async function payNow() {
         CartManager.clearCart();
         CartManager.updateCartCount();
         
-        // Show bill popup with payment details
-        showBillPopup(response, orderPayload, user);
+        // Store bill data in sessionStorage for the bill page
+        const billData = {
+            response: response,
+            orderPayload: orderPayload,
+            user: user,
+            cartItems: cartItems
+        };
+        sessionStorage.setItem('billData', JSON.stringify(billData));
+        
+        // Redirect to bill page instead of showing popup
+        window.location.href = 'bill.html';
         
         // Refresh cart display
         loadCart();
@@ -356,154 +409,6 @@ function logout() {
     }
 }
 
-function showBillPopup(response, orderPayload, user) {
-    // Create bill popup content
-    const billContent = `
-        <div class="bill-popup-overlay" id="billPopup" style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        ">
-            <div class="bill-container" style="
-                background: white;
-                max-width: 500px;
-                width: 90%;
-                max-height: 90%;
-                border-radius: 10px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-                overflow-y: auto;
-                position: relative;
-            ">
-                <div class="bill-header" style="
-                    background: #3b82f6;
-                    color: white;
-                    padding: 20px;
-                    text-align: center;
-                    border-radius: 10px 10px 0 0;
-                ">
-                    <h2 style="margin: 0; font-size: 24px;">Payment Receipt</h2>
-                    <button onclick="closeBillPopup()" style="
-                        position: absolute;
-                        top: 15px;
-                        right: 15px;
-                        background: none;
-                        border: none;
-                        color: white;
-                        font-size: 24px;
-                        cursor: pointer;
-                        width: 30px;
-                        height: 30px;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    ">&times;</button>
-                </div>
-                <div class="bill-body" style="padding: 20px;">
-                    <div class="bill-info" style="margin-bottom: 20px;">
-                        <h3 style="color: #1f2937; margin-bottom: 15px; text-align: center;">SYOS Management</h3>
-                        <div style="text-align: center; margin-bottom: 20px; color: #6b7280;">
-                            <p style="margin: 5px 0;">Invoice: ${response.invoiceNumber || 'N/A'}</p>
-                            <p style="margin: 5px 0;">Date: ${new Date().toLocaleDateString()}</p>
-                            <p style="margin: 5px 0;">Time: ${new Date().toLocaleTimeString()}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="customer-info" style="
-                        background: #f9fafb;
-                        padding: 15px;
-                        border-radius: 8px;
-                        margin-bottom: 20px;
-                    ">
-                        <h4 style="color: #374151; margin: 0 0 10px 0;">Customer Details</h4>
-                        <p style="margin: 5px 0; color: #6b7280;"><strong>Name:</strong> ${user.name}</p>
-                        <p style="margin: 5px 0; color: #6b7280;"><strong>Phone:</strong> ${user.contactNumber}</p>
-                        <p style="margin: 5px 0; color: #6b7280;"><strong>Email:</strong> ${user.email}</p>
-                    </div>
-                    
-                    <div class="items-section" style="margin-bottom: 20px;">
-                        <h4 style="color: #374151; margin-bottom: 15px;">Items Purchased</h4>
-                        <div class="items-list">
-                            ${orderPayload.items.map(item => `
-                                <div style="
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    padding: 10px 0;
-                                    border-bottom: 1px solid #e5e7eb;
-                                ">
-                                    <div>
-                                        <div style="font-weight: 500; color: #374151;">${item.code}</div>
-                                        <div style="color: #6b7280; font-size: 14px;">Qty: ${item.quantity} × Rs. ${item.price.toFixed(2)}</div>
-                                    </div>
-                                    <div style="font-weight: 500; color: #374151;">Rs. ${(item.quantity * item.price).toFixed(2)}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    
-                    <div class="bill-summary" style="
-                        background: #f9fafb;
-                        padding: 15px;
-                        border-radius: 8px;
-                        border: 2px solid #e5e7eb;
-                    ">
-                        <h4 style="color: #374151; margin: 0 0 15px 0;">Payment Summary</h4>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="color: #6b7280;">Subtotal:</span>
-                            <span style="color: #374151;">Rs. ${(response.total || orderPayload.total).toFixed(2)}</span>
-                        </div>
-                        ${response.discount && response.discount > 0 ? `
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span style="color: #6b7280;">Discount:</span>
-                                <span style="color: #ef4444;">-Rs. ${response.discount.toFixed(2)}</span>
-                            </div>
-                        ` : ''}
-                        <hr style="border: none; border-top: 1px solid #d1d5db; margin: 10px 0;">
-                        <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold;">
-                            <span style="color: #374151;">Total Paid:</span>
-                            <span style="color: #059669;">Rs. ${(response.finalTotal || orderPayload.total).toFixed(2)}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="bill-actions" style="margin-top: 20px; text-align: center;">
-                        <button onclick="closeBillPopup()" style="
-                            background: #6b7280;
-                            color: white;
-                            border: none;
-                            padding: 10px 20px;
-                            border-radius: 5px;
-                            cursor: pointer;
-                            font-size: 14px;
-                        ">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Add bill popup to the page
-    document.body.insertAdjacentHTML('beforeend', billContent);
-}
-
-function closeBillPopup() {
-    const billPopup = document.getElementById('billPopup');
-    if (billPopup) {
-        billPopup.remove();
-    }
-    
-    // Ensure cart is cleared and display is refreshed
-    CartManager.clearCart();
-    CartManager.updateCartCount();
-    loadCart();
-}
-
 // Initialize cart display on page load
+document.addEventListener('DOMContentLoaded', loadCart);
 loadCart();

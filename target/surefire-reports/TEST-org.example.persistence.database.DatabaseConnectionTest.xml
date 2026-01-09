@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.example.persistence.database.DatabaseConnectionTest" time="1.849" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="net.bytebuddy.experimental" value="true"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585 2026-01-09T15-49-36_319-jvmRun1 surefire-20260109154936576_1tmp surefire_0-20260109154936576_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\test-classes;C:\Users\tahir\Downloads\SYOS_CB009900_Final\target\classes;C:\Users\tahir\.m2\repository\com\mysql\mysql-connector-j\9.3.0\mysql-connector-j-9.3.0.jar;C:\Users\tahir\.m2\repository\com\google\protobuf\protobuf-java\4.29.0\protobuf-java-4.29.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.0\junit-jupiter-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\tahir\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\tahir\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\tahir\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-core\5.2.0\mockito-core-5.2.0.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy\1.14.1\byte-buddy-1.14.1.jar;C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar;C:\Users\tahir\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-junit-jupiter\5.2.0\mockito-junit-jupiter-5.2.0.jar;C:\Users\tahir\.m2\repository\org\mockito\mockito-inline\5.2.0\mockito-inline-5.2.0.jar;C:\Users\tahir\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\tahir\.m2\repository\org\testcontainers\junit-jupiter\1.19.1\junit-jupiter-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\testcontainers\1.19.1\testcontainers-1.19.1.jar;C:\Users\tahir\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\tahir\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tahir\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\tahir\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\tahir\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-api\3.3.3\docker-java-api-3.3.3.jar;C:\Users\tahir\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.3.3\docker-java-transport-zerodep-3.3.3.jar;C:\Users\tahir\.m2\repository\com\github\docker-java\docker-java-transport\3.3.3\docker-java-transport-3.3.3.jar;C:\Users\tahir\.m2\repository\net\java\dev\jna\jna\5.12.1\jna-5.12.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\mysql\1.19.1\mysql-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\jdbc\1.19.1\jdbc-1.19.1.jar;C:\Users\tahir\.m2\repository\org\testcontainers\database-commons\1.19.1\database-commons-1.19.1.jar;C:\Users\tahir\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar;C:\Users\tahir\.m2\repository\org\json\json\20240303\json-20240303.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\tahir\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\tahir"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
+    <property name="junit.jupiter.execution.parallel.mode.default" value="concurrent"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\tahir\AppData\Local\Temp\surefire12427479170930186585\surefirebooter-20260109154936576_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="24.0.1+9-30"/>
+    <property name="user.name" value="tahir"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="junit.jupiter.execution.parallel.config.strategy" value="dynamic"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="junit.jupiter.execution.parallel.enabled" value="true"/>
+    <property name="localRepository" value="C:\Users\tahir\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\tahir\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.1"/>
+    <property name="user.dir" value="C:\Users\tahir\Downloads\SYOS_CB009900_Final"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\flutter\flutter\bin\cache\dart-sdk\bin\;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Java\jdk-24\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\flutter\flutter\bin\cache\dart-sdk\bin\;$PATH:$CATALINA_HOME/bin:$JAVA_HOME/bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\tahir\.config\herd\bin;C:\Users\tahir\AppData\Local\Microsoft\WindowsApps;C:\Users\tahir\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PhpStorm 2024.2\bin;;C:\Program Files\php-8.2.22;C:\Users\tahir\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git;C:\Users\tahir\AppData\Local\Android\Sdk;C:\flutter\flutter\bin;C:\Users\tahir\AppData\Local\Pub\Cache\bin;C:\Users\tahir\AppData\Local\GitHubDesktop\bin;C:\flutter new\flutter\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\bin;;C:\Users\tahir\AppData\Local\Programs\Windsurf\bin;C:\Users\tahir\AppData\Local\Programs\Ollama;C:\Users\tahir\AppData\Local\Programs\cursor\resources\app\bin;C:\apache-maven-3.9.11\bin;;c:\Users\tahir\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;C:\Program Files\Java\jdk-11\bin;C:\Users\tahir\AppData\Roaming\npm;c:\Users\tahir\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;c:\Users\tahir\.vscode\extensions\ms-python.debugpy-2025.14.1-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="junit.jupiter.extensions.autodetection.enabled" value="true"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.1+9-30"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="testMixedOperations" classname="org.example.SimpleConcurrencyTest" time="0.514">
+    <system-out><![CDATA[============================================================
+STARTING: 100 Concurrent User Registration Test
+============================================================
+All threads prepared. Starting concurrent execution...
+✅ User 24 registered successfully (Response time: 290ms)
+✅ User 27 registered successfully (Response time: 330ms)
+✅ User 3 registered successfully (Response time: 357ms)
+✅ User 18 registered successfully (Response time: 378ms)
+✅ User 15 registered successfully (Response time: 397ms)
+✅ User 21 registered successfully (Response time: 397ms)
+✅ User 6 registered successfully (Response time: 427ms)
+✅ User 12 registered successfully (Response time: 428ms)
+✅ User 9 registered successfully (Response time: 456ms)
+✅ User 30 registered successfully (Response time: 467ms)
+
+============================================================
+MIXED OPERATIONS TEST RESULTS
+============================================================
+Test Completed: YES
+Total Test Time: 506 ms (0.51 seconds)
+Total Operations: 30
+Successful Operations: 30
+Failed Operations: 0
+Success Rate: 100.00%
+Average Response Time: 200.50 ms
+Throughput: 59.29 operations/second
+============================================================
+]]></system-out>
+  </testcase>
+  <testcase name="testConcurrentUserRegistrations" classname="org.example.SimpleConcurrencyTest" time="0.998">
+    <system-out><![CDATA[✅ User 25 registered successfully (Response time: 254ms)
+✅ User 40 registered successfully (Response time: 281ms)
+✅ User 30 registered successfully (Response time: 288ms)
+✅ User 14 registered successfully (Response time: 292ms)
+✅ User 4 registered successfully (Response time: 296ms)
+✅ User 35 registered successfully (Response time: 299ms)
+✅ User 17 registered successfully (Response time: 304ms)
+✅ User 45 registered successfully (Response time: 342ms)
+✅ User 32 registered successfully (Response time: 342ms)
+✅ User 50 registered successfully (Response time: 350ms)
+✅ User 33 registered successfully (Response time: 348ms)
+✅ User 23 registered successfully (Response time: 350ms)
+✅ User 18 registered successfully (Response time: 350ms)
+✅ User 7 registered successfully (Response time: 353ms)
+✅ User 44 registered successfully (Response time: 356ms)
+✅ User 38 registered successfully (Response time: 361ms)
+✅ User 13 registered successfully (Response time: 368ms)
+✅ User 11 registered successfully (Response time: 373ms)
+✅ User 16 registered successfully (Response time: 373ms)
+✅ User 24 registered successfully (Response time: 374ms)
+✅ User 39 registered successfully (Response time: 376ms)
+✅ User 8 registered successfully (Response time: 378ms)
+✅ User 1 registered successfully (Response time: 380ms)
+✅ User 29 registered successfully (Response time: 381ms)
+✅ User 47 registered successfully (Response time: 381ms)
+✅ User 2 registered successfully (Response time: 392ms)
+✅ User 36 registered successfully (Response time: 392ms)
+✅ User 43 registered successfully (Response time: 393ms)
+✅ User 19 registered successfully (Response time: 396ms)
+✅ User 12 registered successfully (Response time: 398ms)
+✅ User 42 registered successfully (Response time: 402ms)
+✅ User 10 registered successfully (Response time: 406ms)
+✅ User 21 registered successfully (Response time: 408ms)
+✅ User 49 registered successfully (Response time: 413ms)
+✅ User 34 registered successfully (Response time: 416ms)
+✅ User 31 registered successfully (Response time: 416ms)
+✅ User 6 registered successfully (Response time: 421ms)
+✅ User 20 registered successfully (Response time: 430ms)
+✅ User 41 registered successfully (Response time: 435ms)
+✅ User 5 registered successfully (Response time: 445ms)
+✅ User 46 registered successfully (Response time: 448ms)
+✅ User 15 registered successfully (Response time: 459ms)
+✅ User 9 registered successfully (Response time: 467ms)
+✅ User 27 registered successfully (Response time: 469ms)
+✅ User 28 registered successfully (Response time: 475ms)
+✅ User 37 registered successfully (Response time: 489ms)
+✅ User 22 registered successfully (Response time: 494ms)
+✅ User 3 registered successfully (Response time: 498ms)
+✅ User 26 registered successfully (Response time: 508ms)
+✅ User 48 registered successfully (Response time: 530ms)
+✅ User 54 registered successfully (Response time: 268ms)
+✅ User 57 registered successfully (Response time: 267ms)
+✅ User 51 registered successfully (Response time: 341ms)
+✅ User 52 registered successfully (Response time: 349ms)
+✅ User 58 registered successfully (Response time: 306ms)
+✅ User 77 registered successfully (Response time: 259ms)
+✅ User 68 registered successfully (Response time: 300ms)
+✅ User 66 registered successfully (Response time: 315ms)
+✅ User 88 registered successfully (Response time: 250ms)
+✅ User 55 registered successfully (Response time: 384ms)
+✅ User 53 registered successfully (Response time: 392ms)
+✅ User 87 registered successfully (Response time: 278ms)
+✅ User 76 registered successfully (Response time: 320ms)
+✅ User 72 registered successfully (Response time: 343ms)
+✅ User 56 registered successfully (Response time: 432ms)
+✅ User 91 registered successfully (Response time: 296ms)
+✅ User 81 registered successfully (Response time: 355ms)
+✅ User 61 registered successfully (Response time: 414ms)
+✅ User 63 registered successfully (Response time: 414ms)
+✅ User 80 registered successfully (Response time: 366ms)
+✅ User 67 registered successfully (Response time: 406ms)
+✅ User 64 registered successfully (Response time: 445ms)
+✅ User 74 registered successfully (Response time: 394ms)
+✅ User 83 registered successfully (Response time: 391ms)
+✅ User 96 registered successfully (Response time: 309ms)
+✅ User 75 registered successfully (Response time: 416ms)
+✅ User 93 registered successfully (Response time: 332ms)
+✅ User 70 registered successfully (Response time: 424ms)
+✅ User 92 registered successfully (Response time: 319ms)
+✅ User 71 registered successfully (Response time: 422ms)
+✅ User 62 registered successfully (Response time: 454ms)
+✅ User 94 registered successfully (Response time: 349ms)
+✅ User 60 registered successfully (Response time: 473ms)
+✅ User 82 registered successfully (Response time: 444ms)
+✅ User 85 registered successfully (Response time: 435ms)
+✅ User 65 registered successfully (Response time: 495ms)
+✅ User 73 registered successfully (Response time: 475ms)
+✅ User 89 registered successfully (Response time: 420ms)
+✅ User 78 registered successfully (Response time: 477ms)
+✅ User 59 registered successfully (Response time: 532ms)
+✅ User 84 registered successfully (Response time: 465ms)
+✅ User 95 registered successfully (Response time: 408ms)
+✅ User 69 registered successfully (Response time: 531ms)
+✅ User 86 registered successfully (Response time: 488ms)
+✅ User 97 registered successfully (Response time: 412ms)
+✅ User 100 registered successfully (Response time: 384ms)
+✅ User 79 registered successfully (Response time: 522ms)
+✅ User 98 registered successfully (Response time: 420ms)
+✅ User 90 registered successfully (Response time: 473ms)
+✅ User 99 registered successfully (Response time: 446ms)
+
+============================================================
+CONCURRENT USER REGISTRATION TEST RESULTS
+============================================================
+Test Completed: YES
+Total Test Time: 993 ms (0.99 seconds)
+Total Users: 100
+Successful Registrations: 100
+Failed Registrations: 0
+Success Rate: 100.00%
+Average Response Time: 391.60 ms
+Throughput: 100.70 registrations/second
+============================================================
+]]></system-out>
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\tahir\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.1\byte-buddy-agent-1.14.1.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="testConnect" classname="org.example.persistence.database.DatabaseConnectionTest" time="1.66"/>
+  <testcase name="testCloseConnection" classname="org.example.persistence.database.DatabaseConnectionTest" time="0.009"/>
+</testsuite>

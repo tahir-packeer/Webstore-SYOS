@@ -10,17 +10,27 @@
     <!-- Customer Management Servlet -->
     <servlet>
         <servlet-name>CustomerServlet</servlet-name>
-        <servlet-class>org.example.Servlet.CustomerServlet</servlet-class>
+        <servlet-class>org.example.presentation.servlets.CustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/api/customers/*</url-pattern>
     </servlet-mapping>
 
+    <!-- POS Customer Management Servlet -->
+    <servlet>
+        <servlet-name>POSCustomerServlet</servlet-name>
+        <servlet-class>org.example.presentation.servlets.POSCustomerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>POSCustomerServlet</servlet-name>
+        <url-pattern>/api/pos-customers/*</url-pattern>
+    </servlet-mapping>
+
     <!-- Sales Transaction Servlet -->
     <servlet>
         <servlet-name>SalesServlet</servlet-name>
-        <servlet-class>org.example.Servlet.SalesServlet</servlet-class>
+        <servlet-class>org.example.presentation.servlets.SalesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SalesServlet</servlet-name>
@@ -30,7 +40,7 @@
     <!-- Online Sales Servlet -->
     <servlet>
         <servlet-name>OnlineSalesServlet</servlet-name>
-        <servlet-class>org.example.Servlet.OnlineSalesServlet</servlet-class>
+        <servlet-class>org.example.presentation.servlets.OnlineSalesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OnlineSalesServlet</servlet-name>
@@ -40,7 +50,7 @@
     <!-- Stock Management Servlet -->
     <servlet>
         <servlet-name>StockServlet</servlet-name>
-        <servlet-class>org.example.Servlet.StockServlet</servlet-class>
+        <servlet-class>org.example.presentation.servlets.StockServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StockServlet</servlet-name>
@@ -50,7 +60,7 @@
     <!-- Reports Servlet -->
     <servlet>
         <servlet-name>ReportServlet</servlet-name>
-        <servlet-class>org.example.Servlet.ReportServlet</servlet-class>
+        <servlet-class>org.example.presentation.servlets.ReportServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ReportServlet</servlet-name>
@@ -60,7 +70,7 @@
     <!-- Staff Authentication Servlet -->
     <servlet>
         <servlet-name>StaffServlet</servlet-name>
-        <servlet-class>org.example.Servlet.StaffServlet</servlet-class>
+        <servlet-class>org.example.presentation.servlets.StaffServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StaffServlet</servlet-name>
@@ -70,7 +80,7 @@
     <!-- Items API Servlet -->
     <servlet>
         <servlet-name>ItemsController</servlet-name>
-        <servlet-class>org.example.Controller.ItemsController</servlet-class>
+        <servlet-class>org.example.presentation.controllers.ItemsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ItemsController</servlet-name>
@@ -80,7 +90,7 @@
     <!-- Store Manager Servlet -->
     <servlet>
         <servlet-name>StoreManagerServlet</servlet-name>
-        <servlet-class>org.example.Servlet.StoreManagerServlet</servlet-class>
+        <servlet-class>org.example.presentation.servlets.StoreManagerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StoreManagerServlet</servlet-name>
@@ -95,7 +105,7 @@
   
     <filter>
         <filter-name>CorsFilter</filter-name>
-        <filter-class>org.example.Filter.CorsFilter</filter-class>
+        <filter-class>org.example.presentation.filters.CorsFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
